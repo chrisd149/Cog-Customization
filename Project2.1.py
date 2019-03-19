@@ -1,6 +1,5 @@
-
+#Panda3D Imports
 from panda3d.core import loadPrcFile
-
 from direct.actor.Actor import Actor
 from pandac.PandaModules import *
 from direct.task import Task
@@ -22,6 +21,7 @@ from direct.actor.Actor import Actor
 from direct.showbase.DirectObject import DirectObject
 import os
 
+#project name and info
 """Project 2:  Big Cheese's stroll is interrupted by a bug"""
 
 
@@ -30,6 +30,7 @@ import os
 2. Explode does not stop looping or slow down
 3. (TEMPORARY FIX: Actors moved off screen.) Actors wouldn't be removed.
 4. (FIXED: Mouse is now locked.) Camera won't move."""
+#these are not all the bugs, just the most annoying ones
 
 class MyApp(ShowBase):
 
@@ -38,7 +39,7 @@ class MyApp(ShowBase):
                 self.loadModels();
                 self.loadCog()
                 self.SetUpCam()
-                self.dialogue()
+                self.Sounds()
 
                 # intervals
                 Drop = self.tnt.posInterval(1.5, Point3(38, 2, 0))
@@ -98,7 +99,7 @@ class MyApp(ShowBase):
                         startTime=0,
                         volume=1
                 )
-
+                #Sequence 
                 self.Pace = Sequence(
                         Parallel(Golfball, Golfing),
                         Parallel(Walk1, Walk, FootSteps),
@@ -109,7 +110,8 @@ class MyApp(ShowBase):
                         Parallel(Cam2, Cam, Gone, Destroy, Explode)
                 )
                 self.Pace.start()
-
+                
+                #props
         def loadModels(self):
                 self.bbhq = loader.loadModel('phase_12\models/bossbotHQ/CogGolfExterior.bam')
                 self.bbhq.reparentTo(self.render)
@@ -122,7 +124,8 @@ class MyApp(ShowBase):
                 self.explode = Actor('phase_3.5\models\props\explosion.bam')
                 self.explode.reparentTo(render)
                 self.explode.setPosHprScale((38, 3, 100), (120, 0, 0), (2, 2, 2))
-
+                
+                #cog
         def loadCog(self):
                 self.Cog = Actor('phase_3.5\models\char\suitA-mod.bam',
                                  {'Flail' : 'phase_4\models\char\suitA-flailing.bam',
@@ -143,8 +146,9 @@ class MyApp(ShowBase):
 
                 #Cog Setting / Size
                 self.Cog.setPosHprScale((25, 0 , 0), (-90, 0 ,0), (1, 1 ,1))
-
-        def dialogue(self):
+                
+                #sounds
+        def Sounds(self):
                 self.speak1 = loader.loadSfx('phase_3.5/audio\dial\COG_VO_question.ogg')
 
                 self.speak2 = loader.loadSfx('phase_3.5/audio\dial\COG_VO_grunt.ogg')
@@ -154,12 +158,15 @@ class MyApp(ShowBase):
                 self.footsteps = loader.loadSfx('phase_3.5/audio\sfx/AV_footstep_walkloop.ogg')
 
                 self.golfball = loader.loadSfx('phase_6/audio\sfx\Golf_Hit_Ball.ogg')
-
+                
+                #camera settings
         def SetUpCam(self):
                 self.disable_mouse()
                 self.camera.reparentTo(self.Cog)
                 self.camera.setPosHpr((0, 25, 10),(180, -10, 0))
-
+                
+#frame interpolation
 loadPrcFileData("", "interpolate-frames 1")
+
 app = MyApp()
 app.run()
