@@ -86,4 +86,4 @@ Main Author: Christian M Diaz
 
 <h4>All questions and inquiries must be related to the project in some way, unrelated messages will be ignored</h4>
 
-<h2>For now, I wont add any authors/pull requests until the project is somewhat funcional</h2>
+<h3>For now, I wont add any authors/pull requests until the project is somewhat funcional</h3>
