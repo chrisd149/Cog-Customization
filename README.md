@@ -50,11 +50,11 @@ To install
 
 *	[ ] **Basic opening scene**
 
-*	[ ] **Control a Cog in BossBotHQ**
+*	[ ] **Control a Cog**
 
-*	[ ] **Customize suit textures**
+*	[ ] **Customize suit textures, hats, and heads using a GUI**
 
-*	[ ] **Customize hats and heads**
+*	[ ] **Finish a basic task**
 	
 <h3>Side Goals</h3>
 
