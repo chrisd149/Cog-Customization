@@ -22,8 +22,18 @@ from direct.showbase.DirectObject import DirectObject
 import os
 from direct.gui.DirectGui import *
 
-class MyApp(ShowBase):
+"""Character customaztion of Big Cheese"""
 
+"""
+
+MAJOR BUGS:
+1. Nametag clips thorugh it's background when viewed at an angle
+2. Mouse is locked, and may cause issues w/camera and/or GUI
+
+"""
+
+
+class MyApp(ShowBase):
         def __init__(self):
                 ShowBase.__init__(self)
                 self.loadModels()
@@ -32,12 +42,12 @@ class MyApp(ShowBase):
                 self.loadGUI()
 
 
-
+        #models
         def loadModels(self):
                 self.training = self.loader.loadModel('phase_10\models\cogHQ\MidVault.bam')
                 self.training.reparentTo(self.render)
 
-
+        #cogs
         def loadCog(self):
                 self.Cog = Actor('phase_3.5\models\char\suitA-mod.bam',
                                  {'Flail': 'phase_4\models\char\suitA-flailing.bam',
@@ -52,6 +62,7 @@ class MyApp(ShowBase):
                 self.Cog.setPosHprScale((130, -12.5, 70.75),(65, 0, 0),(1, 1, 1))
                 self.Cog.loop('Stand')
 
+        #camera settings        
         def loadCam(self):
                 self.disable_mouse()
                 self.camera.reparentTo(self.render)
@@ -59,14 +70,15 @@ class MyApp(ShowBase):
 
 
 
-
+        #GUI seetings
         def loadGUI(self):
 
                 self.txtb1 = loader.loadModel \
                         ('phase_3\models\props\chatbox.bam')
 
                 self.font1 = loader.loadFont('Impress.egg')
-
+                
+                #cog tag
                 self.textob = DirectLabel(parent=self.Cog,
                                            text= 'Big Cheese',
                                            pos=(0, 0, 9),
@@ -81,7 +93,8 @@ class MyApp(ShowBase):
 
                 self.textob.component('text0').textNode.setCardDecal(1)
                 self.textob['text'] = 'Big Cheese'
-
+                
+                #Main GUI panel
                 self.guiimage = loader.loadModel('phase_3\models\gui\dialog_box_gui.bam')
 
                 self.guipanel = DirectLabel(parent=self.Cog,
@@ -95,6 +108,7 @@ class MyApp(ShowBase):
                                             image_pos=(2, .3 , -1.25),
                                             image_scale=(10, 5, 5),
                                             textMayChange=1)
-                self.b = DirectButton(text=('Scale', ''))
+              #Buttons will be added at a later time
+        
 app = MyApp()
 app.run()
