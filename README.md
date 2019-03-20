@@ -84,6 +84,6 @@ Main Author: Christian M Diaz
 	* Hours M-F: 2pm - 9pm EST
 	* Hours Weekend: 10am - 11pm EST
 
-***All questions and inquiries must be related to the project in some way, unrelated messages will be ignored***
+<h4>All questions and inquiries must be related to the project in some way, unrelated messages will be ignored</h4>
 
-
+**For now, I wont add any authors/pull requests until the project is somewhat funcional**
