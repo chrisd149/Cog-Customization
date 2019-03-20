@@ -62,7 +62,7 @@ To install
 
 *	[ ] NPC that guides you through the game
 
-*	[ ] Other cogs roaming the HQ
+*	[ ] Other cogs/toons roaming the HQ
 	
 
 
