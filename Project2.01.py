@@ -21,7 +21,7 @@ from direct.actor.Actor import Actor
 from direct.showbase.DirectObject import DirectObject
 import os
 
-#project name and info
+#scene1
 """Project 2:  Big Cheese's stroll is interrupted by a bug"""
 
 
@@ -165,6 +165,10 @@ class MyApp(ShowBase):
                 self.camera.reparentTo(self.Cog)
                 self.camera.setPosHpr((0, 25, 10),(180, -10, 0))
                 
+                
+                
+                
+#scene 2 (COMING SOON)
 #frame interpolation
 loadPrcFileData("", "interpolate-frames 1")
 
