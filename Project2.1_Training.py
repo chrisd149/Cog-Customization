@@ -25,15 +25,14 @@ from direct.gui.DirectGui import *
 """Character customaztion of Big Cheese"""
 
 """
-
 MAJOR BUGS:
-1. Nametag clips thorugh it's background when viewed at an angle
-2. Mouse is locked, and may cause issues w/camera and/or GUI
-
+1. (FIXED)Nametag clips thorugh it's background when viewed at an angle
+2. (NOT A PROBLEM ANYMORE)Mouse is locked, and may cause issues w/camera and/or GUI
+3. Button textures can't be found error
 """
 
-
 class MyApp(ShowBase):
+        
         def __init__(self):
                 ShowBase.__init__(self)
                 self.loadModels()
@@ -62,41 +61,47 @@ class MyApp(ShowBase):
                 self.Cog.setPosHprScale((130, -12.5, 70.75),(65, 0, 0),(1, 1, 1))
                 self.Cog.loop('Stand')
 
-        #camera settings        
+        #camera settings
         def loadCam(self):
                 self.disable_mouse()
                 self.camera.reparentTo(self.render)
                 self.camera.setPosHpr((90, 0, 75), (80, 180, -180))
 
-
-
-        #GUI seetings
+        #GUI settings
         def loadGUI(self):
-
+                #settings
                 self.txtb1 = loader.loadModel \
                         ('phase_3\models\props\chatbox.bam')
 
                 self.font1 = loader.loadFont('Impress.egg')
+
+                self.click = loader.loadSfx('phase_3/audio\sfx\GUI_create_toon_fwd.ogg')
+                self.click.setVolume(.75)
+
+                self.rollover = loader.loadSfx('phase_3/audio\sfx\GUI_rollover.ogg')
+                self.rollover.setVolume(1)
                 
-                #cog tag
-                self.textob = DirectLabel(parent=self.Cog,
-                                           text= 'Big Cheese',
-                                           pos=(0, 0, 9),
+                self.guiimage = loader.loadModel('phase_3\models\gui\dialog_box_gui.bam')
+                
+                #cog nametag
+                self.textob = DirectButton(text= ('Big Cheese', '', 'Change Name', 'Big Cheese'),
+                                           parent=aspect2d,
+                                           pos=(.485, .45, .475),
                                            relief=None,
-                                           text_scale=(.6),
-                                           hpr=(180,0,0),
+                                           text_scale=(.05),
+                                           hpr=(0,0,0),
                                            text_bg = (255, 255, 255, 0.5),
                                            text_font=self.font1,
-                                           text_fg=(0,0,0,1)
+                                           text_fg=(0,0,0,1),
+                                           clickSound=self.click
                                            #text_fg=()
                                            )
 
                 self.textob.component('text0').textNode.setCardDecal(1)
-                self.textob['text'] = 'Big Cheese'
-                
-                #Main GUI panel
-                self.guiimage = loader.loadModel('phase_3\models\gui\dialog_box_gui.bam')
+                self.textob['text'] = ('Big Cheese', '', 'Change Name', 'Big Cheese')
 
+                
+                #gui panel
                 self.guipanel = DirectLabel(parent=self.Cog,
                                             text= 'Click the arrows to pick your options.',
                                             text_wordwrap = 10,
@@ -107,8 +112,42 @@ class MyApp(ShowBase):
                                             image=self.guiimage,
                                             image_pos=(2, .3 , -1.25),
                                             image_scale=(10, 5, 5),
-                                            textMayChange=1)
-              #Buttons will be added at a later time
-        
+                                            textMayChange=1,
+                                            text_font=self.font1)
+
+                """Textures for buttons (BROKEN)"""
+                #self.maps = self.loader.loadModel('samples\gamepad\models/button_maps.egg')
+                #self.b1 = DirectButton(geom=(self.maps.find('**/button_ready'),
+                                             #self.maps.find('**/button_click'),
+                                             #self.maps.find('**/button_rollover'),
+                                             #self.maps.find('**/button_disabled')))
+
+
+                #next button
+                self.b1 = DirectButton(text=('Next', 'Loading...', 'Go to Next', ''),
+                                      text_scale=.05,
+                                      text_font=self.font1,
+                                      text_pos=(-.05, .125, 1),
+                                      pressEffect=1,
+                                      geom_scale=(1, 6, 1),
+                                      relief=None,
+                                      frameColor=(255, 0, 0, 0.8),
+                                      clickSound=self.click,
+                                      rolloverSound=self.rollover
+                                      )
+                
+                #back button
+                self.b2 = DirectButton(text=('Back', 'Loading...', 'Go Back', ''),
+                                       text_scale=.05,
+                                       text_font=self.font1,
+                                       text_pos=(-.55, .125, 1),
+                                       pressEffect=1,
+                                       geom_scale=(1, 6, 1),
+                                       relief=None,
+                                       frameColor=(255, 0, 0, 0.8),
+                                       clickSound=self.click,
+                                       rolloverSound=self.rollover,
+                                       )
+
 app = MyApp()
 app.run()
