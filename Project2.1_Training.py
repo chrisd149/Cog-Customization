@@ -1,4 +1,5 @@
 # Panda3D Imports
+from panda3d.core import loadPrcFileData
 from panda3d.core import loadPrcFile
 from direct.actor.Actor import Actor
 from pandac.PandaModules import *
@@ -21,24 +22,34 @@ from direct.actor.Actor import Actor
 from direct.showbase.DirectObject import DirectObject
 import os
 from direct.gui.DirectGui import *
+from direct.gui import DirectGuiGlobals as DGG
+loadPrcFileData("", "interpolate-frames 1")
+
+
+"""PLEASE READ: This project was meant to add full customaziton of Big Cheese, but my motovation
+has changed.  As a result I will stop adding content to this project soon.  Before so, I will
+try to iron out any bugs, but for the most part this project was mainly an attempt to blend
+buttons, sounds, sequences, music as a proof of concept for future projects."""
+
 
 """Character customaztion of Big Cheese"""
 
 """
 MAJOR BUGS:
 1. (FIXED)Nametag clips thorugh it's background when viewed at an angle
-2. (NOT A PROBLEM ANYMORE)Mouse is locked, and may cause issues w/camera and/or GUI
-3. Button textures can't be found error
+2. (Not a problem in testing)Mouse is locked, and may cause issues w/camera and/or GUI
+3. (FIXED)Button textures can't be found error
 """
 
 class MyApp(ShowBase):
-        
+
         def __init__(self):
                 ShowBase.__init__(self)
                 self.loadModels()
                 self.loadCog()
                 self.loadCam()
                 self.loadGUI()
+                self.animations()
 
 
         #models
@@ -46,13 +57,18 @@ class MyApp(ShowBase):
                 self.training = self.loader.loadModel('phase_10\models\cogHQ\MidVault.bam')
                 self.training.reparentTo(self.render)
 
+                self.music = loader.loadSfx('phase_3/audio/bgm\create_a_toon.ogg')
+                self.music.setVolume(.3)
+                self.music.play()
+
         #cogs
         def loadCog(self):
                 self.Cog = Actor('phase_3.5\models\char\suitA-mod.bam',
                                  {'Flail': 'phase_4\models\char\suitA-flailing.bam',
                                   'Stand': 'phase_4\models\char\suitA-neutral.bam',
                                   'Walk': 'phase_4\models\char\suitA-walk.bam',
-                                  'Golf': 'phase_5\models\char\suitA-golf-club-swing.bam'}
+                                  'Golf': 'phase_5\models\char\suitA-golf-club-swing.bam',
+                                  'Victory' : 'phase_4\models\char\suitA-victory.bam'}
                                  )
 
                 self.Cog.reparentTo(self.render)
@@ -60,6 +76,39 @@ class MyApp(ShowBase):
                 self.CogHead.reparentTo(self.Cog.find('**/joint_head'))
                 self.Cog.setPosHprScale((130, -12.5, 70.75),(65, 0, 0),(1, 1, 1))
                 self.Cog.loop('Stand')
+
+
+                self.goon = Actor('phase_9\models\char\Cog_Goonie-zero.bam',\
+                                  {'Walk' : 'phase_9\models\char\Cog_Goonie-walk.bam'})
+                self.goon.reparentTo(self.render)
+                self.goon.setPosHprScale((150, -30, 70.65),(180, 0, 0),(2, 2, 2))
+
+        #animations
+        def animations(self):
+                stand = self.Cog.actorInterval('Stand', duration=15, loop=1)
+                victory = self.Cog.actorInterval('Victory', duration=7.5, loop=0)
+                scared = self.Cog.actorInterval('Flail', duration=1.5, loop=0)
+                walka = self.goon.actorInterval('Walk', duration=6, loop=1)
+                walkb = self.goon.actorInterval('Walk', duration=1.5, loop=1)
+
+                walk1 = self.goon.posInterval(6, Point3(150, 12.5, 70.65))
+                turn1 = self.goon.hprInterval(1.5, Vec3(0,0,0))
+                walk2 = self.goon.posInterval(6, Point3(150, -30, 70.65))
+                turn2 = self.goon.hprInterval(1.5, Vec3(180, 0, 0))
+
+                self.pace = Sequence(
+                             Parallel(walka, walk1),
+                              Parallel(turn1, walkb),
+                                Parallel(walk2, walka),
+                                  Parallel(walkb, turn2)
+                             )
+                self.pace.loop()
+
+                self.pace2 = \
+                        Sequence(
+                                stand, victory, stand, scared
+                        )
+                self.pace2.loop()
 
         #camera settings
         def loadCam(self):
@@ -69,22 +118,24 @@ class MyApp(ShowBase):
 
         #GUI settings
         def loadGUI(self):
-                #settings
-                self.txtb1 = loader.loadModel \
+
+                #gui files
+                self.txtb1 = self.loader.loadModel \
                         ('phase_3\models\props\chatbox.bam')
 
-                self.font1 = loader.loadFont('Impress.egg')
+                self.font1 = self.loader.loadFont('Impress.egg')
 
-                self.click = loader.loadSfx('phase_3/audio\sfx\GUI_create_toon_fwd.ogg')
+                self.click = self.loader.loadSfx('phase_3/audio\sfx\GUI_create_toon_fwd.ogg')
                 self.click.setVolume(.75)
 
-                self.rollover = loader.loadSfx('phase_3/audio\sfx\GUI_rollover.ogg')
+                self.rollover = self.loader.loadSfx('phase_3/audio\sfx\GUI_rollover.ogg')
                 self.rollover.setVolume(1)
-                
-                self.guiimage = loader.loadModel('phase_3\models\gui\dialog_box_gui.bam')
-                
-                #cog nametag
-                self.textob = DirectButton(text= ('Big Cheese', '', 'Change Name', 'Big Cheese'),
+
+                self.grunt = self.loader.loadSfx('phase_3.5/audio\dial\COG_VO_grunt.ogg')
+
+                self.img1 = self.loader.loadModel('phase_3\models\gui\ChatPanel.bam')
+
+                self.textob = DirectButton(text= ('Big Cheese', 'Big Cheese', 'Big Cheese', 'Big Cheese'),
                                            parent=aspect2d,
                                            pos=(.485, .45, .475),
                                            relief=None,
@@ -93,15 +144,14 @@ class MyApp(ShowBase):
                                            text_bg = (255, 255, 255, 0.5),
                                            text_font=self.font1,
                                            text_fg=(0,0,0,1),
-                                           clickSound=self.click
-                                           #text_fg=()
+                                           clickSound=self.grunt
                                            )
 
                 self.textob.component('text0').textNode.setCardDecal(1)
-                self.textob['text'] = ('Big Cheese', '', 'Change Name', 'Big Cheese')
+                self.textob['text'] = ('Big Cheese', 'Big Cheese', 'Big Cheese', 'Big Cheese')
 
-                
-                #gui panel
+                self.guiimage = self.loader.loadModel('phase_3\models\gui\dialog_box_gui.bam')
+
                 self.guipanel = DirectLabel(parent=self.Cog,
                                             text= 'Click the arrows to pick your options.',
                                             text_wordwrap = 10,
@@ -115,15 +165,8 @@ class MyApp(ShowBase):
                                             textMayChange=1,
                                             text_font=self.font1)
 
-                """Textures for buttons (BROKEN)"""
-                #self.maps = self.loader.loadModel('samples\gamepad\models/button_maps.egg')
-                #self.b1 = DirectButton(geom=(self.maps.find('**/button_ready'),
-                                             #self.maps.find('**/button_click'),
-                                             #self.maps.find('**/button_rollover'),
-                                             #self.maps.find('**/button_disabled')))
 
 
-                #next button
                 self.b1 = DirectButton(text=('Next', 'Loading...', 'Go to Next', ''),
                                       text_scale=.05,
                                       text_font=self.font1,
@@ -133,10 +176,14 @@ class MyApp(ShowBase):
                                       relief=None,
                                       frameColor=(255, 0, 0, 0.8),
                                       clickSound=self.click,
-                                      rolloverSound=self.rollover
+                                      rolloverSound=self.rollover,
+                                      textMayChange=1,
+                                      image=self.img1,
+                                      image_scale=(.25, .09, .09),
+                                      image_pos=(-.175, .2, .19),
                                       )
-                
-                #back button
+
+
                 self.b2 = DirectButton(text=('Back', 'Loading...', 'Go Back', ''),
                                        text_scale=.05,
                                        text_font=self.font1,
@@ -147,7 +194,14 @@ class MyApp(ShowBase):
                                        frameColor=(255, 0, 0, 0.8),
                                        clickSound=self.click,
                                        rolloverSound=self.rollover,
+                                       image=self.img1,
+                                       image_scale=(.25, .09, .09),
+                                       image_pos=(-.675, .2, .19),
+                                       textMayChange=1,
                                        )
+
+
+
 
 app = MyApp()
 app.run()
