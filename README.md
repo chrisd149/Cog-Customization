@@ -1,4 +1,4 @@
-<h1>BossbotHQ</h1>
+<h1>Cog Training</h1>
 
 This is a early project for a very basic User Interactive game using Panda3D and Python.  
 
@@ -32,7 +32,7 @@ First off, the program is ran in Python only.  You can download the main project
 To install
 	
 	1.	Install Panda3D-1.10-02 if not already installed, on the [offical website](https://www.panda3d.org/download/)
-	2.	Download the main file
+	2.	Download files into a folder/location on your PC.
 	3.	Open file in your choice of Python IDE (e.g. PyCharm, Atom, etc)
 	4.	Run file, it will open up in a Panda3D enviroment window, similar to Toontown.
 	
@@ -48,29 +48,18 @@ To install
 
 <h3>Main Goals</h3>
 
-*	[ ] **Basic opening scene**
+*	[X] **Basic opening scene**
 
-*	[ ] **Control a Cog**
+*	[X] **Sequences of animations of multiple actors**
 
-*	[ ] **Customize suit textures, hats, and heads using a GUI**
-
-*	[ ] **Finish a basic task**
-	
-<h3>Side Goals</h3>
-
-*	[ ] Golf as a cog
-
-*	[ ] NPC that guides you through the game
-
-*	[ ] Other cogs/toons roaming the HQ
-	
+*	[X] **GUI buttons with working animations/sounds**
 
 
+<h2>License</h2>
 
+This game is completly open-source and can be modified to any extent, **but do not upload to anywhere if it is unmodified**.
 
-<h2>VERY optimistic ETA</h2>
-
-**Late March, early April**
+Credit is not required, just have fun running/modifing the program :)
 
 <h2>Authors</h2>
 
@@ -86,4 +75,3 @@ Main Author: Christian M Diaz
 
 <h4>All questions and inquiries must be related to the project in some way, unrelated messages will be ignored</h4>
 
-<h3>For now, I wont add any authors/pull requests until the project is somewhat funcional</h3>
