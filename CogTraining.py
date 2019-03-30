@@ -23,13 +23,11 @@ from direct.showbase.DirectObject import DirectObject
 import os
 from direct.gui.DirectGui import *
 from direct.gui import DirectGuiGlobals as DGG
+
 loadPrcFileData("", "interpolate-frames 1")
 
 
-"""PLEASE READ: This project was meant to add full customaziton of Big Cheese, but my motovation
-has changed.  As a result I will stop adding content to this project soon.  Before so, I will
-try to iron out any bugs, but for the most part this project was mainly an attempt to blend
-buttons, sounds, sequences, music as a proof of concept for future projects."""
+""""""
 
 
 """Character customaztion of Big Cheese"""
@@ -39,6 +37,7 @@ MAJOR BUGS:
 1. (FIXED)Nametag clips thorugh it's background when viewed at an angle
 2. (Not a problem in testing)Mouse is locked, and may cause issues w/camera and/or GUI
 3. (FIXED)Button textures can't be found error
+4. Text Box doesnt change text of other objects
 """
 
 class MyApp(ShowBase):
@@ -57,12 +56,13 @@ class MyApp(ShowBase):
                 self.training = self.loader.loadModel('phase_10\models\cogHQ\MidVault.bam')
                 self.training.reparentTo(self.render)
 
-                self.music = loader.loadSfx('phase_3/audio/bgm\create_a_toon.ogg')
+                self.music = self.loader.loadSfx('phase_3/audio/bgm\create_a_toon.ogg')
                 self.music.setVolume(.3)
                 self.music.play()
 
-        #cogs
+        #cogs/goons/bosses
         def loadCog(self):
+                #cog
                 self.Cog = Actor('phase_3.5\models\char\suitA-mod.bam',
                                  {'Flail': 'phase_4\models\char\suitA-flailing.bam',
                                   'Stand': 'phase_4\models\char\suitA-neutral.bam',
@@ -77,7 +77,7 @@ class MyApp(ShowBase):
                 self.Cog.setPosHprScale((130, -12.5, 70.75),(65, 0, 0),(1, 1, 1))
                 self.Cog.loop('Stand')
 
-
+                #goon
                 self.goon = Actor('phase_9\models\char\Cog_Goonie-zero.bam',\
                                   {'Walk' : 'phase_9\models\char\Cog_Goonie-walk.bam'})
                 self.goon.reparentTo(self.render)
@@ -96,6 +96,8 @@ class MyApp(ShowBase):
                 walk2 = self.goon.posInterval(6, Point3(150, -30, 70.65))
                 turn2 = self.goon.hprInterval(1.5, Vec3(180, 0, 0))
 
+                #sequences
+                #goon
                 self.pace = Sequence(
                              Parallel(walka, walk1),
                               Parallel(turn1, walkb),
@@ -104,6 +106,7 @@ class MyApp(ShowBase):
                              )
                 self.pace.loop()
 
+                #cog
                 self.pace2 = \
                         Sequence(
                                 stand, victory, stand, scared
@@ -135,23 +138,63 @@ class MyApp(ShowBase):
 
                 self.img1 = self.loader.loadModel('phase_3\models\gui\ChatPanel.bam')
 
-                self.textob = DirectButton(text= ('Big Cheese', 'Big Cheese', 'Big Cheese', 'Big Cheese'),
-                                           parent=aspect2d,
-                                           pos=(.485, .45, .475),
-                                           relief=None,
-                                           text_scale=(.05),
-                                           hpr=(0,0,0),
-                                           text_bg = (255, 255, 255, 0.5),
-                                           text_font=self.font1,
-                                           text_fg=(0,0,0,1),
-                                           clickSound=self.grunt
-                                           )
-
-                self.textob.component('text0').textNode.setCardDecal(1)
-                self.textob['text'] = ('Big Cheese', 'Big Cheese', 'Big Cheese', 'Big Cheese')
-
                 self.guiimage = self.loader.loadModel('phase_3\models\gui\dialog_box_gui.bam')
 
+
+                #text for textob1
+                self.text1 = ('Big Cheese', 'Big Cheese', 'Big Cheese', 'Big Cheese')
+
+                # cog tag
+                self.textob1 = DirectButton(text=('Big Cheese', 'Big Cheese', 'Big Cheese', 'Big Cheese'),
+                                            parent=self.aspect2d,
+                                            pos=(.485, .45, .475),
+                                            relief=None,
+                                            text_scale=(.05),
+                                            hpr=(0, 0, 0),
+                                            text_bg=(255, 255, 255, 0.5),
+                                            text_font=self.font1,
+                                            text_fg=(0, 0, 0, 1),
+                                            clickSound=self.grunt,
+                                            textMayChange=1,
+                                            # command=self.destroygui()
+                                            )
+
+                self.textob1.component('text0').textNode.setCardDecal(1)
+                self.textob1['text'] = self.text1
+
+                #background of textbox
+                self.textob2 = DirectLabel(parent=self.Cog,
+                                            text= '',
+                                            text_wordwrap = 10,
+                                            relief=None,
+                                            text_scale=1,
+                                            pos=(-5, 10, 10),
+                                            hpr=(190, 0, 0),
+                                            image=self.guiimage,
+                                            image_pos=(4.25, .3, -1.25),
+                                            image_scale=(4.1, 3, 5.5),
+                                            textMayChange=1,
+                                            text_font=self.font1)
+
+                #textbox
+                self.entry = DirectEntry(text='',
+                                         scale=.05,
+                                         command=self.textob2.setText(),
+                                         initialText='You can type here.  It will not affect anything.',
+                                         numLines=10,
+                                         focus=1,
+                                         focusInCommand=self.textob2.clearText(),
+                                         parent=self.aspect2d,
+                                         pos=(1.45, .1, .8),
+                                         entryFont=self.font1,
+                                         relief=None,
+                                         clickSound=self.click,
+                                         rolloverSound=self.rollover,
+                                         text_align=TextNode.ACenter
+                                         )
+
+
+                #main panel
                 self.guipanel = DirectLabel(parent=self.Cog,
                                             text= 'Click the arrows to pick your options.',
                                             text_wordwrap = 10,
@@ -166,7 +209,7 @@ class MyApp(ShowBase):
                                             text_font=self.font1)
 
 
-
+                #gui buttons
                 self.b1 = DirectButton(text=('Next', 'Loading...', 'Go to Next', ''),
                                       text_scale=.05,
                                       text_font=self.font1,
@@ -200,8 +243,14 @@ class MyApp(ShowBase):
                                        textMayChange=1,
                                        )
 
+        def setText(self, textEntered):
+                self.textob2.setText(textEntered)
 
+        def clearText(self):
+                self.entry.enterText('')
 
+        #def destroygui(self):
+                #self.textob2.destroy()
 
 app = MyApp()
 app.run()
