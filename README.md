@@ -9,7 +9,7 @@ This is a early project for a very basic User Interactive game using Panda3D and
 
 <h3>System Info</h3>	
 
-*	OS: Windows 10/8/7/Vista/XP
+*	OS: Windows 10/8/7/Vista/XP, not tested on Unix/Linux or MacOS.
 
 *	CPU: 500Mhz< CPU, 1Ghz< Recommended
 
