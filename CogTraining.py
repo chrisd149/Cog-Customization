@@ -60,6 +60,14 @@ class MyApp(ShowBase):
                 self.music.setVolume(.3)
                 self.music.play()
 
+                self.desk = self.loader.loadModel('phase_3.5\models\modules\desk_only_wo_phone.bam')
+                self.desk.reparentTo(self.render)
+                self.desk.setPosHprScale((130, 7.5, 70.75), (120, 0, 0), (1.5, 1.5, 1.5))
+
+                self.chair = self.loader.loadModel('phase_5.5\models\estate\deskChair.bam')
+                self.chair.reparentTo(self.render)
+                self.chair.setPosHprScale((135, 7, 70.75), (-60, 0, 0), (1.5, 1.5, 1.5))
+
         #cogs/goons/bosses
         def loadCog(self):
                 #cog
@@ -73,9 +81,36 @@ class MyApp(ShowBase):
 
                 self.Cog.reparentTo(self.render)
                 self.CogHead = self.loader.loadModel('phase_4\models\char\suitA-heads.bam').find('**/bigcheese')
+
                 self.CogHead.reparentTo(self.Cog.find('**/joint_head'))
+                self.CogHead.setPos(0, 0, -.05)
+
+                self.CogTorso = self.loader.loadTexture('phase_3.5\maps\c_blazer.jpg')
+                self.CogTorso2 = self.loader.loadTexture('phase_3.5\maps\l_blazer.jpg')
+                self.Cog.find('**/torso').setTexture(self.CogTorso, 1)
+
                 self.Cog.setPosHprScale((130, -12.5, 70.75),(65, 0, 0),(1, 1, 1))
+
+                self.hat1 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_fez.bam')
+                self.hat1.reparentTo(self.CogHead)
+                self.hat1.setPosHprScale((0, -0.1, 1.5), (30, -10, 0), (.4, .4, .4))
+
                 self.Cog.loop('Stand')
+
+                self.Cog2 = Actor('phase_3.5\models\char\suitC-mod.bam',
+                                  {'Sit' : 'phase_11\models\char\suitC-sit.bam'})
+
+                self.Cog2.reparentTo(self.chair)
+                self.Cog2.setPosHprScale((0,-2,0), (180, 0, 0), (.8, .8, .8))
+                self.Cog2.loop('Sit')
+
+                self.CogHead2 = self.loader.loadModel('phase_3.5\models\char\suitC-heads.bam').find('**/coldcaller')
+                self.CogHead2.reparentTo(self.Cog2.find('**/joint_head'))
+                self.CogHead2.setPos(0,0,-.05)
+
+                self.hat2 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_fedora.bam')
+                self.hat2.reparentTo(self.CogHead2)
+                self.hat2.setPosHprScale((0, 0, .9),(0, 0, 0),(.5, .5, .5))
 
                 #goon
                 self.goon = Actor('phase_9\models\char\Cog_Goonie-zero.bam',\
@@ -85,16 +120,26 @@ class MyApp(ShowBase):
 
         #animations
         def animations(self):
-                stand = self.Cog.actorInterval('Stand', duration=15, loop=1)
+                stand = self.Cog.actorInterval('Stand', duration=7.5, loop=1)
                 victory = self.Cog.actorInterval('Victory', duration=7.5, loop=0)
                 scared = self.Cog.actorInterval('Flail', duration=1.5, loop=0)
                 walka = self.goon.actorInterval('Walk', duration=6, loop=1)
                 walkb = self.goon.actorInterval('Walk', duration=1.5, loop=1)
+                sit = self.Cog2.actorInterval('Sit', duration=10, loop=1)
 
                 walk1 = self.goon.posInterval(6, Point3(150, 12.5, 70.65))
                 turn1 = self.goon.hprInterval(1.5, Vec3(0,0,0))
                 walk2 = self.goon.posInterval(6, Point3(150, -30, 70.65))
                 turn2 = self.goon.hprInterval(1.5, Vec3(180, 0, 0))
+                spiny = self.hat1.hprInterval(20, Vec3(1000, 0, 0))
+                head1 = self.CogHead.hprInterval(2.5, Vec3(30, 10, 0))
+                head2 = self.CogHead.hprInterval(2.5, Vec3(0, 0, 0))
+                head3 = self.CogHead.hprInterval(2.5, Vec3(-30, 20, 0))
+                head4 = self.CogHead.hprInterval(2.5, Vec3(-0, 0, 0))
+                head11 = self.CogHead2.hprInterval(2.5, Vec3(15, 10, 0))
+                head22 = self.CogHead2.hprInterval(2.5, Vec3(0, 0, 0))
+                head33 = self.CogHead2.hprInterval(2.5, Vec3(-15, 10, 5))
+                head44 = self.CogHead2.hprInterval(2.5, Vec3(-0, 0, 0))
 
                 #sequences
                 #goon
@@ -107,11 +152,26 @@ class MyApp(ShowBase):
                 self.pace.loop()
 
                 #cog
-                self.pace2 = \
-                        Sequence(
-                                stand, victory, stand, scared
+                self.pace2 = Sequence(
+                                stand,
+                                Parallel(stand, head1),
+                                Parallel(stand, head2),
+                                scared,
+                                Parallel(stand, head3),
+                                Parallel(stand, head4),
+                                victory, stand,
                         )
+                #second cog
                 self.pace2.loop()
+
+                self.pace3 = Sequence(
+                        sit,
+                        Parallel(sit, head11),
+                        Parallel(sit, head22),
+                        Parallel(sit, head33),
+                        Parallel(sit, head44)
+                )
+                self.pace3.loop()
 
         #camera settings
         def loadCam(self):
@@ -140,12 +200,12 @@ class MyApp(ShowBase):
 
                 self.guiimage = self.loader.loadModel('phase_3\models\gui\dialog_box_gui.bam')
 
-
-                #text for textob1
-                self.text1 = ('Big Cheese', 'Big Cheese', 'Big Cheese', 'Big Cheese')
+                # text for textob1
+                #self.text1 = ('Big Cheese', 'Big Cheese', 'Big Cheese', 'Big Cheese')
 
                 # cog tag
-                self.textob1 = DirectButton(text=('Big Cheese', 'Big Cheese', 'Big Cheese', 'Big Cheese'),
+                self.textob1 = DirectButton(text='Big Cheese    lvl 12',
+                                            text_wordwrap= 5,
                                             parent=self.aspect2d,
                                             pos=(.485, .45, .475),
                                             relief=None,
@@ -160,7 +220,7 @@ class MyApp(ShowBase):
                                             )
 
                 self.textob1.component('text0').textNode.setCardDecal(1)
-                self.textob1['text'] = self.text1
+                self.textob1['text'] = 'Big Cheese    lvl 12'
 
                 #background of textbox
                 self.textob2 = DirectLabel(parent=self.Cog,
@@ -175,6 +235,22 @@ class MyApp(ShowBase):
                                             image_scale=(4.1, 3, 5.5),
                                             textMayChange=1,
                                             text_font=self.font1)
+
+                self.textob3 = DirectButton(text='Cold Caller           LvL 5',
+                                            text_wordwrap=8,
+                                            parent=self.aspect2d,
+                                            pos=(-1.225, .45, .4),
+                                            relief=None,
+                                            text_scale=(.05),
+                                            hpr=(0, 0, 0),
+                                            text_bg=(254, 255, 255, 0.5),
+                                            text_font=self.font1,
+                                            text_fg=(0, 0, 0, 1),
+                                            clickSound=self.grunt,
+                                            textMayChange=1,
+                                            )
+
+
 
                 #textbox
                 self.entry = DirectEntry(text='',
@@ -224,6 +300,7 @@ class MyApp(ShowBase):
                                       image=self.img1,
                                       image_scale=(.25, .09, .09),
                                       image_pos=(-.175, .2, .19),
+                                      #command=self.changeAnim()
                                       )
 
 
@@ -248,6 +325,15 @@ class MyApp(ShowBase):
 
         def clearText(self):
                 self.entry.enterText('')
+
+        #def changeAnim(self):
+                        #self.Cog.stop('Stand')
+
+
+        #def changeHat(self):
+                        #self.hat1.removeNode(),
+                        #self.hat2.reparentTo(self.CogHead)
+                        #self.hat2.setPosHprScale((0, 0, 1.5), (30, -10, 0), (.25, .25, .25))
 
         #def destroygui(self):
                 #self.textob2.destroy()
