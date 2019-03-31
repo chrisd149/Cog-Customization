@@ -32,7 +32,7 @@ First off, the program is ran in Python only.  You can download the main project
 To install
 	
 	1.	Install Panda3D-1.10-02 if not already installed, on the [offical website](https://www.panda3d.org/download/)
-	2.	Download files into a folder/location on your PC.
+	2.	Download files from the releases section.
 	3.	Open file in your choice of Python IDE (e.g. PyCharm, Atom, etc)
 	4.	Run file, it will open up in a Panda3D enviroment window, similar to Toontown.
 	
