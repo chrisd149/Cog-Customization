@@ -1,7 +1,6 @@
 # Panda3D Imports
 from panda3d.core import loadPrcFileData
 from panda3d.core import loadPrcFile
-loadPrcFileData("", "win-title TITLE GOES HERE")
 from direct.actor.Actor import Actor
 from direct.task import Task
 import math
@@ -13,6 +12,7 @@ from direct.interval.ActorInterval import ActorInterval
 from direct.interval.IntervalGlobal import *
 from pandac.PandaModules import WindowProperties
 loadPrcFileData("", "window-title Cog Training v0.3-alpha")
+loadPrcFileData("", "window-icon pandaIcon.ico")
 from panda3d.core import CollisionTraverser, CollisionNode
 from panda3d.core import CollisionHandlerQueue, CollisionRay
 from panda3d.core import Filename, AmbientLight, DirectionalLight
@@ -25,6 +25,8 @@ import os
 from direct.gui.DirectGui import *
 from direct.gui import DirectGuiGlobals as DGG
 import datetime
+from weather import Weather, Unit
+import sys
 
 """"""
 
@@ -32,7 +34,9 @@ import datetime
 
 """
 MAJOR BUGS:
-1. Text Box doesnt change text of other objects
+1. Functions must be replicated to achieve different results /
+for example, a function must be made for each color used for
+cog_1.hands.
 """
 
 
@@ -47,19 +51,24 @@ class MyApp(ShowBase):
                 self.loadGUI()
                 self.animations()
                 self.music()
-
-        # models
-        def loadModels(self):
-                self.training = self.loader.loadModel('phase_10\models\cogHQ\MidVault.bam')
-                self.training.reparentTo(self.render)
-
-                self.desk = self.loader.loadModel('phase_3.5\models\modules\desk_only_wo_phone.bam')
-                self.desk.reparentTo(self.render)
-                self.desk.setPosHprScale((130, 7.5, 70.75), (120, 0, 0), (1.5, 1.5, 1.5))
-
-                self.chair = self.loader.loadModel('phase_5.5\models\estate\deskChair.bam')
-                self.chair.reparentTo(self.render)
-                self.chair.setPosHprScale((135, 7, 70.75), (-60, 0, 0), (1.5, 1.5, 1.5))
+                self.screenText()
+                self.accept('escape', sys.exit)
+                self.accept('m', self.music.stop)
+                self.accept('m-repeat', self.music.play)
+                self.hat_button_label = OnscreenText(text='Hats',
+                                                     pos=(-.05, .225, 1),
+                                                     scale=.05,
+                                                     font=self.font_1
+                                                     )
+                self.scale_button_label = OnscreenText(text='Scale',
+                                                     pos=(-.475, .225, 1),
+                                                     scale=.05,
+                                                     font=self.font_1
+                                                     )
+                self.color_button_label = OnscreenText(text='Color',
+                                                       pos=(-.05, .46, 1),
+                                                       scale=.05,
+                                                       font=self.font_1)
 
         # music
         def music(self):
@@ -93,12 +102,6 @@ class MyApp(ShowBase):
                 #cog position/hpr/scale
                 self.cog_1.setPosHprScale((130, -12.5, 70.75), (65, 0, 0), (1, 1, 1))
 
-                #cog hat
-                self.hat1 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_fez.bam')
-                self.hat1.reparentTo(self.coghead_1)
-                self.hat1.setPosHprScale((0, -0.1, 1.5), (30, -10, 0), (.4, .4, .4))
-
-
                 # cog_2
                 self.cog_2 = Actor('phase_3.5\models\char\suitC-mod.bam',
                                   {'Sit': 'phase_11\models\char\suitC-sit.bam'})
@@ -115,11 +118,18 @@ class MyApp(ShowBase):
                 self.coghead_2.reparentTo(self.cog_2.find('**/joint_head'))
                 self.coghead_2.setPos(0, 0, -.05)
 
-                #cog hat
-                self.hat2 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_fedora.bam')
-                self.hat2.reparentTo(self.coghead_2)
-                self.hat2.setPosHprScale((0, 0, .9), (0, 0, 0), (.5, .5, .5))
+                # cog_1 hats
+                self.hat1 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_fez.bam')
+                self.hat1.reparentTo(self.coghead_1)
+                self.hat1.setPosHprScale((0, -0.1, 1.5), (30, -10, 0), (.4, .4, .4))
 
+                self.hat2 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_band.bam')
+                self.hat2.setPosHprScale((0, -0.1, 1.5), (180, 0, 0), (.25, .25, .25))
+
+                # cog_2 hat
+                self.hat = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_fedora.bam')
+                self.hat.reparentTo(self.coghead_2)
+                self.hat.setPosHprScale((0, 0, .9), (0, 0, 0), (.5, .5, .5))
 
                 # goon
                 self.goon = Actor('phase_9\models\char\Cog_Goonie-zero.bam', \
@@ -129,6 +139,24 @@ class MyApp(ShowBase):
 
                 # goon position/hpr/scale
                 self.goon.setPosHprScale((150, -30, 70.65), (180, 0, 0), (2, 2, 2))
+
+
+                # models
+        def loadModels(self):
+                self.training = self.loader.loadModel('phase_10\models\cogHQ\MidVault.bam')
+                self.training.reparentTo(self.render)
+
+                self.desk = self.loader.loadModel('phase_3.5\models\modules\desk_only_wo_phone.bam')
+                self.desk.reparentTo(self.render)
+                self.desk.setPosHprScale((130, 7.5, 70.75), (120, 0, 0), (1.5, 1.5, 1.5))
+
+                self.chair = self.loader.loadModel('phase_5.5\models\estate\deskChair.bam')
+                self.chair.reparentTo(self.render)
+                self.chair.setPosHprScale((135, 7, 70.75), (-60, 0, 0), (1.5, 1.5, 1.5))
+
+
+
+
 
         # animations
         def animations(self):
@@ -200,33 +228,7 @@ class MyApp(ShowBase):
                 self.camera.reparentTo(self.render)
                 self.camera.setPosHpr((90, 0, 75), (80, 180, -180))
 
-
-        # GUI settings
-        def loadGUI(self):
-                # gui audio & images
-                self.chatbox = self.loader.loadModel \
-                        ('phase_3\models\props\chatbox.bam')
-
-                self.font_1 = self.loader.loadFont('Impress.ttf')
-
-                self.click = self.loader.loadSfx('phase_3/audio\sfx\GUI_create_toon_fwd.ogg')
-                self.click.setVolume(.75)
-
-                self.rollover = self.loader.loadSfx('phase_3/audio\sfx\GUI_rollover.ogg')
-                self.rollover.setVolume(1)
-
-                self.grunt = self.loader.loadSfx('phase_3.5/audio\dial\COG_VO_grunt.ogg')
-
-                self.img_1 = self.loader.loadModel('phase_3\models\gui\ChatPanel.bam')
-
-                self.guiimage = self.loader.loadModel('phase_3\models\gui\dialog_box_gui.bam')
-
-                self.date = datetime.datetime.now()
-
-                self.time_now = self.date.strftime('%H:%M')
-
-                # general information
-
+        def screenText(self):
 
                 self.screentext_1 = OnscreenText(text='Author: Christian Diaz',
                                                  pos=(-1.8, .95),
@@ -244,7 +246,7 @@ class MyApp(ShowBase):
                                                  align=TextNode.A_left,
                                                  )
 
-                self.screentext_3 =  OnscreenText(text='Current Version: v0.3-alpha',
+                self.screentext_3 = OnscreenText(text='Current Version: v0.3-alpha',
                                                  pos=(-1.8, .8),
                                                  font=self.font_1,
                                                  fg=(255, 255, 255, 1),
@@ -276,9 +278,40 @@ class MyApp(ShowBase):
                                                  align=TextNode.A_left,
                                                  )
 
+                self.screentext_7 = OnscreenText(text='Contact: christianmigueldiaz@gmail.com',
+                                                 pos=(-1.8, .725),
+                                                 font=self.font_1,
+                                                 fg=(255, 255, 255, 1),
+                                                 scale=.05,
+                                                 align=TextNode.A_left,
+                                                 )
+
                 self.info_frame = DirectFrame(frameSize=(-1.9, -.9, .6, 1),
                                               frameColor=(254, 255, 255, 0.1))
 
+        # GUI settings
+        def loadGUI(self):
+                # gui audio & images
+                self.chatbox = self.loader.loadModel \
+                        ('phase_3\models\props\chatbox.bam')
+
+                self.font_1 = self.loader.loadFont('Impress.ttf')
+
+                self.click = self.loader.loadSfx('phase_3/audio\sfx\GUI_create_toon_fwd.ogg')
+                self.click.setVolume(.75)
+
+                self.rollover = self.loader.loadSfx('phase_3/audio\sfx\GUI_rollover.ogg')
+                self.rollover.setVolume(1)
+
+                self.grunt = self.loader.loadSfx('phase_3.5/audio\dial\COG_VO_grunt.ogg')
+
+                self.img_1 = self.loader.loadModel('phase_3\models\gui\ChatPanel.bam')
+
+                self.guiimage = self.loader.loadModel('phase_3\models\gui\dialog_box_gui.bam')
+
+                self.date = datetime.datetime.now()
+
+                self.time_now = self.date.strftime('%H:%M')
 
                 # background of textbox
                 self.textbox_bg = DirectLabel(parent=self.cog_1,
@@ -357,46 +390,320 @@ class MyApp(ShowBase):
                                             textMayChange=1,
                                             text_font=self.font_1)
 
-
                 # gui buttons
                 self.button_1 = DirectButton(text=('Next', 'Loading...', 'Go to Next', ''),
-                                       text_scale=.05,
-                                       text_font=self.font_1,
-                                       text_pos=(-.05, .125, 1),
-                                       pressEffect=1,
-                                       geom_scale=(1, 6, 1),
-                                       relief=None,
-                                       frameColor=(255, 0, 0, 0.8),
-                                       clickSound=self.click,
-                                       rolloverSound=self.rollover,
-                                       textMayChange=1,
-                                       image=self.img_1,
-                                       image_scale=(.25, .09, .09),
-                                       image_pos=(-.175, 0, .19)
-                                       )
+                                             text_scale=.05,
+                                             text_font=self.font_1,
+                                             text_pos=(-.05, .125, 1),
+                                             pressEffect=1,
+                                             geom_scale=(1, 6, 1),
+                                             relief=None,
+                                             frameColor=(255, 0, 0, 0.8),
+                                             clickSound=self.click,
+                                             rolloverSound=self.rollover,
+                                             textMayChange=1,
+                                             image=self.img_1,
+                                             image_scale=(.25, .09, .09),
+                                             image_pos=(-.175, 0, .19),
+                                             command= self.add_hat1
+                                             )
 
-                self.button_2 = DirectButton(text=('Back', 'Loading...', 'Go Back', ''),
-                                       text_scale=.05,
-                                       text_font=self.font_1,
-                                       text_pos=(-.55, .125, 1),
-                                       pressEffect=1,
-                                       geom_scale=(1, 6, 1),
-                                       relief=None,
-                                       frameColor=(255, 0, 0, 0.8),
-                                       clickSound=self.click,
-                                       rolloverSound=self.rollover,
-                                       image=self.img_1,
-                                       image_scale=(.25, .09, .09),
-                                       image_pos=(-.675, .2, .19),
-                                       textMayChange=1,
-                                       )
+                self.button_3 = DirectButton(text=('Delete Top-right text.', 'Loading...', 'This will delete top-right text.', ''),
+                                             text_scale=.05,
+                                             text_font=self.font_1,
+                                             text_pos=(-.625, .925),
+                                             pressEffect=1,
+                                             geom_scale=(1, 6, 1),
+                                             relief=None,
+                                             frameColor=(255, 0, 0, 0.8),
+                                             clickSound=self.click,
+                                             rolloverSound=self.rollover,
+                                             image=self.img_1,
+                                             image_scale=(.55, .09, .09),
+                                             image_pos=(-.9, .2, .975),
+                                             textMayChange=1,
+                                             command= self.screen_text_destroy
+                                             )
 
+                self.button_5 = DirectButton(text=('Next', 'Loading...', 'Go to Next', ''),
+                                             text_scale=.05,
+                                             text_font=self.font_1,
+                                             text_pos=(-.475, .125, 1),
+                                             pressEffect=1,
+                                             geom_scale=(1, 6, 1),
+                                             relief=None,
+                                             frameColor=(255, 0, 0, 0.8),
+                                             clickSound=self.click,
+                                             rolloverSound=self.rollover,
+                                             textMayChange=1,
+                                             image=self.img_1,
+                                             image_scale=(.25, .09, .09),
+                                             image_pos=(-.6, 0, .19),
+                                             command=self.decrease_scale
+                                             )
+                self.button_7 = DirectButton(text=('Next', 'Loading...', 'Go to Next', ''),
+                                             text_scale=.05,
+                                             text_font=self.font_1,
+                                             text_pos=(-.05, .365, 1),
+                                             pressEffect=1,
+                                             geom_scale=(1, 6, 1),
+                                             relief=None,
+                                             frameColor=(255, 0, 0, 0.8),
+                                             clickSound=self.click,
+                                             rolloverSound=self.rollover,
+                                             textMayChange=1,
+                                             image=self.img_1,
+                                             image_scale=(.25, .09, .09),
+                                             image_pos=(-.175, 0, .425),
+                                             command=self.change_color_purple
+                                             )
+        # textbox functions
         def setText(self, textEntered):
                 self.textbox_bg.setText(textEntered)
 
         def clearText(self):
                 self.entry.enterText('')
+                self.entry.destroy()
+                del self.entry
+
+        # func to destroy onscreentext objects
+        def screen_text_destroy(self):
+                self.screentext_1.removeNode()
+                del self.screentext_1
+                self.screentext_2.removeNode()
+                del self.screentext_2
+                self.screentext_3.removeNode()
+                del self.screentext_3
+                self.screentext_4.removeNode()
+                del self.screentext_4
+                self.screentext_5.removeNode()
+                del self.screentext_5
+                self.screentext_6.removeNode()
+                del self.screentext_6
+                self.screentext_7.removeNode()
+                del self.screentext_7
+                self.info_frame.destroy()
+                self.button_3.destroy()
+                del self.button_3
+                self.button_4 = DirectButton(
+                        text=('Add top-right text.', 'Loading...', 'This will add top-right text.', ''),
+                        text_scale=.05,
+                        text_font=self.font_1,
+                        text_pos=(-1.5, .925),
+                        pressEffect=1,
+                        geom_scale=(1, 6, 1),
+                        relief=None,
+                        frameColor=(255, 0, 0, 0.8),
+                        clickSound=self.click,
+                        rolloverSound=self.rollover,
+                        image=self.img_1,
+                        image_scale=(.55, .09, .09),
+                        image_pos=(-1.75, .2, .975),
+                        textMayChange=1,
+                        command=self.screen_text_load
+                        )
+
+        # func to add back Screentext objects
+        def screen_text_load(self):
+                self.screenText()
+                self.button_4.destroy()
+                del self.button_4
 
 
+        # func to add hat
+        def add_hat1(self):
+                self.hat1.removeNode()
+                del self.hat1
+                self.hat2 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_band.bam')
+                self.hat2.setPosHprScale((0, -0.1, 1.5), (180, 0, 0), (.25, .25, .25))
+                self.hat2.reparentTo(self.coghead_1)
+                self.button_1.destroy()
+                del self.button_1
+                self.button_2 = DirectButton(text=('Back', 'Loading...', 'Go Back', ''),
+                                             text_scale=.05,
+                                             text_font=self.font_1,
+                                             text_pos=(-.05, .125, 1),
+                                             pressEffect=1,
+                                             geom_scale=(1, 6, 1),
+                                             relief=None,
+                                             frameColor=(255, 0, 0, 0.8),
+                                             clickSound=self.click,
+                                             rolloverSound=self.rollover,
+                                             image=self.img_1,
+                                             image_scale=(.25, .09, .09),
+                                             image_pos=(-.175, 0, .19),
+                                             textMayChange=1,
+                                             command= self.add_hat2
+                                             )
+        # func to add hat
+        def add_hat2(self):
+                self.hat2.removeNode()
+                del self.hat2
+                self.hat1 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_fez.bam')
+                self.hat1.reparentTo(self.coghead_1)
+                self.hat1.setPosHprScale((0, -0.1, 1.5), (30, -10, 0), (.4, .4, .4))
+                self.button_2.destroy()
+                del self.button_2
+                self.button_1 = DirectButton(text=('Next', 'Loading...', 'Go to Next', ''),
+                                             text_scale=.05,
+                                             text_font=self.font_1,
+                                             text_pos=(-.05, .125, 1),
+                                             pressEffect=1,
+                                             geom_scale=(1, 6, 1),
+                                             relief=None,
+                                             frameColor=(255, 0, 0, 0.8),
+                                             clickSound=self.click,
+                                             rolloverSound=self.rollover,
+                                             textMayChange=1,
+                                             image=self.img_1,
+                                             image_scale=(.25, .09, .09),
+                                             image_pos=(-.175, 0, .19),
+                                             command= self.add_hat1
+                                          )
+        # functions that change scale of cog_1
+        def decrease_scale(self):
+                self.cog_1.setScale(.5, .5, .5)
+                self.guipanel.setScale(2, 2, 2)
+                self.guipanel.setPos(16, 20, 16)
+                self.textbox_bg.setScale(2, 2, 2)
+                self.textbox_bg.setPos(-10, 20, 20)
+                self.cogtag_1.setPos(.485, .45, .05)
+                self.cogtag_1.setScale(.5, .5, .5)
+                self.button_5.destroy()
+                del self.button_5
+                self.button_6 = DirectButton(text=('Back', 'Loading...', 'Go Back', ''),
+                                             text_scale=.05,
+                                             text_font=self.font_1,
+                                             text_pos=(-.475, .125, 1),
+                                             pressEffect=1,
+                                             geom_scale=(1, 6, 1),
+                                             relief=None,
+                                             frameColor=(255, 0, 0, 0.8),
+                                             clickSound=self.click,
+                                             rolloverSound=self.rollover,
+                                             textMayChange=1,
+                                             image=self.img_1,
+                                             image_scale=(.25, .09, .09),
+                                             image_pos=(-.6, 0, .19),
+                                             command=self.increase_scale
+                                             )
+
+        def increase_scale(self):
+                self.cog_1.setScale(1, 1, 1)
+                self.guipanel.setScale(1, 1, 1)
+                self.guipanel.setPos(8, 10, 8)
+                self.textbox_bg.setScale(1, 1, 1)
+                self.textbox_bg.setPos(-5, 10, 10)
+                self.cogtag_1.setPos(.485, .45, .475)
+                self.cogtag_1.setScale(1, 1, 1)
+                self.button_6.destroy()
+                del self.button_6
+
+                self.button_5 = DirectButton(text=('Next', 'Loading...', 'Go to Next', ''),
+                                             text_scale=.05,
+                                             text_font=self.font_1,
+                                             text_pos=(-.475, .125, 1),
+                                             pressEffect=1,
+                                             geom_scale=(1, 6, 1),
+                                             relief=None,
+                                             frameColor=(255, 0, 0, 0.8),
+                                             clickSound=self.click,
+                                             rolloverSound=self.rollover,
+                                             textMayChange=1,
+                                             image=self.img_1,
+                                             image_scale=(.25, .09, .09),
+                                             image_pos=(-.6, 0, .19),
+                                             command=self.decrease_scale
+                                             )
+        # glove color functions
+        # purple
+        def change_color_purple(self):
+                self.cog_1.find("**/hands").setColor(255, 0, 255)
+                self.button_7.destroy()
+                del self.button_7
+
+                self.button_8 = DirectButton(text=('Next', 'Loading...', 'Go to Next', ''),
+                                             text_scale=.05,
+                                             text_font=self.font_1,
+                                             text_pos=(-.05, .365, 1),
+                                             pressEffect=1,
+                                             geom_scale=(1, 6, 1),
+                                             relief=None,
+                                             frameColor=(255, 0, 0, 0.8),
+                                             clickSound=self.click,
+                                             rolloverSound=self.rollover,
+                                             textMayChange=1,
+                                             image=self.img_1,
+                                             image_scale=(.25, .09, .09),
+                                             image_pos=(-.175, 0, .425),
+                                             command=self.change_color_yellow
+                                             )
+        # yellow
+        def change_color_yellow(self):
+                self.cog_1.find("**/hands").setColor(255, 255, 0)
+                self.button_8.destroy()
+                del self.button_8
+
+                self.button_9 = DirectButton(text=('Next', 'Loading...', 'Go to Next', ''),
+                                             text_scale=.05,
+                                             text_font=self.font_1,
+                                             text_pos=(-.05, .365, 1),
+                                             pressEffect=1,
+                                             geom_scale=(1, 6, 1),
+                                             relief=None,
+                                             frameColor=(255, 0, 0, 0.8),
+                                             clickSound=self.click,
+                                             rolloverSound=self.rollover,
+                                             textMayChange=1,
+                                             image=self.img_1,
+                                             image_scale=(.25, .09, .09),
+                                             image_pos=(-.175, 0, .425),
+                                             command=self.change_color_cyan
+                                             )
+
+        # cyan
+        def change_color_cyan(self):
+                self.cog_1.find("**/hands").setColor(0, 255, 255)
+                self.button_9.destroy()
+                del self.button_9
+
+                self.button_10 = DirectButton(text=('Next', 'Loading...', 'Go to Next', ''),
+                                             text_scale=.05,
+                                             text_font=self.font_1,
+                                             text_pos=(-.05, .365, 1),
+                                             pressEffect=1,
+                                             geom_scale=(1, 6, 1),
+                                             relief=None,
+                                             frameColor=(255, 0, 0, 0.8),
+                                             clickSound=self.click,
+                                             rolloverSound=self.rollover,
+                                             textMayChange=1,
+                                             image=self.img_1,
+                                             image_scale=(.25, .09, .09),
+                                             image_pos=(-.175, 0, .425),
+                                             command=self.change_color_white
+                                             )
+        # white
+        def change_color_white(self):
+                self.cog_1.find("**/hands").setColor(255, 255, 255)
+                self.button_10.destroy()
+                del self.button_10
+
+                self.button_7 = DirectButton(text=('Next', 'Loading...', 'Go to Next', ''),
+                                             text_scale=.05,
+                                             text_font=self.font_1,
+                                             text_pos=(-.05, .365, 1),
+                                             pressEffect=1,
+                                             geom_scale=(1, 6, 1),
+                                             relief=None,
+                                             frameColor=(255, 0, 0, 0.8),
+                                             clickSound=self.click,
+                                             rolloverSound=self.rollover,
+                                             textMayChange=1,
+                                             image=self.img_1,
+                                             image_scale=(.25, .09, .09),
+                                             image_pos=(-.175, 0, .425),
+                                             command=self.change_color_purple
+                                             )
 app = MyApp()
 app.run()
