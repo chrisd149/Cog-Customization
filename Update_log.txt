@@ -4,3 +4,5 @@ Log 4/8: Code is cleaned up significantly from intial release.  Many comments ha
 Many varribles have been changed to easier names (i.e. self.Cog1 to self.cog_1, self.textob1 to self.cogtag_1, etc.)
 Animation blending has been added, and many lines of redundent code have been remove.  Updates coming soon, with release of
 v0.3 coming soon.
+
+Log 4/12| 4/13:  Added significant updates to main.py.  Several functions to control the big cheese's hat, color of hands, and scale have been added.  There is now the ability to close the Info tab in the top left corner of the app, and key binds have been added, such as Esc for closing the program, and M for stoping the music.  After the functions, I cleaned up the code significantly by re-wording comments, updating some grammar problems in the application gui, fixed indentation problems, spacing, etc.  v0.3 is pretty much done, and will probably be the last alpha release.  v0.4 might come out to test walking mechanics and the area for the user to walk around (area will be made with Toontown Level Editor.)  This new area will be discussed more later.
