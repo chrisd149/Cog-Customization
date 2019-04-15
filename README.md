@@ -31,10 +31,13 @@ First off, the program is ran in Python only.  You can download the main project
 
 To install
 	
-	1.	Install Panda3D-1.10-02 if not already installed, on the [offical website](https://www.panda3d.org/download/)
-	2.	Download files from the releases section.
-	3.	Open file in your choice of Python IDE (e.g. PyCharm, Atom, etc)
-	4.	Run file, it will open up in a Panda3D enviroment window, similar to Toontown.
+	1.	Download files from the latest release from the releases section.
+	2.	Install Panda3D-1.10-02 if not already installed, at www.panda3d.org/download
+	3.      Go to www.toontownrewritten.com/play, and install Toontown Rewritten.
+	4.      Go to the Toontown Rewritten Folder, and copy/paste the .mf phase files into your Cogtraining folder 
+		or your Panda3D folder. 
+	5.	Open main.py in your choice of Python IDE (e.g. PyCharm, Atom, etc).
+	4.	Run main.py, it will open up in a Panda3D enviroment window, similar to Toontown.
 	
 <h2>Built With</h2>
 
@@ -42,7 +45,7 @@ To install
 
 *	[***Toontown Rewritten***](https://www.toontownrewritten.com/) - Phase files imported from Toontown phase files.
 
-*	[***PyCharm***](https://www.jetbrains.com/pycharm/) - IDE used to build program
+*	[***PyCharm***](https://www.jetbrains.com/pycharm/) - IDE used to build program.
 
 <h2>Goals of Project</h2>
 
@@ -52,10 +55,16 @@ To install
 
 *	[X] **GUI buttons with working animations/sounds**
 
+*  	[X] **Advanced functions that change colors, scale, load/delete models, and textures**
+
+*	[ ] **Have the program run as an .exe file**
+
 
 <h2>License</h2>
 
-This game is completly open-source and can be modified to any extent, **but do not upload to anywhere if it is unmodified**.
+**This Panda3D Game is not affiliated with The Walt Disney Company and/or the Disney Interactive Media Group (collectively referred to as "Disney")**
+
+This game can be modified to any extent, **but do not upload to anywhere if it is unmodified**.
 
 Credit is not required, just have fun running/modifing the program :)
 
@@ -65,7 +74,7 @@ Main Author: Christian M Diaz
 
 <h3>Contact Info</h3>
 
-*	UserName: ***@chrisd149***
+*	GitHub UserName: **@chrisd149**
 
 * Email: **christianmigueldiaz@gmail.com**
 	* Hours M-F: 2pm - 9pm EST
