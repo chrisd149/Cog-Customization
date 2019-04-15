@@ -34,7 +34,7 @@ import sys
 
 """
 MAJOR BUGS:
-1. Finish function breaks if User selects different color, hats, or scales.
+None :)
 """
 
 
