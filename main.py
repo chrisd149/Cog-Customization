@@ -7,6 +7,7 @@ from math import pi, sin, cos
 from direct.showbase.ShowBase import ShowBase
 from direct.task import Task
 from pandac.PandaModules import *
+
 loadPrcFileData("", "window-title Cog Training v0.3")
 loadPrcFileData("", "win-size 1920 1080")
 from direct.interval.ActorInterval import ActorInterval
@@ -26,7 +27,6 @@ from direct.gui import DirectGuiGlobals as DGG
 import datetime
 from weather import Weather, Unit
 import sys
-
 
 """"""
 
@@ -69,20 +69,20 @@ class MyApp(ShowBase):
 
         # music
         def music(self):
-            self.music = self.loader.loadSfx('phase_3/audio/bgm\create_a_toon.ogg')
-            self.music.setVolume(.3)
-            self.music.play()
+                self.music = self.loader.loadSfx('phase_3/audio/bgm\create_a_toon.ogg')
+                self.music.setVolume(.3)
+                self.music.play()
 
         # cogs/goons/bosses
         def loadCog(self):
                 # cog_1
                 self.cog_1 = Actor('phase_3.5\models\char\suitA-mod.bam',
-                                 {'Flail': 'phase_4\models\char\suitA-flailing.bam',
-                                  'Stand': 'phase_4\models\char\suitA-neutral.bam',
-                                  'Walk': 'phase_4\models\char\suitA-walk.bam',
-                                  'Golf': 'phase_5\models\char\suitA-golf-club-swing.bam',
-                                  'Victory': 'phase_4\models\char\suitA-victory.bam'}
-                                 )
+                                   {'Flail': 'phase_4\models\char\suitA-flailing.bam',
+                                    'Stand': 'phase_4\models\char\suitA-neutral.bam',
+                                    'Walk': 'phase_4\models\char\suitA-walk.bam',
+                                    'Golf': 'phase_5\models\char\suitA-golf-club-swing.bam',
+                                    'Victory': 'phase_4\models\char\suitA-victory.bam'}
+                                   )
                 # self.cog_1.loop('Stand')
                 self.cog_1.reparentTo(self.render)
                 self.cog_1.setBlend(frameBlend=True)
@@ -101,14 +101,13 @@ class MyApp(ShowBase):
 
                 # cog_2
                 self.cog_2 = Actor('phase_3.5\models\char\suitC-mod.bam',
-                                  {'Sit': 'phase_11\models\char\suitC-sit.bam'})
+                                   {'Sit': 'phase_11\models\char\suitC-sit.bam'})
                 self.cog_2.loop('Sit')
                 self.cog_2.reparentTo(self.chair)
                 self.cog_2.setBlend(frameBlend=True)
 
                 # cog position/hpr/scale
                 self.cog_2.setPosHprScale((0, -2, 0), (180, 0, 0), (.8, .8, .8))
-
 
                 # cog head
                 self.coghead_2 = self.loader.loadModel('phase_3.5\models\char\suitC-heads.bam').find('**/coldcaller')
@@ -152,7 +151,6 @@ class MyApp(ShowBase):
 
         # animations
         def animations(self):
-
                 # actor intervals
                 stand = self.cog_1.actorInterval('Stand', duration=7.5, loop=1)
                 victory = self.cog_1.actorInterval('Victory', duration=7.5, loop=0)
@@ -221,7 +219,6 @@ class MyApp(ShowBase):
                 self.camera.setPosHpr((90, 0, 75), (80, 180, -180))
 
         def screenText(self):
-
                 self.screentext_1 = OnscreenText(text='Author: Christian Diaz',
                                                  pos=(-1.75, .95),
                                                  font=self.font_1,
@@ -396,7 +393,7 @@ class MyApp(ShowBase):
                                              image=self.img_1,
                                              image_scale=(.25, .09, .09),
                                              image_pos=(-.175, 0, .19),
-                                             command= self.add_hat1
+                                             command=self.add_hat1
                                              )
 
                 self.button_3 = DirectButton(text=('Delete Top-right text.', 'Loading...',
@@ -413,7 +410,7 @@ class MyApp(ShowBase):
                                              image_scale=(.65, .09, .09),
                                              image_pos=(-.95, .2, .975),
                                              textMayChange=1,
-                                             command= self.screen_text_destroy
+                                             command=self.screen_text_destroy
                                              )
 
                 self.button_5 = DirectButton(text=('Normal Cog', 'Loading...', 'Change Size', ''),
@@ -463,24 +460,7 @@ class MyApp(ShowBase):
                                               image_pos=(1.25, 0, -.75),
                                               command=self.exit_popup
                                               )
-                # button to go to walking area
-                """
-                self.button_11 = DirectButton(text=('Finish.', 'Loading...', 'Finish', ''),
-                                              text_scale=.05,
-                                              text_font=self.font_1,
-                                              text_pos=(1, .365, 1),
-                                              pressEffect=1,
-                                              geom_scale=(1, 6, 1),
-                                              relief=None,
-                                              clickSound=self.click,
-                                              rolloverSound=self.rollover,
-                                              textMayChange=1,
-                                              image=self.img_1,
-                                              image_scale=(.25, .09, .09),
-                                              image_pos=(.5, 0, .425),
-                                              command=self.finish
-                                              )
-                """
+
         # textbox functions
         def setText(self, textEntered):
                 self.textbox_bg.setText(textEntered)
@@ -524,7 +504,7 @@ class MyApp(ShowBase):
                         image_pos=(-1.75, .2, .975),
                         textMayChange=1,
                         command=self.screen_text_load
-                        )
+                )
 
         # func to add back Screentext objects
         def screen_text_load(self):
@@ -555,7 +535,7 @@ class MyApp(ShowBase):
                                              image_scale=(.3, .09, .09),
                                              image_pos=(-.2, 0, .19),
                                              textMayChange=1,
-                                             command= self.add_hat2
+                                             command=self.add_hat2
                                              )
 
         # func to add hat
@@ -567,7 +547,7 @@ class MyApp(ShowBase):
                 self.hat1.setPosHprScale((0, -0.1, 1.5), (30, -10, 0), (.4, .4, .4))
                 self.button_2.destroy()
                 del self.button_2
-                self.button_1 = DirectButton(text=('Next', 'Loading...', 'Go to Next', ''),
+                self.button_1 = DirectButton(text=('Fez Hat', 'Loading...', 'Change Hat', ''),
                                              text_scale=.05,
                                              text_font=self.font_1,
                                              text_pos=(-.05, .125, 1),
@@ -580,7 +560,7 @@ class MyApp(ShowBase):
                                              image=self.img_1,
                                              image_scale=(.25, .09, .09),
                                              image_pos=(-.175, 0, .19),
-                                             command= self.add_hat1
+                                             command=self.add_hat1
                                              )
 
         # functions that change scale of cog_1
@@ -746,50 +726,6 @@ class MyApp(ShowBase):
 
         def exit_app(self):
                 sys.exit()
-
-        # broken function to go to walking area
-        """ 
-        def finish(self):
-                self.button_7.destroy()
-                del self.button_7
-                self.button_5.destroy()
-                del self.button_5
-                self.button_1.destroy()
-                del self.button_1
-                self.button_11.destroy()
-                del self.button_11
-                self.guipanel.destroy()
-                del self.guipanel
-                self.entry.destroy()
-                del self.entry
-                self.textbox_bg.destroy()
-                del self.textbox_bg
-                self.hat_button_label.destroy()
-                del self.hat_button_label
-                self.scale_button_label.destroy()
-                del self.scale_button_label
-                self.color_button_label.destroy()
-                del self.color_button_label
-                self.goon.delete()
-                del self.goon
-                self.cog_2.delete()
-                del self.cog_2
-                self.desk.removeNode()
-                del self.desk
-                self.chair.removeNode()
-                del self.chair
-                self.cogtag_2.removeNode()
-                del self.cogtag_2
-                self.music.stop()
-                self.training.removeNode()
-                del self.training
-                self.training2 = self.loader.loadModel('phase_15\street/toontorial_street.bam')
-                self.training2.reparentTo(self.render)
-                self.camera.reparentTo(self.cog_1)
-                self.camera.setPosHpr((0, -35, 12.5), (0, -7.5, 0))
-                self.cogtag_1.setPos(0, 0, .2)
-                self.cog_1.setPosHpr((60, 0, -.5), (0, 0, 0))
-                """
 
 
 app = MyApp()
