@@ -2,12 +2,14 @@
 from panda3d.core import loadPrcFileData
 from panda3d.core import loadPrcFile
 from direct.actor.Actor import Actor
-from direct.task import Task
 import math
 from math import pi, sin, cos
 from direct.showbase.ShowBase import ShowBase
 from direct.task import Task
 from pandac.PandaModules import *
+
+loadPrcFileData("", "window-title Cog Training v0.3")
+loadPrcFileData("", "win-size 1920 1080")
 from direct.interval.ActorInterval import ActorInterval
 from direct.interval.IntervalGlobal import *
 from pandac.PandaModules import WindowProperties
@@ -25,7 +27,6 @@ from direct.gui import DirectGuiGlobals as DGG
 import datetime
 from weather import Weather, Unit
 import sys
-loadPrcFileData("", "window-title Cog Training v0.3-alpha")
 
 """"""
 
@@ -33,15 +34,11 @@ loadPrcFileData("", "window-title Cog Training v0.3-alpha")
 
 """
 MAJOR BUGS:
-1. Functions must be replicated to achieve different results /
-for example, a function must be made for each color used for
-cog_1.hands.
+1. Finish function breaks if User selects different color, hats, or scales.
 """
 
 
-
 class MyApp(ShowBase):
-
         def __init__(self):
                 ShowBase.__init__(self)
                 self.loadModels()
@@ -51,7 +48,6 @@ class MyApp(ShowBase):
                 self.animations()
                 self.music()
                 self.screenText()
-                self.accept('escape', sys.exit)
                 self.accept('m', self.music.stop)
                 self.accept('m-repeat', self.music.play)
 
@@ -73,21 +69,21 @@ class MyApp(ShowBase):
 
         # music
         def music(self):
-            self.music = self.loader.loadSfx('phase_3/audio/bgm\create_a_toon.ogg')
-            self.music.setVolume(.3)
-            self.music.play()
+                self.music = self.loader.loadSfx('phase_3/audio/bgm\create_a_toon.ogg')
+                self.music.setVolume(.3)
+                self.music.play()
 
         # cogs/goons/bosses
         def loadCog(self):
                 # cog_1
                 self.cog_1 = Actor('phase_3.5\models\char\suitA-mod.bam',
-                                 {'Flail': 'phase_4\models\char\suitA-flailing.bam',
-                                  'Stand': 'phase_4\models\char\suitA-neutral.bam',
-                                  'Walk': 'phase_4\models\char\suitA-walk.bam',
-                                  'Golf': 'phase_5\models\char\suitA-golf-club-swing.bam',
-                                  'Victory': 'phase_4\models\char\suitA-victory.bam'}
-                                 )
-                self.cog_1.loop('Stand')
+                                   {'Flail': 'phase_4\models\char\suitA-flailing.bam',
+                                    'Stand': 'phase_4\models\char\suitA-neutral.bam',
+                                    'Walk': 'phase_4\models\char\suitA-walk.bam',
+                                    'Golf': 'phase_5\models\char\suitA-golf-club-swing.bam',
+                                    'Victory': 'phase_4\models\char\suitA-victory.bam'}
+                                   )
+                # self.cog_1.loop('Stand')
                 self.cog_1.reparentTo(self.render)
                 self.cog_1.setBlend(frameBlend=True)
 
@@ -100,19 +96,18 @@ class MyApp(ShowBase):
                 self.cogtorso_1 = self.loader.loadTexture('phase_3.5\maps\c_blazer.jpg')
                 self.cog_1.find('**/torso').setTexture(self.cogtorso_1, 1)
 
-                #cog position/hpr/scale
+                # cog position/hpr/scale
                 self.cog_1.setPosHprScale((130, -12.5, 70.75), (65, 0, 0), (1, 1, 1))
 
                 # cog_2
                 self.cog_2 = Actor('phase_3.5\models\char\suitC-mod.bam',
-                                  {'Sit': 'phase_11\models\char\suitC-sit.bam'})
+                                   {'Sit': 'phase_11\models\char\suitC-sit.bam'})
                 self.cog_2.loop('Sit')
                 self.cog_2.reparentTo(self.chair)
                 self.cog_2.setBlend(frameBlend=True)
 
                 # cog position/hpr/scale
                 self.cog_2.setPosHprScale((0, -2, 0), (180, 0, 0), (.8, .8, .8))
-
 
                 # cog head
                 self.coghead_2 = self.loader.loadModel('phase_3.5\models\char\suitC-heads.bam').find('**/coldcaller')
@@ -141,7 +136,6 @@ class MyApp(ShowBase):
                 # goon position/hpr/scale
                 self.goon.setPosHprScale((150, -30, 70.65), (180, 0, 0), (2, 2, 2))
 
-
         # models
         def loadModels(self):
                 self.training = self.loader.loadModel('phase_10\models\cogHQ\MidVault.bam')
@@ -157,7 +151,6 @@ class MyApp(ShowBase):
 
         # animations
         def animations(self):
-
                 # actor intervals
                 stand = self.cog_1.actorInterval('Stand', duration=7.5, loop=1)
                 victory = self.cog_1.actorInterval('Victory', duration=7.5, loop=0)
@@ -226,9 +219,8 @@ class MyApp(ShowBase):
                 self.camera.setPosHpr((90, 0, 75), (80, 180, -180))
 
         def screenText(self):
-
                 self.screentext_1 = OnscreenText(text='Author: Christian Diaz',
-                                                 pos=(-1.8, .95),
+                                                 pos=(-1.75, .95),
                                                  font=self.font_1,
                                                  fg=(255, 255, 255, 1),
                                                  scale=.05,
@@ -236,7 +228,7 @@ class MyApp(ShowBase):
                                                  )
 
                 self.screentext_2 = OnscreenText(text='Engine Build: Panda3D 1.10.2',
-                                                 pos=(-1.8, .875),
+                                                 pos=(-1.75, .875),
                                                  font=self.font_1,
                                                  fg=(255, 255, 255, 1),
                                                  scale=.05,
@@ -244,7 +236,7 @@ class MyApp(ShowBase):
                                                  )
 
                 self.screentext_3 = OnscreenText(text='Current Version: v0.3-alpha',
-                                                 pos=(-1.8, .8),
+                                                 pos=(-1.75, .8),
                                                  font=self.font_1,
                                                  fg=(255, 255, 255, 1),
                                                  scale=.05,
@@ -252,7 +244,7 @@ class MyApp(ShowBase):
                                                  )
 
                 self.screentext_4 = OnscreenText(text='Current Time: ',
-                                                 pos=(-1.8, .65),
+                                                 pos=(-1.75, .65),
                                                  font=self.font_1,
                                                  fg=(255, 255, 255, 1),
                                                  scale=.05,
@@ -260,7 +252,7 @@ class MyApp(ShowBase):
                                                  )
 
                 self.screentext_5 = OnscreenText(text=(str(self.time_now)),
-                                                 pos=(-1.5, .65),
+                                                 pos=(-1.45, .65),
                                                  font=self.font_1,
                                                  fg=(255, 255, 255, 1),
                                                  scale=.05,
@@ -268,7 +260,7 @@ class MyApp(ShowBase):
                                                  )
 
                 self.screentext_6 = OnscreenText(text='Contact: christianmigueldiaz@gmail.com',
-                                                 pos=(-1.8, .725),
+                                                 pos=(-1.75, .725),
                                                  font=self.font_1,
                                                  fg=(255, 255, 255, 1),
                                                  scale=.05,
@@ -276,14 +268,14 @@ class MyApp(ShowBase):
                                                  )
 
                 self.screentext_7 = OnscreenText(text='Contact: christianmigueldiaz@gmail.com',
-                                                 pos=(-1.8, .725),
+                                                 pos=(-1.75, .725),
                                                  font=self.font_1,
                                                  fg=(255, 255, 255, 1),
                                                  scale=.05,
                                                  align=TextNode.A_left,
                                                  )
 
-                self.info_frame = DirectFrame(frameSize=(-1.9, -.9, .6, 1),
+                self.info_frame = DirectFrame(frameSize=(-1.85, -.9, .6, 1),
                                               frameColor=(254, 255, 255, 0.1))
 
         # GUI settings
@@ -388,21 +380,20 @@ class MyApp(ShowBase):
                                             )
 
                 # gui buttons
-                self.button_1 = DirectButton(text=('Next', 'Loading...', 'Go to Next', ''),
+                self.button_1 = DirectButton(text=('Fez', 'Loading...', 'Change Hat', ''),
                                              text_scale=.05,
                                              text_font=self.font_1,
                                              text_pos=(-.05, .125, 1),
                                              pressEffect=1,
                                              geom_scale=(1, 6, 1),
                                              relief=None,
-                                             frameColor=(255, 0, 0, 0.8),
                                              clickSound=self.click,
                                              rolloverSound=self.rollover,
                                              textMayChange=1,
                                              image=self.img_1,
                                              image_scale=(.25, .09, .09),
                                              image_pos=(-.175, 0, .19),
-                                             command= self.add_hat1
+                                             command=self.add_hat1
                                              )
 
                 self.button_3 = DirectButton(text=('Delete Top-right text.', 'Loading...',
@@ -413,24 +404,22 @@ class MyApp(ShowBase):
                                              pressEffect=1,
                                              geom_scale=(1, 6, 1),
                                              relief=None,
-                                             frameColor=(255, 0, 0, 0.8),
                                              clickSound=self.click,
                                              rolloverSound=self.rollover,
                                              image=self.img_1,
                                              image_scale=(.65, .09, .09),
                                              image_pos=(-.95, .2, .975),
                                              textMayChange=1,
-                                             command= self.screen_text_destroy
+                                             command=self.screen_text_destroy
                                              )
 
-                self.button_5 = DirectButton(text=('Next', 'Loading...', 'Go to Next', ''),
+                self.button_5 = DirectButton(text=('Normal Cog', 'Loading...', 'Change Size', ''),
                                              text_scale=.05,
                                              text_font=self.font_1,
                                              text_pos=(-.475, .125, 1),
                                              pressEffect=1,
                                              geom_scale=(1, 6, 1),
                                              relief=None,
-                                             frameColor=(255, 0, 0, 0.8),
                                              clickSound=self.click,
                                              rolloverSound=self.rollover,
                                              textMayChange=1,
@@ -440,14 +429,13 @@ class MyApp(ShowBase):
                                              command=self.decrease_scale
                                              )
 
-                self.button_7 = DirectButton(text=('Next', 'Loading...', 'Go to Next', ''),
+                self.button_7 = DirectButton(text=('White', 'Loading...', 'Next Color', ''),
                                              text_scale=.05,
                                              text_font=self.font_1,
                                              text_pos=(-.05, .365, 1),
                                              pressEffect=1,
                                              geom_scale=(1, 6, 1),
                                              relief=None,
-                                             frameColor=(255, 0, 0, 0.8),
                                              clickSound=self.click,
                                              rolloverSound=self.rollover,
                                              textMayChange=1,
@@ -456,6 +444,22 @@ class MyApp(ShowBase):
                                              image_pos=(-.175, 0, .425),
                                              command=self.change_color_purple
                                              )
+
+                self.button_12 = DirectButton(text=('Exit', 'Loading...', 'Exit App', ''),
+                                              text_scale=.05,
+                                              text_font=self.font_1,
+                                              text_pos=(1.375, -.81, 1),
+                                              pressEffect=1,
+                                              geom_scale=(1, 6, 1),
+                                              relief=None,
+                                              clickSound=self.click,
+                                              rolloverSound=self.rollover,
+                                              textMayChange=1,
+                                              image=self.img_1,
+                                              image_scale=(.25, .09, .09),
+                                              image_pos=(1.25, 0, -.75),
+                                              command=self.exit_popup
+                                              )
 
         # textbox functions
         def setText(self, textEntered):
@@ -493,8 +497,6 @@ class MyApp(ShowBase):
                         text_pos=(-1.45, .925),
                         pressEffect=1,
                         geom_scale=(1, 6, 1),
-                        relief=None,
-                        frameColor=(255, 0, 0, 0.8),
                         clickSound=self.click,
                         rolloverSound=self.rollover,
                         image=self.img_1,
@@ -502,7 +504,7 @@ class MyApp(ShowBase):
                         image_pos=(-1.75, .2, .975),
                         textMayChange=1,
                         command=self.screen_text_load
-                        )
+                )
 
         # func to add back Screentext objects
         def screen_text_load(self):
@@ -520,22 +522,22 @@ class MyApp(ShowBase):
                 self.button_1.destroy()
                 del self.button_1
 
-                self.button_2 = DirectButton(text=('Back', 'Loading...', 'Go Back', ''),
+                self.button_2 = DirectButton(text=('Grand Band Hat', 'Loading...', 'Change Hat', ''),
                                              text_scale=.05,
                                              text_font=self.font_1,
                                              text_pos=(-.05, .125, 1),
                                              pressEffect=1,
                                              geom_scale=(1, 6, 1),
                                              relief=None,
-                                             frameColor=(255, 0, 0, 0.8),
                                              clickSound=self.click,
                                              rolloverSound=self.rollover,
                                              image=self.img_1,
-                                             image_scale=(.25, .09, .09),
-                                             image_pos=(-.175, 0, .19),
+                                             image_scale=(.3, .09, .09),
+                                             image_pos=(-.2, 0, .19),
                                              textMayChange=1,
-                                             command= self.add_hat2
+                                             command=self.add_hat2
                                              )
+
         # func to add hat
         def add_hat2(self):
                 self.hat2.removeNode()
@@ -545,21 +547,20 @@ class MyApp(ShowBase):
                 self.hat1.setPosHprScale((0, -0.1, 1.5), (30, -10, 0), (.4, .4, .4))
                 self.button_2.destroy()
                 del self.button_2
-                self.button_1 = DirectButton(text=('Next', 'Loading...', 'Go to Next', ''),
+                self.button_1 = DirectButton(text=('Fez Hat', 'Loading...', 'Change Hat', ''),
                                              text_scale=.05,
                                              text_font=self.font_1,
                                              text_pos=(-.05, .125, 1),
                                              pressEffect=1,
                                              geom_scale=(1, 6, 1),
                                              relief=None,
-                                             frameColor=(255, 0, 0, 0.8),
                                              clickSound=self.click,
                                              rolloverSound=self.rollover,
                                              textMayChange=1,
                                              image=self.img_1,
                                              image_scale=(.25, .09, .09),
                                              image_pos=(-.175, 0, .19),
-                                             command= self.add_hat1
+                                             command=self.add_hat1
                                              )
 
         # functions that change scale of cog_1
@@ -574,14 +575,13 @@ class MyApp(ShowBase):
                 self.button_5.destroy()
                 del self.button_5
 
-                self.button_6 = DirectButton(text=('Back', 'Loading...', 'Go Back', ''),
+                self.button_6 = DirectButton(text=('Small Cog', 'Loading...', 'Change Size', ''),
                                              text_scale=.05,
                                              text_font=self.font_1,
                                              text_pos=(-.475, .125, 1),
                                              pressEffect=1,
                                              geom_scale=(1, 6, 1),
                                              relief=None,
-                                             frameColor=(255, 0, 0, 0.8),
                                              clickSound=self.click,
                                              rolloverSound=self.rollover,
                                              textMayChange=1,
@@ -602,14 +602,13 @@ class MyApp(ShowBase):
                 self.button_6.destroy()
                 del self.button_6
 
-                self.button_5 = DirectButton(text=('Next', 'Loading...', 'Go to Next', ''),
+                self.button_5 = DirectButton(text=('Normal Cog', 'Loading...', 'Change Size', ''),
                                              text_scale=.05,
                                              text_font=self.font_1,
                                              text_pos=(-.475, .125, 1),
                                              pressEffect=1,
                                              geom_scale=(1, 6, 1),
                                              relief=None,
-                                             frameColor=(255, 0, 0, 0.8),
                                              clickSound=self.click,
                                              rolloverSound=self.rollover,
                                              textMayChange=1,
@@ -618,6 +617,7 @@ class MyApp(ShowBase):
                                              image_pos=(-.6, 0, .19),
                                              command=self.decrease_scale
                                              )
+
         # glove color functions
         # purple
         def change_color_purple(self):
@@ -625,14 +625,13 @@ class MyApp(ShowBase):
                 self.button_7.destroy()
                 del self.button_7
 
-                self.button_8 = DirectButton(text=('Next', 'Loading...', 'Go to Next', ''),
+                self.button_8 = DirectButton(text=('Purple', 'Loading...', 'Next Color', ''),
                                              text_scale=.05,
                                              text_font=self.font_1,
                                              text_pos=(-.05, .365, 1),
                                              pressEffect=1,
                                              geom_scale=(1, 6, 1),
                                              relief=None,
-                                             frameColor=(255, 0, 0, 0.8),
                                              clickSound=self.click,
                                              rolloverSound=self.rollover,
                                              textMayChange=1,
@@ -641,20 +640,20 @@ class MyApp(ShowBase):
                                              image_pos=(-.175, 0, .425),
                                              command=self.change_color_yellow
                                              )
+
         # yellow
         def change_color_yellow(self):
                 self.cog_1.find("**/hands").setColor(255, 255, 0)
                 self.button_8.destroy()
                 del self.button_8
 
-                self.button_9 = DirectButton(text=('Next', 'Loading...', 'Go to Next', ''),
+                self.button_9 = DirectButton(text=('Yellow', 'Loading...', 'Change Color', ''),
                                              text_scale=.05,
                                              text_font=self.font_1,
                                              text_pos=(-.05, .365, 1),
                                              pressEffect=1,
                                              geom_scale=(1, 6, 1),
                                              relief=None,
-                                             frameColor=(255, 0, 0, 0.8),
                                              clickSound=self.click,
                                              rolloverSound=self.rollover,
                                              textMayChange=1,
@@ -670,14 +669,13 @@ class MyApp(ShowBase):
                 self.button_9.destroy()
                 del self.button_9
 
-                self.button_10 = DirectButton(text=('Next', 'Loading...', 'Go to Next', ''),
+                self.button_10 = DirectButton(text=('Cyan', 'Loading...', 'Change Color', ''),
                                               text_scale=.05,
                                               text_font=self.font_1,
                                               text_pos=(-.05, .365, 1),
                                               pressEffect=1,
                                               geom_scale=(1, 6, 1),
                                               relief=None,
-                                              frameColor=(255, 0, 0, 0.8),
                                               clickSound=self.click,
                                               rolloverSound=self.rollover,
                                               textMayChange=1,
@@ -693,14 +691,13 @@ class MyApp(ShowBase):
                 self.button_10.destroy()
                 del self.button_10
 
-                self.button_7 = DirectButton(text=('Next', 'Loading...', 'Go to Next', ''),
+                self.button_7 = DirectButton(text=('White', 'Loading...', 'Change Color', ''),
                                              text_scale=.05,
                                              text_font=self.font_1,
                                              text_pos=(-.05, .365, 1),
                                              pressEffect=1,
                                              geom_scale=(1, 6, 1),
                                              relief=None,
-                                             frameColor=(255, 0, 0, 0.8),
                                              clickSound=self.click,
                                              rolloverSound=self.rollover,
                                              textMayChange=1,
@@ -709,6 +706,26 @@ class MyApp(ShowBase):
                                              image_pos=(-.175, 0, .425),
                                              command=self.change_color_purple
                                              )
+
+        # exit function
+        def exit_popup(self):
+                self.button_12.destroy()
+                del self.button_12
+
+                self.bye = DirectButton(text=('Thank you for playing!', 'Closing App', 'Close App', ''),
+                                        scale=.25,
+                                        image=self.img_1,
+                                        relief=None,
+                                        image_scale=(9, 1, 1.5),
+                                        image_pos=(-4.5, 0, 1),
+                                        clickSound=self.click,
+                                        rolloverSound=self.rollover,
+                                        command=self.exit_app,
+                                        text_font=self.font_1
+                                        )
+
+        def exit_app(self):
+                sys.exit()
 
 
 app = MyApp()
