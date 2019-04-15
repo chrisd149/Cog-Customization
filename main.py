@@ -497,6 +497,7 @@ class MyApp(ShowBase):
                         text_pos=(-1.45, .925),
                         pressEffect=1,
                         geom_scale=(1, 6, 1),
+                        relief=None,
                         clickSound=self.click,
                         rolloverSound=self.rollover,
                         image=self.img_1,
