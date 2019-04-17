@@ -34,8 +34,7 @@ To install
 	1.	Download files from the latest release from the releases section.
 	2.	Install Panda3D-1.10-02 if not already installed, at www.panda3d.org/download
 	3.      Go to www.toontownrewritten.com/play, and install Toontown Rewritten.
-	4.      Go to the Toontown Rewritten Folder, and copy/paste the .mf phase files into your Cogtraining folder 
-		or your Panda3D folder. 
+	4.      Go to the Toontown Rewritten Folder, and copy/paste the .mf phase files into your Panda3D folder. 
 	5.	Open main.py in your choice of Python IDE (e.g. PyCharm, Atom, etc).
 	4.	Run main.py, it will open up in a Panda3D enviroment window, similar to Toontown.
 	
