@@ -1,3 +1,7 @@
+import time
+# start time of main.py
+start = time.time()
+
 # Panda3D Imports
 from panda3d.core import loadPrcFileData
 from panda3d.core import loadPrcFile
@@ -7,7 +11,6 @@ from math import pi, sin, cos
 from direct.showbase.ShowBase import ShowBase
 from direct.task import Task
 from pandac.PandaModules import *
-
 loadPrcFileData("", "window-title Cog Training v0.3")
 loadPrcFileData("", "win-size 1920 1080")
 from direct.interval.ActorInterval import ActorInterval
@@ -101,10 +104,8 @@ class MyApp(ShowBase):
                 # textures
                 self.cogtorso_1 = self.loader.loadTexture('phase_3.5\maps\c_blazer.jpg')
                 self.cog_1.find('**/torso').setTexture(self.cogtorso_1, 1)
-
                 self.cogarms_1 = self.loader.loadTexture('phase_3.5\maps\c_sleeve.jpg')
                 self.cog_1.find('**/arms').setTexture(self.cogarms_1, 1)
-
                 self.coglegs_1 = self.loader.loadTexture('phase_3.5\maps\c_leg.jpg')
                 self.cog_1.find('**/legs').setTexture(self.coglegs_1, 1)
                 """
@@ -507,7 +508,6 @@ class MyApp(ShowBase):
         def setText(self, textEntered):
                 self.cogtag_1.setText(textEntered)
                 self.cogtag_1.clearText()
-
         def clearText(self):
                 self.entry.enterText('sdfdsf')
                 self.entry.destroy()
@@ -887,7 +887,7 @@ class MyApp(ShowBase):
                                               text_wordwrap=13.25,
                                               relief=None,
                                               text_scale=.04,
-                                              text_pos=(.185, .825, .75),
+                                              text_pos=(.185, .83, .75),
                                               hpr=(0, 0, 0),
                                               image=self.guiimage,
                                               image_pos=(.5, .5, .75),
@@ -898,7 +898,7 @@ class MyApp(ShowBase):
                                               )
 
                 self.button_18 = DirectButton(geom_scale=(1, 1, 1),
-                                              parent=(self.aspect2d),
+                                              parent=self.aspect2d,
                                               relief=None,
                                               clickSound=self.click,
                                               rolloverSound=self.rollover,
@@ -943,9 +943,34 @@ class MyApp(ShowBase):
                                         text_font=self.font_1
                                         )
 
-        def exit_app(self):
+        @staticmethod
+        def exit_app():
                 sys.exit()
+
+
+class AppInfo:
+        # current app information
+        def __init__(self, devs, ver, tim):
+                self.authors = devs
+                self.version = ver
+                self.runtime = tim
+                self.app_data = 'Authors: {} | ' \
+                                'Version: {} | ' \
+                                'Script Time: {} seconds'\
+                                .format(devs, ver, tim)
+
+
+# end time of main.py
+end = time.time()
+elapsed_time = (end - start)
+
+data = AppInfo('Christian Diaz', 'v1.0 Beta', elapsed_time)
+
+print(data.app_data)
+print('Thanks for playing!')
 
 
 app = MyApp()
 app.run()
+
+
