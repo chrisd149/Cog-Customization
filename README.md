@@ -9,7 +9,7 @@ This is a early project for a very basic User Interactive game using Panda3D and
 
 <h3>System Info</h3>	
 
-*	**OS**: Windows 10/8/7/Vista/XP, not tested on Unix/Linux or MacOS.
+*	**OS**: Windows 10/8/7/Vista/XP
 
 *	**CPU**: 500Mhz< CPU, 1Ghz< Recommended
 
@@ -23,11 +23,9 @@ This is a early project for a very basic User Interactive game using Panda3D and
 
 *	**Programming Language**: ***Python 3.7***
 
-*	**Language**: English, Spanish and possibly others later.
+*	**Language**: English, Spanish possibly later.
 
 <h2>Installing</h2>
-
-First off, the program is ran in Python only.  You can download the main project file, or copy its contents into a Python script.
 
 To install
 	
@@ -35,8 +33,7 @@ To install
 	2.	Install Panda3D-1.10-02 if not already installed, at www.panda3d.org/download
 	3.      Go to www.toontownrewritten.com/play, and install Toontown Rewritten.
 	4.      Go to the Toontown Rewritten Folder, and copy/paste the .mf phase files into your Panda3D folder. 
-	5.	Open main.py in your choice of Python IDE (e.g. PyCharm, Atom, etc).
-	4.	Run main.py, it will open up in a Panda3D enviroment window, similar to Toontown.
+	5.	Open main.cpython-37.pyc. 
 	
 <h2>Built With</h2>
 
@@ -56,12 +53,12 @@ To install
 
 *  	[X] **Advanced functions that change colors, scale, load/delete models, and textures**
 
-*	[ ] **Have the program run as an .exe file**
+*	[X] **Have the program run as an .exe/.pyc file**
 
 
 <h2>License</h2>
 
-**This Panda3D Game is not affiliated with The Walt Disney Company and/or the Disney Interactive Media Group (collectively referred to as "Disney")**
+**This Panda3D Game and/or the authors are not affiliated with The Walt Disney Company and/or the Disney Interactive Media Group (collectively referred to as "Disney")**
 
 This game can be modified to any extent, **but do not upload to anywhere if it is unmodified**.
 
