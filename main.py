@@ -44,13 +44,13 @@ None :)
 class MyApp(ShowBase):
         def __init__(self):
                 ShowBase.__init__(self)
-                self.loadModels()
-                self.loadCog()
-                self.loadCam()
-                self.loadGUI()
+                self.load_models()
+                self.load_cog()
+                self.load_cam()
+                self.load_gui()
                 self.animations()
                 self.music()
-                self.screenText()
+                self.screen_text()
                 self.accept('m', self.music.stop)
                 self.accept('m-repeat', self.music.play)
 
@@ -83,7 +83,7 @@ class MyApp(ShowBase):
                 self.music.play()
 
         # cogs/goons/bosses
-        def loadCog(self):
+        def load_cog(self):
                 # cog_1
                 self.cog_1 = Actor('phase_3.5\models\char\suitA-mod.bam',
                                    {'Flail': 'phase_4\models\char\suitA-flailing.bam',
@@ -100,15 +100,12 @@ class MyApp(ShowBase):
                 self.coghead_1 = self.loader.loadModel('phase_4\models\char\suitA-heads.bam').find('**/bigcheese')
                 self.coghead_1.reparentTo(self.cog_1.find('**/joint_head'))
                 self.coghead_1.setPos(0, 0, -.05)
-                """
-                # textures
-                self.cogtorso_1 = self.loader.loadTexture('phase_3.5\maps\c_blazer.jpg')
-                self.cog_1.find('**/torso').setTexture(self.cogtorso_1, 1)
-                self.cogarms_1 = self.loader.loadTexture('phase_3.5\maps\c_sleeve.jpg')
-                self.cog_1.find('**/arms').setTexture(self.cogarms_1, 1)
-                self.coglegs_1 = self.loader.loadTexture('phase_3.5\maps\c_leg.jpg')
-                self.cog_1.find('**/legs').setTexture(self.coglegs_1, 1)
-                """
+
+                # cog_1 hat
+                self.hat1 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_fez.bam')
+                self.hat1.reparentTo(self.coghead_1)
+                self.hat1.setPosHprScale((0, -0.1, 1.5), (30, -10, 0), (.4, .4, .4))
+
                 # cog position/hpr/scale
                 self.cog_1.setPosHprScale((130, -13.5, 70.75), (65, 0, 0), (1, 1, 1))
 
@@ -119,26 +116,28 @@ class MyApp(ShowBase):
                 self.cog_2.reparentTo(self.chair)
                 self.cog_2.setBlend(frameBlend=True)
 
-                # cog position/hpr/scale
-                self.cog_2.setPosHprScale((0, -2, 0), (180, 0, 0), (.8, .8, .8))
-
-                # cog head
+                # cog_2 head
                 self.coghead_2 = self.loader.loadModel('phase_3.5\models\char\suitC-heads.bam').find('**/coldcaller')
                 self.coghead_2.reparentTo(self.cog_2.find('**/joint_head'))
                 self.coghead_2.setPos(0, 0, -.05)
 
-                # cog_1 hats
-                self.hat1 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_fez.bam')
-                self.hat1.reparentTo(self.coghead_1)
-                self.hat1.setPosHprScale((0, -0.1, 1.5), (30, -10, 0), (.4, .4, .4))
+                # cog_2 textures
+                self.cogtorso_2 = self.loader.loadTexture('phase_3.5\maps\s_blazer.jpg')
+                self.cog_2.find('**/torso').setTexture(self.cogtorso_2, 1)
 
-                self.hat2 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_band.bam')
-                self.hat2.setPosHprScale((0, -0.1, 1.5), (180, 0, 0), (.25, .25, .25))
+                self.cogarms_2 = self.loader.loadTexture('phase_3.5\maps\s_sleeve.jpg')
+                self.cog_2.find('**/arms').setTexture(self.cogarms_2, 1)
+
+                self.coglegs_2 = self.loader.loadTexture('phase_3.5\maps\s_leg.jpg')
+                self.cog_2.find('**/legs').setTexture(self.coglegs_2, 1)
 
                 # cog_2 hat
                 self.hat = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_fedora.bam')
                 self.hat.reparentTo(self.coghead_2)
                 self.hat.setPosHprScale((0, 0, .9), (0, 0, 0), (.5, .5, .5))
+
+                # cog_2 position/hpr/scale
+                self.cog_2.setPosHprScale((0, -2, 0), (180, 0, 0), (.8, .8, .8))
 
                 # goon
                 self.goon = Actor('phase_9\models\char\Cog_Goonie-zero.bam',
@@ -150,7 +149,7 @@ class MyApp(ShowBase):
                 self.goon.setPosHprScale((150, -30, 70.65), (180, 0, 0), (2, 2, 2))
 
         # models
-        def loadModels(self):
+        def load_models(self):
                 self.training = self.loader.loadModel('phase_10\models\cogHQ\MidVault.bam')
                 self.training.reparentTo(self.render)
 
@@ -226,12 +225,12 @@ class MyApp(ShowBase):
                 pace_3.loop()
 
         # camera settings
-        def loadCam(self):
+        def load_cam(self):
                 self.disable_mouse()
                 self.camera.reparentTo(self.render)
                 self.camera.setPosHpr((90, 0, 75), (80, 180, -180))
 
-        def screenText(self):
+        def screen_text(self):
                 self.screentext_1 = OnscreenText(text='Author: Christian Diaz',
                                                  pos=(-1.75, .95),
                                                  font=self.font_1,
@@ -292,7 +291,7 @@ class MyApp(ShowBase):
                                               frameColor=(254, 255, 255, 0.1))
 
         # GUI settings
-        def loadGUI(self):
+        def load_gui(self):
                 # gui audio & images files
                 self.chatbox = self.loader.loadModel \
                         ('phase_3\models\props\chatbox.bam')
@@ -586,11 +585,38 @@ class MyApp(ShowBase):
         def add_hat2(self):
                 self.hat2.removeNode()
                 del self.hat2
+                self.hat3 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_cowboyHat.bam')
+                self.hat3.reparentTo(self.coghead_1)
+                self.hat3.setPosHprScale((0, -0.1, 1.5), (10, 10, 0), (.35, .35, .35))
+                self.button_2.destroy()
+                del self.button_2
+
+                self.button_19 = DirectButton(text=('Cowboy Hat', 'Loading...', 'Change Hat', ''),
+                                              text_scale=.05,
+                                              text_font=self.font_1,
+                                              text_pos=(-.05, .125, 1),
+                                              pressEffect=1,
+                                              geom_scale=(1, 6, 1),
+                                              relief=None,
+                                              clickSound=self.click,
+                                              rolloverSound=self.rollover,
+                                              textMayChange=1,
+                                              image=self.img_1,
+                                              image_scale=(.25, .09, .09),
+                                              image_pos=(-.175, 0, .19),
+                                              command=self.add_hat3
+                                              )
+
+        # func to add hat
+        def add_hat3(self):
+                self.hat3.removeNode()
+                del self.hat3
                 self.hat1 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_fez.bam')
                 self.hat1.reparentTo(self.coghead_1)
                 self.hat1.setPosHprScale((0, -0.1, 1.5), (30, -10, 0), (.4, .4, .4))
-                self.button_2.destroy()
-                del self.button_2
+                self.button_19.destroy()
+                del self.button_19
+
                 self.button_1 = DirectButton(text=('Fez Hat', 'Loading...', 'Change Hat', ''),
                                              text_scale=.05,
                                              text_font=self.font_1,
@@ -875,8 +901,8 @@ class MyApp(ShowBase):
                                               command=self.cash_texture
                                               )
 
+        # help box
         def helpbox(self):
-                # main gui panel
                 self.button_17.destroy()
                 del self.button_17
                 self.help_panel = DirectLabel(parent=self.aspect2d,
@@ -931,17 +957,77 @@ class MyApp(ShowBase):
                 self.button_12.destroy()
                 del self.button_12
 
-                self.bye = DirectButton(text=('Thank you for playing!', 'Closing App', 'Close App', ''),
-                                        scale=.25,
-                                        image=self.img_1,
-                                        relief=None,
-                                        image_scale=(9, 1, 1.5),
-                                        image_pos=(-4.5, 0, 1),
-                                        clickSound=self.click,
-                                        rolloverSound=self.rollover,
-                                        command=self.exit_app,
-                                        text_font=self.font_1
-                                        )
+                self.warning_text = OnscreenText(text='WARNING',
+                                                 scale=.25,
+                                                 fg=(255, 0, 0, 1),
+                                                 bg=(255, 255, 255, .15),
+                                                 pos=(0, .625, .5),
+                                                 font=self.font_1
+                                                 )
+
+                self.exit_panel = DirectLabel(text='This will close the application.  Are you sure you want to exit?',
+                                              text_wordwrap=7.5,
+                                              text_scale=.175,
+                                              text_pos=(-.85, .25, 0.25),
+                                              relief=None,
+                                              text_fg=(255, 0, 0, 1),
+                                              image=self.guiimage,
+                                              image_scale=(1.75, 1, 1),
+                                              text_align=TextNode.A_left,
+                                              text_font=self.font_1
+                                              )
+
+                self.exit_button = DirectButton(text=('Yes', 'Closing App', 'Close App', ''),
+                                                scale=.1,
+                                                relief=None,
+                                                text_pos=(5, -1.75, 0),
+                                                image=self.img_1,
+                                                image_scale=(5, 1, 1.5),
+                                                image_pos=(2.5, 0, -.75),
+                                                clickSound=self.click,
+                                                rolloverSound=self.rollover,
+                                                command=self.exit_app,
+                                                text_font=self.font_1
+                                                )
+
+                self.exit_back_button = DirectButton(text=('No', 'Loading...', 'Close Pop-up', ''),
+                                                     scale=.1,
+                                                     relief=None,
+                                                     text_pos=(5, -4, 0),
+                                                     image=self.img_1,
+                                                     image_scale=(5, 1, 1.5),
+                                                     image_pos=(2.5, 0, -3),
+                                                     clickSound=self.click,
+                                                     rolloverSound=self.rollover,
+                                                     command=self.close_exit,
+                                                     text_font=self.font_1
+                                                     )
+
+        def close_exit(self):
+                self.warning_text.destroy()
+                del self.warning_text
+                self.exit_panel.destroy()
+                del self.exit_panel
+                self.exit_button.destroy()
+                del self.exit_button
+                self.exit_back_button.destroy()
+                del self.exit_back_button
+
+                self.button_12 = DirectButton(text=('Exit', 'Loading...', 'Exit App', ''),
+                                              text_scale=.05,
+                                              text_font=self.font_1,
+                                              text_pos=(1.375, -.81, 1),
+                                              pressEffect=1,
+                                              geom_scale=(1, 6, 1),
+                                              relief=None,
+                                              clickSound=self.click,
+                                              rolloverSound=self.rollover,
+                                              textMayChange=1,
+                                              image=self.img_1,
+                                              image_scale=(.25, .09, .09),
+                                              image_pos=(1.25, 0, -.75),
+                                              command=self.exit_popup
+                                              )
 
         @staticmethod
         def exit_app():
@@ -966,6 +1052,7 @@ elapsed_time = (end - start)
 
 data = AppInfo('Christian Diaz', 'v1.0 Beta', elapsed_time)
 
+print('GitHub Link: https://github.com/chrisd149/Cog-Training')
 print(data.app_data)
 print('Thanks for playing!')
 
