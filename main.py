@@ -293,16 +293,17 @@ class MyApp(ShowBase):
         # GUI settings
         def load_gui(self):
                 # gui audio & images files
-                self.chatbox = self.loader.loadModel \
+                self.chat_box = self.loader.loadModel \
                         ('phase_3\models\props\chatbox.bam')
 
                 self.font_1 = self.loader.loadFont('Impress.ttf')
+                self.font_2 = self.loader.loadFont('CogFont.ttf')
 
                 self.click = self.loader.loadSfx('phase_3/audio\sfx\GUI_create_toon_fwd.ogg')
                 self.click.setVolume(.75)
 
-                self.rollover = self.loader.loadSfx('phase_3/audio\sfx\GUI_rollover.ogg')
-                self.rollover.setVolume(1)
+                self.roll_over = self.loader.loadSfx('phase_3/audio\sfx\GUI_rollover.ogg')
+                self.roll_over.setVolume(1)
 
                 self.grunt = self.loader.loadSfx('phase_3.5/audio\dial\COG_VO_grunt.ogg')
 
@@ -310,7 +311,7 @@ class MyApp(ShowBase):
                 self.img_2 = self.loader.loadModel('phase_3.5\models\gui\QT_buttons.bam')
                 self.img_3 = self.loader.loadModel('phase files\phase_3.5\models\gui\QT_buttons.bam')
 
-                self.guiimage = self.loader.loadModel('phase_3\models\gui\dialog_box_gui.bam')
+                self.gui_image = self.loader.loadModel('phase_3\models\gui\dialog_box_gui.bam')
 
                 # function for time in hours & seconds
                 self.date = datetime.datetime.now()
@@ -324,7 +325,7 @@ class MyApp(ShowBase):
                                               text_scale=1,
                                               pos=(1.525, .1, .4),
                                               hpr=(190, 0, 0),
-                                              image=self.guiimage,
+                                              image=self.gui_image,
                                               image_pos=(.1, .1, .1),
                                               image_scale=(.6, .5, .8),
                                               textMayChange=1,
@@ -344,20 +345,20 @@ class MyApp(ShowBase):
                                          entryFont=self.font_1,
                                          relief=None,
                                          clickSound=self.click,
-                                         rolloverSound=self.rollover,
+                                         rolloverSound=self.roll_over,
                                          text_align=TextNode.ACenter
                                          )
 
                 # cog_1 tag
                 self.cogtag_1 = DirectButton(text='Big Cheese    lvl 12',
-                                             text_wordwrap=5,
+                                             text_wordwrap=7.5,
                                              parent=self.aspect2d,
                                              pos=(.565, .45, .475),
                                              relief=None,
                                              text_scale=.05,
                                              hpr=(0, 0, 0),
                                              text_bg=(255, 255, 255, 0.4),
-                                             text_font=self.font_1,
+                                             text_font=self.font_2,
                                              text_fg=(0, 0, 0, 1),
                                              clickSound=self.grunt,
                                              textMayChange=1,
@@ -372,7 +373,7 @@ class MyApp(ShowBase):
                                              text_scale=(.05),
                                              hpr=(0, 0, 0),
                                              text_bg=(254, 255, 255, 0.4),
-                                             text_font=self.font_1,
+                                             text_font=self.font_2,
                                              text_fg=(0, 0, 0, 1),
                                              clickSound=self.grunt,
                                              textMayChange=1,
@@ -386,7 +387,7 @@ class MyApp(ShowBase):
                                             text_scale=.5,
                                             pos=(0, 0, 0),
                                             hpr=(0, 0, 0),
-                                            image=self.guiimage,
+                                            image=self.gui_image,
                                             image_pos=(130, -4, 78),
                                             image_scale=(10, 5, 5),
                                             image_hpr=(85, 0, 0),
@@ -395,122 +396,113 @@ class MyApp(ShowBase):
                                             )
 
                 # gui buttons
-                self.button_1 = DirectButton(text=('Fez', 'Loading...', 'Change Hat', ''),
-                                             text_scale=.05,
-                                             text_font=self.font_1,
-                                             text_pos=(-.05, .125, 1),
-                                             pressEffect=1,
-                                             geom_scale=(1, 6, 1),
-                                             relief=None,
-                                             clickSound=self.click,
-                                             rolloverSound=self.rollover,
-                                             textMayChange=1,
-                                             image=self.img_1,
-                                             image_scale=(.25, .09, .09),
-                                             image_pos=(-.175, 0, .19),
-                                             command=self.add_hat1
-                                             )
+                self.hat1_button = DirectButton(text=('Fez', 'Loading...', 'Change Hat', ''),
+                                                text_scale=.05,
+                                                text_font=self.font_1,
+                                                text_pos=(-.05, .125, 1),
+                                                pressEffect=1,
+                                                geom_scale=(1, 6, 1),
+                                                relief=None,
+                                                clickSound=self.click,
+                                                rolloverSound=self.roll_over,
+                                                textMayChange=1,
+                                                image=self.img_1,
+                                                image_scale=(.25, .09, .09),
+                                                image_pos=(-.175, 0, .19),
+                                                command=self.add_hat1
+                                                )
 
-                self.button_3 = DirectButton(text=('Delete Top-left text.', 'Loading...',
-                                                   'This will delete the top-left text.', ''),
-                                             text_scale=.05,
-                                             text_font=self.font_1,
-                                             text_pos=(-.625, .925),
-                                             pressEffect=1,
-                                             geom_scale=(1, 6, 1),
-                                             relief=None,
-                                             clickSound=self.click,
-                                             rolloverSound=self.rollover,
-                                             image=self.img_1,
-                                             image_scale=(.65, .09, .09),
-                                             image_pos=(-.95, .2, .975),
-                                             textMayChange=1,
-                                             command=self.screen_text_destroy
-                                             )
+                self.des_text_button = DirectButton(text=('Delete Top-left text.', 'Loading...',
+                                                    'This will delete the top-left text.', ''),
+                                                    text_scale=.05,
+                                                    text_font=self.font_1,
+                                                    text_pos=(-.625, .925),
+                                                    pressEffect=1,
+                                                    geom_scale=(1, 6, 1),
+                                                    relief=None,
+                                                    clickSound=self.click,
+                                                    rolloverSound=self.roll_over,
+                                                    image=self.img_1,
+                                                    image_scale=(.65, .09, .09),
+                                                    image_pos=(-.95, .2, .975),
+                                                    textMayChange=1,
+                                                    command=self.screen_text_destroy
+                                                    )
 
-                self.button_5 = DirectButton(text=('Normal Cog', 'Loading...', 'Change Size', ''),
-                                             text_scale=.05,
-                                             text_font=self.font_1,
-                                             text_pos=(-.475, .125, 1),
-                                             pressEffect=1,
-                                             geom_scale=(1, 6, 1),
-                                             relief=None,
-                                             clickSound=self.click,
-                                             rolloverSound=self.rollover,
-                                             textMayChange=1,
-                                             image=self.img_1,
-                                             image_scale=(.25, .09, .09),
-                                             image_pos=(-.6, 0, .19),
-                                             command=self.decrease_scale
-                                             )
+                self.normal_cog_button = DirectButton(text=('Normal Cog', 'Loading...', 'Change Size', ''),
+                                                      text_scale=.05,
+                                                      text_font=self.font_1,
+                                                      text_pos=(-.475, .125, 1),
+                                                      pressEffect=1,
+                                                      geom_scale=(1, 6, 1),
+                                                      relief=None,
+                                                      clickSound=self.click,
+                                                      rolloverSound=self.roll_over,
+                                                      textMayChange=1,
+                                                      image=self.img_1,
+                                                      image_scale=(.25, .09, .09),
+                                                      image_pos=(-.6, 0, .19),
+                                                      command=self.decrease_scale
+                                                      )
 
-                self.button_7 = DirectButton(text=('White', 'Loading...', 'Next Color', ''),
-                                             text_scale=.05,
-                                             text_font=self.font_1,
-                                             text_pos=(-.05, .365, 1),
-                                             pressEffect=1,
-                                             geom_scale=(1, 6, 1),
-                                             relief=None,
-                                             clickSound=self.click,
-                                             rolloverSound=self.rollover,
-                                             textMayChange=1,
-                                             image=self.img_1,
-                                             image_scale=(.25, .09, .09),
-                                             image_pos=(-.175, 0, .425),
-                                             command=self.change_color_purple
-                                             )
+                self.white_button = DirectButton(text=('White', 'Loading...', 'Next Color', ''),
+                                                 text_scale=.05,
+                                                 text_font=self.font_1,
+                                                 text_pos=(-.05, .365, 1),
+                                                 pressEffect=1,
+                                                 geom_scale=(1, 6, 1),
+                                                 relief=None,
+                                                 clickSound=self.click,
+                                                 rolloverSound=self.roll_over,
+                                                 textMayChange=1,
+                                                 image=self.img_1,
+                                                 image_scale=(.25, .09, .09),
+                                                 image_pos=(-.175, 0, .425),
+                                                 command=self.change_color_purple
+                                                 )
 
-                self.button_12 = DirectButton(text=('Exit', 'Loading...', 'Exit App', ''),
-                                              text_scale=.05,
-                                              text_font=self.font_1,
-                                              text_pos=(1.375, -.81, 1),
-                                              pressEffect=1,
-                                              geom_scale=(1, 6, 1),
-                                              relief=None,
-                                              clickSound=self.click,
-                                              rolloverSound=self.rollover,
-                                              textMayChange=1,
-                                              image=self.img_1,
-                                              image_scale=(.25, .09, .09),
-                                              image_pos=(1.25, 0, -.75),
-                                              command=self.exit_popup
-                                              )
+                self.exit_popup_button = DirectButton(text=('Exit', 'Loading...', 'Exit App', ''),
+                                                      text_scale=.05,
+                                                      text_font=self.font_1,
+                                                      text_pos=(1.375, -.81, 1),
+                                                      pressEffect=1,
+                                                      geom_scale=(1, 6, 1),
+                                                      relief=None,
+                                                      clickSound=self.click,
+                                                      rolloverSound=self.roll_over,
+                                                      textMayChange=1,
+                                                      image=self.img_1,
+                                                      image_scale=(.25, .09, .09),
+                                                      image_pos=(1.25, 0, -.75),
+                                                      command=self.exit_popup
+                                                      )
 
-                self.button_13 = DirectButton(text=('Bossbot', 'Loading...', 'Change Type', ''),
-                                              text_scale=.05,
-                                              text_font=self.font_1,
-                                              text_pos=(-.475, .3625, .1),
-                                              pressEffect=1,
-                                              geom_scale=(1, 6, 1),
-                                              relief=None,
-                                              clickSound=self.click,
-                                              rolloverSound=self.rollover,
-                                              textMayChange=1,
-                                              image=self.img_1,
-                                              image_scale=(.25, .09, .09),
-                                              image_pos=(-.6, 0, .425),
-                                              command=self.cash_texture
-                                              )
+                self.bossbot_button = DirectButton(text=('Bossbot', 'Loading...', 'Change Type', ''),
+                                                   text_scale=.05,
+                                                   text_font=self.font_1,
+                                                   text_pos=(-.475, .3625, .1),
+                                                   pressEffect=1,
+                                                   geom_scale=(1, 6, 1),
+                                                   relief=None,
+                                                   clickSound=self.click,
+                                                   rolloverSound=self.roll_over,
+                                                   textMayChange=1,
+                                                   image=self.img_1,
+                                                   image_scale=(.25, .09, .09),
+                                                   image_pos=(-.6, 0, .425),
+                                                   command=self.cash_texture
+                                                   )
 
-                self.button_17 = DirectButton(geom_scale=(1, 1, 1),
-                                              relief=None,
-                                              clickSound=self.click,
-                                              rolloverSound=self.rollover,
-                                              textMayChange=1,
-                                              image=self.img_2,
-                                              image_scale=(.1, .1, .1),
-                                              image_pos=(-1.1, 0, .5),
-                                              command=self.helpbox
-                                              )
-
-        """# textbox functions
-        def setText(self, textEntered):
-                self.cogtag_1.setText(textEntered)
-                self.cogtag_1.clearText()
-        def clearText(self):
-                self.entry.enterText('sdfdsf')
-                self.entry.destroy()
-                del self.entry"""
+                self.help_button = DirectButton(geom_scale=(1, 1, 1),
+                                                relief=None,
+                                                clickSound=self.click,
+                                                rolloverSound=self.roll_over,
+                                                textMayChange=1,
+                                                image=self.img_2,
+                                                image_scale=(.1, .1, .1),
+                                                image_pos=(-1.1, 0, .5),
+                                                command=self.help_box
+                                                )
 
         # func to destroy onscreentext objects
         def screen_text_destroy(self):
@@ -529,10 +521,10 @@ class MyApp(ShowBase):
                 self.screentext_7.removeNode()
                 del self.screentext_7
                 self.info_frame.destroy()
-                self.button_3.destroy()
-                del self.button_3
+                self.des_text_button.destroy()
+                del self.des_text_button
 
-                self.button_4 = DirectButton(
+                self.info_button = DirectButton(
                         text=('Add top-left text.', 'Loading...', 'This will add the top-left text.', ''),
                         text_scale=.05,
                         text_font=self.font_1,
@@ -541,7 +533,7 @@ class MyApp(ShowBase):
                         geom_scale=(1, 6, 1),
                         relief=None,
                         clickSound=self.click,
-                        rolloverSound=self.rollover,
+                        rolloverSound=self.roll_over,
                         image=self.img_1,
                         image_scale=(.6, .09, .09),
                         image_pos=(-1.75, .2, .975),
@@ -551,9 +543,9 @@ class MyApp(ShowBase):
 
         # func to add back Screentext objects
         def screen_text_load(self):
-                self.screenText()
-                self.button_4.destroy()
-                del self.button_4
+                self.screen_text()
+                self.info_button.destroy()
+                del self.info_button
 
         # func to add hat
         def add_hat1(self):
@@ -562,24 +554,24 @@ class MyApp(ShowBase):
                 self.hat2 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_band.bam')
                 self.hat2.setPosHprScale((0, -0.1, 1.5), (180, 0, 0), (.25, .25, .25))
                 self.hat2.reparentTo(self.coghead_1)
-                self.button_1.destroy()
-                del self.button_1
+                self.hat1_button.destroy()
+                del self.hat1_button
 
-                self.button_2 = DirectButton(text=('Grand Band Hat', 'Loading...', 'Change Hat', ''),
-                                             text_scale=.05,
-                                             text_font=self.font_1,
-                                             text_pos=(-.05, .125, 1),
-                                             pressEffect=1,
-                                             geom_scale=(1, 6, 1),
-                                             relief=None,
-                                             clickSound=self.click,
-                                             rolloverSound=self.rollover,
-                                             image=self.img_1,
-                                             image_scale=(.3, .09, .09),
-                                             image_pos=(-.2, 0, .19),
-                                             textMayChange=1,
-                                             command=self.add_hat2
-                                             )
+                self.hat2_button = DirectButton(text=('Grand Band Hat', 'Loading...', 'Change Hat', ''),
+                                                text_scale=.05,
+                                                text_font=self.font_1,
+                                                text_pos=(-.05, .125, 1),
+                                                pressEffect=1,
+                                                geom_scale=(1, 6, 1),
+                                                relief=None,
+                                                clickSound=self.click,
+                                                rolloverSound=self.roll_over,
+                                                image=self.img_1,
+                                                image_scale=(.3, .09, .09),
+                                                image_pos=(-.2, 0, .19),
+                                                textMayChange=1,
+                                                command=self.add_hat2
+                                                )
 
         # func to add hat
         def add_hat2(self):
@@ -588,24 +580,24 @@ class MyApp(ShowBase):
                 self.hat3 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_cowboyHat.bam')
                 self.hat3.reparentTo(self.coghead_1)
                 self.hat3.setPosHprScale((0, -0.1, 1.5), (10, 10, 0), (.35, .35, .35))
-                self.button_2.destroy()
-                del self.button_2
+                self.hat2_button.destroy()
+                del self.hat2_button
 
-                self.button_19 = DirectButton(text=('Cowboy Hat', 'Loading...', 'Change Hat', ''),
-                                              text_scale=.05,
-                                              text_font=self.font_1,
-                                              text_pos=(-.05, .125, 1),
-                                              pressEffect=1,
-                                              geom_scale=(1, 6, 1),
-                                              relief=None,
-                                              clickSound=self.click,
-                                              rolloverSound=self.rollover,
-                                              textMayChange=1,
-                                              image=self.img_1,
-                                              image_scale=(.25, .09, .09),
-                                              image_pos=(-.175, 0, .19),
-                                              command=self.add_hat3
-                                              )
+                self.hat3_button = DirectButton(text=('Cowboy Hat', 'Loading...', 'Change Hat', ''),
+                                                text_scale=.05,
+                                                text_font=self.font_1,
+                                                text_pos=(-.05, .125, 1),
+                                                pressEffect=1,
+                                                geom_scale=(1, 6, 1),
+                                                relief=None,
+                                                clickSound=self.click,
+                                                rolloverSound=self.roll_over,
+                                                textMayChange=1,
+                                                image=self.img_1,
+                                                image_scale=(.25, .09, .09),
+                                                image_pos=(-.175, 0, .19),
+                                                command=self.add_hat3
+                                                )
 
         # func to add hat
         def add_hat3(self):
@@ -614,24 +606,24 @@ class MyApp(ShowBase):
                 self.hat1 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_fez.bam')
                 self.hat1.reparentTo(self.coghead_1)
                 self.hat1.setPosHprScale((0, -0.1, 1.5), (30, -10, 0), (.4, .4, .4))
-                self.button_19.destroy()
-                del self.button_19
+                self.hat3_button.destroy()
+                del self.hat3_button
 
-                self.button_1 = DirectButton(text=('Fez Hat', 'Loading...', 'Change Hat', ''),
-                                             text_scale=.05,
-                                             text_font=self.font_1,
-                                             text_pos=(-.05, .125, 1),
-                                             pressEffect=1,
-                                             geom_scale=(1, 6, 1),
-                                             relief=None,
-                                             clickSound=self.click,
-                                             rolloverSound=self.rollover,
-                                             textMayChange=1,
-                                             image=self.img_1,
-                                             image_scale=(.25, .09, .09),
-                                             image_pos=(-.175, 0, .19),
-                                             command=self.add_hat1
-                                             )
+                self.hat1_button = DirectButton(text=('Fez Hat', 'Loading...', 'Change Hat', ''),
+                                                text_scale=.05,
+                                                text_font=self.font_1,
+                                                text_pos=(-.05, .125, 1),
+                                                pressEffect=1,
+                                                geom_scale=(1, 6, 1),
+                                                relief=None,
+                                                clickSound=self.click,
+                                                rolloverSound=self.roll_over,
+                                                textMayChange=1,
+                                                image=self.img_1,
+                                                image_scale=(.25, .09, .09),
+                                                image_pos=(-.175, 0, .19),
+                                                command=self.add_hat1
+                                                )
 
         # functions that change scale of cog_1
         def decrease_scale(self):
@@ -640,8 +632,8 @@ class MyApp(ShowBase):
                 cogtag_1_scale = self.cogtag_1.scaleInterval(.25, Point3(.5, .5, .5))
                 cogtag_1_pos = self.cogtag_1.posInterval(.25, Point3(.565, .45, .05))
 
-                self.button_5.destroy()
-                del self.button_5
+                self.normal_cog_button.destroy()
+                del self.normal_cog_button
 
                 seq1 = Parallel(cog_1_scale1,
                                 cogtag_1_scale,
@@ -649,138 +641,138 @@ class MyApp(ShowBase):
                                 )
                 seq1.start()
 
-                self.button_6 = DirectButton(text=('Small Cog', 'Loading...', 'Change Size', ''),
-                                             text_scale=.05,
-                                             text_font=self.font_1,
-                                             text_pos=(-.475, .125, 1),
-                                             pressEffect=1,
-                                             geom_scale=(1, 6, 1),
-                                             relief=None,
-                                             clickSound=self.click,
-                                             rolloverSound=self.rollover,
-                                             textMayChange=1,
-                                             image=self.img_1,
-                                             image_scale=(.25, .09, .09),
-                                             image_pos=(-.6, 0, .19),
-                                             command=self.increase_scale
-                                             )
+                self.small_cog_button = DirectButton(text=('Small Cog', 'Loading...', 'Change Size', ''),
+                                                     text_scale=.05,
+                                                     text_font=self.font_1,
+                                                     text_pos=(-.475, .125, 1),
+                                                     pressEffect=1,
+                                                     geom_scale=(1, 6, 1),
+                                                     relief=None,
+                                                     clickSound=self.click,
+                                                     rolloverSound=self.roll_over,
+                                                     textMayChange=1,
+                                                     image=self.img_1,
+                                                     image_scale=(.25, .09, .09),
+                                                     image_pos=(-.6, 0, .19),
+                                                     command=self.increase_scale
+                                                     )
 
         def increase_scale(self):
                 cog_1_scale2 = self.cog_1.scaleInterval(.25, Point3(1, 1, 1))
                 cogtag_1_scale2 = self.cogtag_1.scaleInterval(.25, Point3(1, 1, 1))
                 cogtag_1_pos2 = self.cogtag_1.posInterval(.25, Point3(.565, .45, .475))
-                self.button_6.destroy()
-                del self.button_6
+                self.small_cog_button.destroy()
+                del self.small_cog_button
 
                 seq2 = Parallel(cog_1_scale2,
                                 cogtag_1_scale2,
                                 cogtag_1_pos2,
                                 )
                 seq2.start()
-                self.button_5 = DirectButton(text=('Normal Cog', 'Loading...', 'Change Size', ''),
-                                             text_scale=.05,
-                                             text_font=self.font_1,
-                                             text_pos=(-.475, .125, 1),
-                                             pressEffect=1,
-                                             geom_scale=(1, 6, 1),
-                                             relief=None,
-                                             clickSound=self.click,
-                                             rolloverSound=self.rollover,
-                                             textMayChange=1,
-                                             image=self.img_1,
-                                             image_scale=(.25, .09, .09),
-                                             image_pos=(-.6, 0, .19),
-                                             command=self.decrease_scale
-                                             )
+                self.normal_cog_button = DirectButton(text=('Normal Cog', 'Loading...', 'Change Size', ''),
+                                                      text_scale=.05,
+                                                      text_font=self.font_1,
+                                                      text_pos=(-.475, .125, 1),
+                                                      pressEffect=1,
+                                                      geom_scale=(1, 6, 1),
+                                                      relief=None,
+                                                      clickSound=self.click,
+                                                      rolloverSound=self.roll_over,
+                                                      textMayChange=1,
+                                                      image=self.img_1,
+                                                      image_scale=(.25, .09, .09),
+                                                      image_pos=(-.6, 0, .19),
+                                                      command=self.decrease_scale
+                                                      )
 
         # glove color functions
         # purple
         def change_color_purple(self):
                 self.cog_1.find("**/hands").setColor(255, 0, 255)
-                self.button_7.destroy()
-                del self.button_7
+                self.white_button.destroy()
+                del self.white_button
 
-                self.button_8 = DirectButton(text=('Purple', 'Loading...', 'Next Color', ''),
-                                             text_scale=.05,
-                                             text_font=self.font_1,
-                                             text_pos=(-.05, .365, 1),
-                                             pressEffect=1,
-                                             geom_scale=(1, 6, 1),
-                                             relief=None,
-                                             clickSound=self.click,
-                                             rolloverSound=self.rollover,
-                                             textMayChange=1,
-                                             image=self.img_1,
-                                             image_scale=(.25, .09, .09),
-                                             image_pos=(-.175, 0, .425),
-                                             command=self.change_color_yellow
-                                             )
+                self.purple_button = DirectButton(text=('Purple', 'Loading...', 'Next Color', ''),
+                                                  text_scale=.05,
+                                                  text_font=self.font_1,
+                                                  text_pos=(-.05, .365, 1),
+                                                  pressEffect=1,
+                                                  geom_scale=(1, 6, 1),
+                                                  relief=None,
+                                                  clickSound=self.click,
+                                                  rolloverSound=self.roll_over,
+                                                  textMayChange=1,
+                                                  image=self.img_1,
+                                                  image_scale=(.25, .09, .09),
+                                                  image_pos=(-.175, 0, .425),
+                                                  command=self.change_color_yellow
+                                                  )
 
         # yellow
         def change_color_yellow(self):
                 self.cog_1.find("**/hands").setColor(255, 255, 0)
-                self.button_8.destroy()
-                del self.button_8
+                self.purple_button.destroy()
+                del self.purple_button
 
-                self.button_9 = DirectButton(text=('Yellow', 'Loading...', 'Change Color', ''),
-                                             text_scale=.05,
-                                             text_font=self.font_1,
-                                             text_pos=(-.05, .365, 1),
-                                             pressEffect=1,
-                                             geom_scale=(1, 6, 1),
-                                             relief=None,
-                                             clickSound=self.click,
-                                             rolloverSound=self.rollover,
-                                             textMayChange=1,
-                                             image=self.img_1,
-                                             image_scale=(.25, .09, .09),
-                                             image_pos=(-.175, 0, .425),
-                                             command=self.change_color_cyan
-                                             )
+                self.yellow_button = DirectButton(text=('Yellow', 'Loading...', 'Change Color', ''),
+                                                  text_scale=.05,
+                                                  text_font=self.font_1,
+                                                  text_pos=(-.05, .365, 1),
+                                                  pressEffect=1,
+                                                  geom_scale=(1, 6, 1),
+                                                  relief=None,
+                                                  clickSound=self.click,
+                                                  rolloverSound=self.roll_over,
+                                                  textMayChange=1,
+                                                  image=self.img_1,
+                                                  image_scale=(.25, .09, .09),
+                                                  image_pos=(-.175, 0, .425),
+                                                  command=self.change_color_cyan
+                                                  )
 
         # cyan
         def change_color_cyan(self):
                 self.cog_1.find("**/hands").setColor(0, 255, 255)
-                self.button_9.destroy()
-                del self.button_9
+                self.yellow_button.destroy()
+                del self.yellow_button
 
-                self.button_10 = DirectButton(text=('Cyan', 'Loading...', 'Change Color', ''),
-                                              text_scale=.05,
-                                              text_font=self.font_1,
-                                              text_pos=(-.05, .365, 1),
-                                              pressEffect=1,
-                                              geom_scale=(1, 6, 1),
-                                              relief=None,
-                                              clickSound=self.click,
-                                              rolloverSound=self.rollover,
-                                              textMayChange=1,
-                                              image=self.img_1,
-                                              image_scale=(.25, .09, .09),
-                                              image_pos=(-.175, 0, .425),
-                                              command=self.change_color_white
-                                              )
+                self.cyan_button = DirectButton(text=('Cyan', 'Loading...', 'Change Color', ''),
+                                                text_scale=.05,
+                                                text_font=self.font_1,
+                                                text_pos=(-.05, .365, 1),
+                                                pressEffect=1,
+                                                geom_scale=(1, 6, 1),
+                                                relief=None,
+                                                clickSound=self.click,
+                                                rolloverSound=self.roll_over,
+                                                textMayChange=1,
+                                                image=self.img_1,
+                                                image_scale=(.25, .09, .09),
+                                                image_pos=(-.175, 0, .425),
+                                                command=self.change_color_white
+                                                )
 
         # white
         def change_color_white(self):
                 self.cog_1.find("**/hands").setColor(255, 255, 255)
-                self.button_10.destroy()
-                del self.button_10
+                self.cyan_button.destroy()
+                del self.cyan_button
 
-                self.button_7 = DirectButton(text=('White', 'Loading...', 'Change Color', ''),
-                                             text_scale=.05,
-                                             text_font=self.font_1,
-                                             text_pos=(-.05, .365, 1),
-                                             pressEffect=1,
-                                             geom_scale=(1, 6, 1),
-                                             relief=None,
-                                             clickSound=self.click,
-                                             rolloverSound=self.rollover,
-                                             textMayChange=1,
-                                             image=self.img_1,
-                                             image_scale=(.25, .09, .09),
-                                             image_pos=(-.175, 0, .425),
-                                             command=self.change_color_purple
-                                             )
+                self.white_button = DirectButton(text=('White', 'Loading...', 'Change Color', ''),
+                                                 text_scale=.05,
+                                                 text_font=self.font_1,
+                                                 text_pos=(-.05, .365, 1),
+                                                 pressEffect=1,
+                                                 geom_scale=(1, 6, 1),
+                                                 relief=None,
+                                                 clickSound=self.click,
+                                                 rolloverSound=self.roll_over,
+                                                 textMayChange=1,
+                                                 image=self.img_1,
+                                                 image_scale=(.25, .09, .09),
+                                                 image_pos=(-.175, 0, .425),
+                                                 command=self.change_color_purple
+                                                 )
         # texture functions
         # cashbot
         def cash_texture(self):
@@ -793,24 +785,24 @@ class MyApp(ShowBase):
                 self.coglegs_1 = self.loader.loadTexture('phase_3.5\maps\m_leg.jpg')
                 self.cog_1.find('**/legs').setTexture(self.coglegs_1, 1)
 
-                self.button_13.destroy()
-                del self.button_13
+                self.bossbot_button.destroy()
+                del self.bossbot_button
 
-                self.button_14 = DirectButton(text=('Cashbot', 'Loading...', 'Change Type', ''),
-                                              text_scale=.05,
-                                              text_font=self.font_1,
-                                              text_pos=(-.475, .3625, .1),
-                                              pressEffect=1,
-                                              geom_scale=(1, 6, 1),
-                                              relief=None,
-                                              clickSound=self.click,
-                                              rolloverSound=self.rollover,
-                                              textMayChange=1,
-                                              image=self.img_1,
-                                              image_scale=(.25, .09, .09),
-                                              image_pos=(-.6, 0, .425),
-                                              command=self.law_texture
-                                              )
+                self.cashbot_button = DirectButton(text=('Cashbot', 'Loading...', 'Change Type', ''),
+                                                   text_scale=.05,
+                                                   text_font=self.font_1,
+                                                   text_pos=(-.475, .3625, .1),
+                                                   pressEffect=1,
+                                                   geom_scale=(1, 6, 1),
+                                                   relief=None,
+                                                   clickSound=self.click,
+                                                   rolloverSound=self.roll_over,
+                                                   textMayChange=1,
+                                                   image=self.img_1,
+                                                   image_scale=(.25, .09, .09),
+                                                   image_pos=(-.6, 0, .425),
+                                                   command=self.law_texture
+                                                   )
 
         # lawbot
         def law_texture(self):
@@ -823,24 +815,24 @@ class MyApp(ShowBase):
                 self.coglegs_1 = self.loader.loadTexture('phase_3.5\maps\l_leg.jpg')
                 self.cog_1.find('**/legs').setTexture(self.coglegs_1, 1)
 
-                self.button_14.destroy()
-                del self.button_14
+                self.cashbot_button.destroy()
+                del self.cashbot_button
 
-                self.button_15 = DirectButton(text=('Lawbot', 'Loading...', 'Change Type', ''),
-                                              text_scale=.05,
-                                              text_font=self.font_1,
-                                              text_pos=(-.475, .3625, .1),
-                                              pressEffect=1,
-                                              geom_scale=(1, 6, 1),
-                                              relief=None,
-                                              clickSound=self.click,
-                                              rolloverSound=self.rollover,
-                                              textMayChange=1,
-                                              image=self.img_1,
-                                              image_scale=(.25, .09, .09),
-                                              image_pos=(-.6, 0, .425),
-                                              command=self.sell_texture
-                                              )
+                self.lawbot_button = DirectButton(text=('Lawbot', 'Loading...', 'Change Type', ''),
+                                                  text_scale=.05,
+                                                  text_font=self.font_1,
+                                                  text_pos=(-.475, .3625, .1),
+                                                  pressEffect=1,
+                                                  geom_scale=(1, 6, 1),
+                                                  relief=None,
+                                                  clickSound=self.click,
+                                                  rolloverSound=self.roll_over,
+                                                  textMayChange=1,
+                                                  image=self.img_1,
+                                                  image_scale=(.25, .09, .09),
+                                                  image_pos=(-.6, 0, .425),
+                                                  command=self.sell_texture
+                                                  )
         # sellbot
         def sell_texture(self):
                 self.cogtorso_1 = self.loader.loadTexture('phase_3.5\maps\s_blazer.jpg')
@@ -852,24 +844,24 @@ class MyApp(ShowBase):
                 self.coglegs_1 = self.loader.loadTexture('phase_3.5\maps\s_leg.jpg')
                 self.cog_1.find('**/legs').setTexture(self.coglegs_1, 1)
 
-                self.button_15.destroy()
-                del self.button_15
+                self.lawbot_button.destroy()
+                del self.lawbot_button
 
-                self.button_16 = DirectButton(text=('Sellbot', 'Loading...', 'Change Type', ''),
-                                              text_scale=.05,
-                                              text_font=self.font_1,
-                                              text_pos=(-.475, .3625, .1),
-                                              pressEffect=1,
-                                              geom_scale=(1, 6, 1),
-                                              relief=None,
-                                              clickSound=self.click,
-                                              rolloverSound=self.rollover,
-                                              textMayChange=1,
-                                              image=self.img_1,
-                                              image_scale=(.25, .09, .09),
-                                              image_pos=(-.6, 0, .425),
-                                              command=self.boss_texture
-                                              )
+                self.sellbot_button = DirectButton(text=('Sellbot', 'Loading...', 'Change Type', ''),
+                                                   text_scale=.05,
+                                                   text_font=self.font_1,
+                                                   text_pos=(-.475, .3625, .1),
+                                                   pressEffect=1,
+                                                   geom_scale=(1, 6, 1),
+                                                   relief=None,
+                                                   clickSound=self.click,
+                                                   rolloverSound=self.roll_over,
+                                                   textMayChange=1,
+                                                   image=self.img_1,
+                                                   image_scale=(.25, .09, .09),
+                                                   image_pos=(-.6, 0, .425),
+                                                   command=self.boss_texture
+                                                   )
 
         # bossbot
         def boss_texture(self):
@@ -882,29 +874,29 @@ class MyApp(ShowBase):
                 self.coglegs_1 = self.loader.loadTexture('phase_3.5\maps\c_leg.jpg')
                 self.cog_1.find('**/legs').setTexture(self.coglegs_1, 1)
 
-                self.button_16.destroy()
-                del self.button_16
+                self.sellbot_button.destroy()
+                del self.sellbot_button
 
-                self.button_13 = DirectButton(text=('Bossbot', 'Loading...', 'Change Type', ''),
-                                              text_scale=.05,
-                                              text_font=self.font_1,
-                                              text_pos=(-.475, .3625, .1),
-                                              pressEffect=1,
-                                              geom_scale=(1, 6, 1),
-                                              relief=None,
-                                              clickSound=self.click,
-                                              rolloverSound=self.rollover,
-                                              textMayChange=1,
-                                              image=self.img_1,
-                                              image_scale=(.25, .09, .09),
-                                              image_pos=(-.6, 0, .425),
-                                              command=self.cash_texture
-                                              )
+                self.bossbot_button = DirectButton(text=('Bossbot', 'Loading...', 'Change Type', ''),
+                                                   text_scale=.05,
+                                                   text_font=self.font_1,
+                                                   text_pos=(-.475, .3625, .1),
+                                                   pressEffect=1,
+                                                   geom_scale=(1, 6, 1),
+                                                   relief=None,
+                                                   clickSound=self.click,
+                                                   rolloverSound=self.roll_over,
+                                                   textMayChange=1,
+                                                   image=self.img_1,
+                                                   image_scale=(.25, .09, .09),
+                                                   image_pos=(-.6, 0, .425),
+                                                   command=self.cash_texture
+                                                   )
 
         # help box
-        def helpbox(self):
-                self.button_17.destroy()
-                del self.button_17
+        def help_box(self):
+                self.help_button.destroy()
+                del self.help_button
                 self.help_panel = DirectLabel(parent=self.aspect2d,
                                               text='To change the appearance of the Big Cheese, click the buttons '
                                                    'to the left in the box. '
@@ -915,7 +907,7 @@ class MyApp(ShowBase):
                                               text_scale=.04,
                                               text_pos=(.185, .83, .75),
                                               hpr=(0, 0, 0),
-                                              image=self.guiimage,
+                                              image=self.gui_image,
                                               image_pos=(.5, .5, .75),
                                               image_scale=(.7, .5, .3),
                                               image_hpr=(0, 0, 0),
@@ -923,39 +915,39 @@ class MyApp(ShowBase):
                                               text_font=self.font_1
                                               )
 
-                self.button_18 = DirectButton(geom_scale=(1, 1, 1),
-                                              parent=self.aspect2d,
-                                              relief=None,
-                                              clickSound=self.click,
-                                              rolloverSound=self.rollover,
-                                              textMayChange=1,
-                                              image=self.img_3,
-                                              image_scale=(.075, .075, .075),
-                                              image_pos=(.8, 0, .65),
-                                              command=self.destroy_helpbox
-                                              )
+                self.des_help_button = DirectButton(geom_scale=(1, 1, 1),
+                                                    parent=self.aspect2d,
+                                                    relief=None,
+                                                    clickSound=self.click,
+                                                    rolloverSound=self.roll_over,
+                                                    textMayChange=1,
+                                                    image=self.img_3,
+                                                    image_scale=(.075, .075, .075),
+                                                    image_pos=(.8, 0, .65),
+                                                    command=self.destroy_helpbox
+                                                    )
 
         def destroy_helpbox(self):
                 self.help_panel.destroy()
                 del self.help_panel
-                self.button_18.destroy()
-                del self.button_18
+                self.des_help_button.destroy()
+                del self.des_help_button
 
-                self.button_17 = DirectButton(geom_scale=(1, 1, 1),
-                                              relief=None,
-                                              clickSound=self.click,
-                                              rolloverSound=self.rollover,
-                                              textMayChange=1,
-                                              image=self.img_2,
-                                              image_scale=(.1, .1, .1),
-                                              image_pos=(-1.1, 0, .5),
-                                              command=self.helpbox
-                                              )
+                self.help_button = DirectButton(geom_scale=(1, 1, 1),
+                                                relief=None,
+                                                clickSound=self.click,
+                                                rolloverSound=self.roll_over,
+                                                textMayChange=1,
+                                                image=self.img_2,
+                                                image_scale=(.1, .1, .1),
+                                                image_pos=(-1.1, 0, .5),
+                                                command=self.help_box
+                                                )
 
         # exit function
         def exit_popup(self):
-                self.button_12.destroy()
-                del self.button_12
+                self.exit_popup_button.destroy()
+                del self.exit_popup_button
 
                 self.warning_text = OnscreenText(text='WARNING',
                                                  scale=.25,
@@ -971,7 +963,7 @@ class MyApp(ShowBase):
                                               text_pos=(-.85, .25, 0.25),
                                               relief=None,
                                               text_fg=(255, 0, 0, 1),
-                                              image=self.guiimage,
+                                              image=self.gui_image,
                                               image_scale=(1.75, 1, 1),
                                               text_align=TextNode.A_left,
                                               text_font=self.font_1
@@ -985,7 +977,7 @@ class MyApp(ShowBase):
                                                 image_scale=(5, 1, 1.5),
                                                 image_pos=(2.5, 0, -.75),
                                                 clickSound=self.click,
-                                                rolloverSound=self.rollover,
+                                                rolloverSound=self.roll_over,
                                                 command=self.exit_app,
                                                 text_font=self.font_1
                                                 )
@@ -998,7 +990,7 @@ class MyApp(ShowBase):
                                                      image_scale=(5, 1, 1.5),
                                                      image_pos=(2.5, 0, -3),
                                                      clickSound=self.click,
-                                                     rolloverSound=self.rollover,
+                                                     rolloverSound=self.roll_over,
                                                      command=self.close_exit,
                                                      text_font=self.font_1
                                                      )
@@ -1013,21 +1005,21 @@ class MyApp(ShowBase):
                 self.exit_back_button.destroy()
                 del self.exit_back_button
 
-                self.button_12 = DirectButton(text=('Exit', 'Loading...', 'Exit App', ''),
-                                              text_scale=.05,
-                                              text_font=self.font_1,
-                                              text_pos=(1.375, -.81, 1),
-                                              pressEffect=1,
-                                              geom_scale=(1, 6, 1),
-                                              relief=None,
-                                              clickSound=self.click,
-                                              rolloverSound=self.rollover,
-                                              textMayChange=1,
-                                              image=self.img_1,
-                                              image_scale=(.25, .09, .09),
-                                              image_pos=(1.25, 0, -.75),
-                                              command=self.exit_popup
-                                              )
+                self.exit_popup_button = DirectButton(text=('Exit', 'Loading...', 'Exit App', ''),
+                                                      text_scale=.05,
+                                                      text_font=self.font_1,
+                                                      text_pos=(1.375, -.81, 1),
+                                                      pressEffect=1,
+                                                      geom_scale=(1, 6, 1),
+                                                      relief=None,
+                                                      clickSound=self.click,
+                                                      rolloverSound=self.roll_over,
+                                                      textMayChange=1,
+                                                      image=self.img_1,
+                                                      image_scale=(.25, .09, .09),
+                                                      image_pos=(1.25, 0, -.75),
+                                                      command=self.exit_popup
+                                                      )
 
         @staticmethod
         def exit_app():
