@@ -35,8 +35,9 @@ To install
 	1.	Download files from the latest release from the releases section.
 	2.	Install Panda3D-1.10-02 if not already installed, at www.panda3d.org/download
 	3.      Go to www.toontownrewritten.com/play, and install Toontown Rewritten.
-	4.      Go to the Toontown Rewritten Folder, and copy/paste the .mf phase files into your Panda3D folder. 
-	5.	Open main.cpython-37.pyc. 
+	4.      Go to the Toontown Rewritten Folder, and copy/paste the .mf phase files into your Panda3D folder 
+		(For this project, only phase_3 through phase_5.5, and phase_9 through phase_11 files are needed). 
+	5.	Open main.cpython-37.pyc to run the application (It will open the command prompt to start). 
 	
 <h2>Built With</h2>
 
@@ -58,10 +59,12 @@ To install
 
 *	[X] **Have the program run as an .exe/.pyc file**
 
+*	[ ] **Have the option to set some settings, like resolution and binds**
+
 
 <h2>License</h2>
 
-**This Panda3D Game and/or the authors are not affiliated with The Walt Disney Company and/or the Disney Interactive Media Group (collectively referred to as "Disney")**
+**This Panda3D Game and/or the author(s) are not affiliated with The Walt Disney Company and/or the Disney Interactive Media Group (collectively referred to as "Disney")**
 
 This game can be modified to any extent, **but do not upload to anywhere if it is unmodified**.
 
@@ -77,7 +80,19 @@ Main Author: Christian M Diaz
 
 * Email: **christianmigueldiaz@gmail.com**
 	* Hours M-F: 2pm - 9pm EST
-	* Hours Weekend: 10am - 11pm EST
+	* Hours Weekend: 11am - 1am EST
 
 <h4>All questions and inquiries must be related to the project in some way, unrelated messages will be ignored</h4>
+
+<h2>Easter Eggs/Small Details</h2>
+
+*	Pressing M will stop the music
+
+*	Holding M will restart the music
+
+*	All cog tags make the cog grunt sound effect when clicked
+
+*	The Cold Caller has a help button that explains what to click in the main GUI panel
+
+*	Both cogs look around over time, and will loop through some animations as well.
 
