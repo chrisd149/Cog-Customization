@@ -10,3 +10,5 @@ Log 4/12| 4/13:  Added significant updates to main.py.  Several functions to con
 Log 4/14: main.py has been cleaned up again.  Many lines like frameColor on the buttons were removed since they were not needed.  Also, the program now opens in 1920 x 1080, and an exit button has been added.  In the next update, v1.0 pre-release, cog textures will be changeable.
 
 Log 4/15 - 4/18: Added a button to change textures, updated the exit pop up to be more understandable and exitable in itself.  main.py will be replaced by main.cpython-37.pyc as the main file to install soon, since it directly opens the app without an IDE.
+
+Log 4/18 | 4/19: Changed all buttons' names to be more understandable, and updated exit pop-up to look better.  
