@@ -1,5 +1,8 @@
 <h1>Cog Training</h1>
 
+![image](https://user-images.githubusercontent.com/48182689/56404892-575dd000-6237-11e9-9409-d4507fe9c5f9.png)
+<h6>v1.0 Beta Main GUI</h6>
+
 This is a early project for a very basic User Interactive game using Panda3D and Python.  
 
 
@@ -9,7 +12,7 @@ This is a early project for a very basic User Interactive game using Panda3D and
 
 <h3>System Info</h3>	
 
-*	**OS**: Windows 10/8/7/Vista/XP, not tested on Unix/Linux or MacOS.
+*	**OS**: Windows 10/8/7/Vista/XP
 
 *	**CPU**: 500Mhz< CPU, 1Ghz< Recommended
 
@@ -23,21 +26,18 @@ This is a early project for a very basic User Interactive game using Panda3D and
 
 *	**Programming Language**: ***Python 3.7***
 
-*	**Language**: English, Spanish and possibly others later.
+*	**Language**: English, Spanish possibly later.
 
 <h2>Installing</h2>
-
-First off, the program is ran in Python only.  You can download the main project file, or copy its contents into a Python script.
 
 To install
 	
 	1.	Download files from the latest release from the releases section.
 	2.	Install Panda3D-1.10-02 if not already installed, at www.panda3d.org/download
 	3.      Go to www.toontownrewritten.com/play, and install Toontown Rewritten.
-	4.      Go to the Toontown Rewritten Folder, and copy/paste the .mf phase files into your Cogtraining folder 
-		or your Panda3D folder. 
-	5.	Open main.py in your choice of Python IDE (e.g. PyCharm, Atom, etc).
-	4.	Run main.py, it will open up in a Panda3D enviroment window, similar to Toontown.
+	4.      Go to the Toontown Rewritten Folder, and copy/paste the .mf phase files into your Panda3D folder 
+		(For this project, only phase_3 through phase_5.5, and phase_9 through phase_11 files are needed). 
+	5.	Open main.cpython-37.pyc to run the application (It will open the command prompt to start). 
 	
 <h2>Built With</h2>
 
@@ -57,12 +57,14 @@ To install
 
 *  	[X] **Advanced functions that change colors, scale, load/delete models, and textures**
 
-*	[ ] **Have the program run as an .exe file**
+*	[X] **Have the program run as an .exe/.pyc file**
+
+*	[ ] **Have the option to set some settings, like resolution and binds**
 
 
 <h2>License</h2>
 
-**This Panda3D Game is not affiliated with The Walt Disney Company and/or the Disney Interactive Media Group (collectively referred to as "Disney")**
+**This Panda3D Game and/or the author(s) are not affiliated with The Walt Disney Company and/or the Disney Interactive Media Group (collectively referred to as "Disney")**
 
 This game can be modified to any extent, **but do not upload to anywhere if it is unmodified**.
 
@@ -78,7 +80,19 @@ Main Author: Christian M Diaz
 
 * Email: **christianmigueldiaz@gmail.com**
 	* Hours M-F: 2pm - 9pm EST
-	* Hours Weekend: 10am - 11pm EST
+	* Hours Weekend: 11am - 1am EST
 
 <h4>All questions and inquiries must be related to the project in some way, unrelated messages will be ignored</h4>
+
+<h2>Easter Eggs/Small Details</h2>
+
+*	Pressing M will stop the music
+
+*	Holding M will restart the music
+
+*	All cog tags make the cog grunt sound effect when clicked
+
+*	The Cold Caller has a help button that explains what to click in the main GUI panel
+
+*	Both cogs look around over time, and will loop through some animations as well.
 
