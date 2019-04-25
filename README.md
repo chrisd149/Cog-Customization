@@ -38,6 +38,8 @@ To install
 	4.      Go to the Toontown Rewritten Folder, and copy/paste the .mf phase files into your Panda3D folder 
 		(For this project, only phase_3 through phase_5.5, and phase_9 through phase_11 files are needed). 
 	5.	Open main.cpython-37.pyc to run the application (It will open the command prompt to start). 
+		NOTE: the .pyc file may not work on your system, and if it doesn't,
+		you will have to open the program via a python IDE.
 	
 <h2>Built With</h2>
 
