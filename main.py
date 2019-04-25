@@ -23,7 +23,6 @@ from panda3d.core import PandaNode, NodePath, Camera, TextNode
 from panda3d.core import Vec3, Vec4, BitMask32
 from direct.gui.OnscreenText import OnscreenText
 from direct.actor.Actor import Actor
-from weather import Weather, Unit
 from direct.showbase.DirectObject import DirectObject
 import os
 from direct.gui.DirectGui import *
@@ -309,7 +308,7 @@ class MyApp(ShowBase):
 
                 self.img_1 = self.loader.loadModel('phase_3\models\gui\ChatPanel.bam')
                 self.img_2 = self.loader.loadModel('phase_3.5\models\gui\QT_buttons.bam')
-                self.img_3 = self.loader.loadModel('phase files\phase_3.5\models\gui\QT_buttons.bam')
+                self.img_3 = self.loader.loadModel('phase_3.5\models\gui\QT_buttons.bam')
 
                 self.gui_image = self.loader.loadModel('phase_3\models\gui\dialog_box_gui.bam')
 
