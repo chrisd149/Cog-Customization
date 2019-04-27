@@ -11,8 +11,9 @@ from math import pi, sin, cos
 from direct.showbase.ShowBase import ShowBase
 from direct.task import Task
 from pandac.PandaModules import *
-loadPrcFileData("", "window-title Cog Training v0.3")
+loadPrcFileData("", "window-title Cog Training v1.1")
 loadPrcFileData("", "win-size 1920 1080")
+loadPrcFileData("", "show-frame-rate-meter True")
 from direct.interval.ActorInterval import ActorInterval
 from direct.interval.IntervalGlobal import *
 from pandac.PandaModules import WindowProperties
@@ -29,6 +30,7 @@ from direct.gui.DirectGui import *
 from direct.gui import DirectGuiGlobals as DGG
 import datetime
 import sys
+import webbrowser
 
 """"""
 
@@ -309,6 +311,7 @@ class MyApp(ShowBase):
                 self.img_1 = self.loader.loadModel('phase_3\models\gui\ChatPanel.bam')
                 self.img_2 = self.loader.loadModel('phase_3.5\models\gui\QT_buttons.bam')
                 self.img_3 = self.loader.loadModel('phase_3.5\models\gui\QT_buttons.bam')
+                self.img_4 = self.loader.loadModel('samples\gamepad\models/button_maps.egg')
 
                 self.gui_image = self.loader.loadModel('phase_3\models\gui\dialog_box_gui.bam')
 
@@ -334,19 +337,27 @@ class MyApp(ShowBase):
                 # textbox
                 self.entry = DirectEntry(text='',
                                          scale=.05,
-                                         command=self.textbox_bg.setText(),
+                                         command=self.setText,
                                          initialText='You can type here.  It will not affect anything.',
                                          numLines=10,
                                          focus=1,
-                                         focusInCommand=self.textbox_bg.clearText(),
+                                         focusInCommand=self.clearText,
                                          parent=self.aspect2d,
-                                         pos=(1.45, .1, .8),
+                                         pos=(1.45, .05, .7),
                                          entryFont=self.font_1,
                                          relief=None,
                                          clickSound=self.click,
                                          rolloverSound=self.roll_over,
                                          text_align=TextNode.ACenter
                                          )
+
+                self.entry_title = OnscreenText(text='Type here, then press Enter to delete the text.',
+                                                wordwrap=12,
+                                                pos=(1.45, .825, 1),
+                                                bg=(255, 255, 0, .25),
+                                                scale=.0475,
+                                                font=self.font_1
+                                                )
 
                 # cog_1 tag
                 self.cogtag_1 = DirectButton(text='Big Cheese    lvl 12',
@@ -408,7 +419,8 @@ class MyApp(ShowBase):
                                                 image=self.img_1,
                                                 image_scale=(.25, .09, .09),
                                                 image_pos=(-.175, 0, .19),
-                                                command=self.add_hat1
+                                                command=self.add_hat1,
+
                                                 )
 
                 self.des_text_button = DirectButton(text=('Delete Top-left text.', 'Loading...',
@@ -502,6 +514,37 @@ class MyApp(ShowBase):
                                                 image_pos=(-1.1, 0, .5),
                                                 command=self.help_box
                                                 )
+
+                self.wiki_button = DirectButton(text=('Need more Help?', 'Loading...', 'Go to Wiki', ''),
+                                                text_scale=.05,
+                                                text_font=self.font_1,
+                                                text_pos=(1.375, -.4875, -.45),
+                                                pressEffect=1,
+                                                geom_scale=(1, 6, 1),
+                                                relief=None,
+                                                clickSound=self.click,
+                                                rolloverSound=self.roll_over,
+                                                textMayChange=1,
+                                                image=self.img_1,
+                                                image_scale=(.35, .09, .09),
+                                                image_pos=(1.2, 0, -.425),
+                                                command=self.github_link
+                                                )
+
+        def github_link(self):
+                webbrowser.open('http://github.com/chrisd149/Cog-Training/wiki/Help')
+
+        def setText(self, textEntered):
+                self.textbox_bg.setText(textEntered)
+                self.textbox_bg.destroy()
+                del self.textbox_bg
+                self.entry.destroy()
+                del self.entry
+                self.entry_title.destroy()
+                del self.entry_title
+
+        def clearText(self):
+                self.entry.enterText('')
 
         # func to destroy onscreentext objects
         def screen_text_destroy(self):
@@ -1041,12 +1084,23 @@ class AppInfo:
 end = time.time()
 elapsed_time = (end - start)
 
-data = AppInfo('Christian Diaz', 'v1.0 Beta', elapsed_time)
+data = AppInfo('Christian Diaz', 'v1.1 Beta', elapsed_time)
 
+print('Thanks for playing!')
 print('GitHub Link: https://github.com/chrisd149/Cog-Training')
 print(data.app_data)
-print('Thanks for playing!')
 
+# creating a game log file if it already isn't made
+f = open("game_log.txt", "w+")
+
+f.write(str(data.app_data))
+
+if elapsed_time < 1:
+        f.write("   |   The program is running under a second, which is good.")
+elif elapsed_time > 1 > 1.5:
+        f.write("   |   The program is running slower than normal, but isn't significantly affecting performance.")
+elif elapsed_time > 2:
+        f.write("   |   The program is running very slow, try restarting your computer to decrease run time.")
 
 app = MyApp()
 app.run()
