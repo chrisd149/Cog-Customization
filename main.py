@@ -59,22 +59,26 @@ class MyApp(ShowBase):
                 self.hat_button_label = OnscreenText(text='Hats',
                                                      pos=(-.05, .225, 1),
                                                      scale=.05,
-                                                     font=self.font_1
+                                                     font=self.font_1,
+                                                     bg=(0, 255, 0, .1)
                                                      )
                 self.scale_button_label = OnscreenText(text='Scale',
                                                        pos=(-.475, .225, 1),
                                                        scale=.05,
-                                                       font=self.font_1
+                                                       font=self.font_1,
+                                                       bg=(255, 0, 255, .1)
                                                        )
                 self.color_button_label = OnscreenText(text='Color',
                                                        pos=(-.05, .46, 1),
                                                        scale=.05,
-                                                       font=self.font_1
+                                                       font=self.font_1,
+                                                       bg=(255, 0, 0, .1)
                                                        )
                 self.texture_button_label = OnscreenText(text='Texture',
                                                          pos=(-.475, .46, 1),
                                                          scale=.05,
-                                                         font=self.font_1
+                                                         font=self.font_1,
+                                                         bg=(0, 0, 255, .1)
                                                          )
 
         # music
@@ -96,6 +100,13 @@ class MyApp(ShowBase):
                 # self.cog_1.loop('Stand')
                 self.cog_1.reparentTo(self.render)
                 self.cog_1.setBlend(frameBlend=True)
+
+                # cog_1 shadow
+                self.cogshadow_1 = self.loader.loadModel('phase_3/models/props/drop_shadow.bam')
+                self.cogshadow_1.reparentTo(self.cog_1.find('**/joint_shadow'))
+                self.cogshadow_1.setScale(.5)
+                self.cogshadow_1.setColor(0, 0, 0, .5)
+                self.cogshadow_1.setBin('fixed', 0, 1)
 
                 # cog head
                 self.coghead_1 = self.loader.loadModel('phase_4\models\char\suitA-heads.bam').find('**/bigcheese')
@@ -248,7 +259,7 @@ class MyApp(ShowBase):
                                                  align=TextNode.A_left,
                                                  )
 
-                self.screentext_3 = OnscreenText(text='Current Version: v1.0-beta',
+                self.screentext_3 = OnscreenText(text='Current Version: v1.1-beta',
                                                  pos=(-1.75, .8),
                                                  font=self.font_1,
                                                  fg=(255, 255, 255, 1),
@@ -311,7 +322,6 @@ class MyApp(ShowBase):
                 self.img_1 = self.loader.loadModel('phase_3\models\gui\ChatPanel.bam')
                 self.img_2 = self.loader.loadModel('phase_3.5\models\gui\QT_buttons.bam')
                 self.img_3 = self.loader.loadModel('phase_3.5\models\gui\QT_buttons.bam')
-                self.img_4 = self.loader.loadModel('samples\gamepad\models/button_maps.egg')
 
                 self.gui_image = self.loader.loadModel('phase_3\models\gui\dialog_box_gui.bam')
 
@@ -338,10 +348,9 @@ class MyApp(ShowBase):
                 self.entry = DirectEntry(text='',
                                          scale=.05,
                                          command=self.setText,
-                                         initialText='You can type here.  It will not affect anything.',
+                                         initialText='',
                                          numLines=10,
                                          focus=1,
-                                         focusInCommand=self.clearText,
                                          parent=self.aspect2d,
                                          pos=(1.45, .05, .7),
                                          entryFont=self.font_1,
@@ -483,8 +492,8 @@ class MyApp(ShowBase):
                                                       rolloverSound=self.roll_over,
                                                       textMayChange=1,
                                                       image=self.img_1,
-                                                      image_scale=(.25, .09, .09),
-                                                      image_pos=(1.25, 0, -.75),
+                                                      image_scale=(.20, .09, .09),
+                                                      image_pos=(1.275, 0, -.75),
                                                       command=self.exit_popup
                                                       )
 
@@ -515,10 +524,10 @@ class MyApp(ShowBase):
                                                 command=self.help_box
                                                 )
 
-                self.wiki_button = DirectButton(text=('Need more Help?', 'Loading...', 'Go to Wiki', ''),
+                self.wiki_button = DirectButton(text=('Official Wiki', 'Loading...', 'Go to Wiki', ''),
                                                 text_scale=.05,
                                                 text_font=self.font_1,
-                                                text_pos=(1.375, -.4875, -.45),
+                                                text_pos=(1.375, -.65, -.45),
                                                 pressEffect=1,
                                                 geom_scale=(1, 6, 1),
                                                 relief=None,
@@ -526,13 +535,13 @@ class MyApp(ShowBase):
                                                 rolloverSound=self.roll_over,
                                                 textMayChange=1,
                                                 image=self.img_1,
-                                                image_scale=(.35, .09, .09),
-                                                image_pos=(1.2, 0, -.425),
+                                                image_scale=(.25, .09, .09),
+                                                image_pos=(1.25, 0, -.585),
                                                 command=self.github_link
                                                 )
 
         def github_link(self):
-                webbrowser.open('http://github.com/chrisd149/Cog-Training/wiki/Help')
+                webbrowser.open('http://github.com/chrisd149/Cog-Training/wiki/')
 
         def setText(self, textEntered):
                 self.textbox_bg.setText(textEntered)
@@ -542,9 +551,6 @@ class MyApp(ShowBase):
                 del self.entry
                 self.entry_title.destroy()
                 del self.entry_title
-
-        def clearText(self):
-                self.entry.enterText('')
 
         # func to destroy onscreentext objects
         def screen_text_destroy(self):
@@ -1078,6 +1084,7 @@ class AppInfo:
                                 'Version: {} | ' \
                                 'Script Time: {} seconds'\
                                 .format(devs, ver, tim)
+                self.total_time = 'Runtime: {} seconds'.format(tim)
 
 
 # end time of main.py
@@ -1090,14 +1097,14 @@ print('Thanks for playing!')
 print('GitHub Link: https://github.com/chrisd149/Cog-Training')
 print(data.app_data)
 
-# creating a game log file if it already isn't made
+# creates a game log file if it already isn't made
 f = open("game_log.txt", "w+")
 
-f.write(str(data.app_data))
+f.write(str(data.total_time))
 
 if elapsed_time < 1:
         f.write("   |   The program is running under a second, which is good.")
-elif elapsed_time > 1 > 1.5:
+elif elapsed_time > 1 < 1.5:
         f.write("   |   The program is running slower than normal, but isn't significantly affecting performance.")
 elif elapsed_time > 2:
         f.write("   |   The program is running very slow, try restarting your computer to decrease run time.")
