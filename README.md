@@ -1,9 +1,11 @@
 <h1>Cog Training</h1>
 
-![image](https://user-images.githubusercontent.com/48182689/56404892-575dd000-6237-11e9-9409-d4507fe9c5f9.png)
-<h6>v1.0 Beta Main GUI</h6>
+![image](https://user-images.githubusercontent.com/48182689/56861706-8380fb80-6971-11e9-987f-a122c1bd2423.png)
+<h6>v1.1 Beta</h6>
 
-**[Demo Video](https://youtu.be/6QBK82pIWAo)**
+**[Demo Video 1](https://youtu.be/6QBK82pIWAo)**
+
+**[Demo Video 2](https://youtu.be/H13CPHQySiQ)**
 
 This is a early project for a very basic User Interactive game using Panda3D and Python.  
 
@@ -35,13 +37,12 @@ This is a early project for a very basic User Interactive game using Panda3D and
 To install
 	
 	1.	Download files from the latest release from the releases section.
-	2.	Install Panda3D-1.10-02 if not already installed, at www.panda3d.org/download
+	2.	Install Panda3D-1.10-02 if not already installed, at www.panda3d.org/download.
 	3.      Go to www.toontownrewritten.com/play, and install Toontown Rewritten.
+	4.      If not installed already, get Python 3.7 at www.python.org/downloads.
 	4.      Go to the Toontown Rewritten Folder, and copy/paste the .mf phase files into your Panda3D folder 
 		(For this project, only phase_3 through phase_5.5, and phase_9 through phase_11 files are needed). 
-	5.	Open main.cpython-37.pyc to run the application (It will open the command prompt to start). 
-		NOTE: the .pyc file may not work on your system, and if it doesn't,
-		you will have to open the program via a python IDE.
+	5.	Open main.py to run the application (It will open the command prompt to start). 
 	
 <h2>Built With</h2>
 
