@@ -62,14 +62,12 @@ To install
 
 *  	[X] **Advanced functions that change colors, scale, load/delete models, and textures**
 
-*	~~[ ] **Have the program run as an .exe/.pyc file**~~
-
 *	[X] **Allow the user to access help *while* ingame or online via the wiki**
 
 
 <h2>License</h2>
 
-**This Panda3D Game and/or the author(s) are not affiliated with *The Walt Disney Company* and/or the *Disney Interactive Media Group*(collectively referred to as *"Disney"*)**
+**This Panda3D game and/or the author(s) are not affiliated with *The Walt Disney Company* and/or the *Disney Interactive Media Group*(collectively referred to as *"Disney"*).  All textures/models used in this program are not mine, and are allowed to be publicly used and distributed, with the exceptition for profit, which isn't allowed at all.**
 
 This game can be modified to any extent. and can be reuploaded ***if*** it is modified.
 
@@ -91,13 +89,15 @@ Main Author: Christian M Diaz
 
 <h2>Easter Eggs/Small Details</h2>
 
-*	Pressing M will stop the music
+*	Pressing M will stop the music.
 
-*	Holding M will restart the music
+*	Holding M will restart the music.
 
-*	All cog tags make the cog grunt sound effect when clicked
+*	All cog tags make the cog grunt sound effect when clicked.
 
-*	The Cold Caller has a help button that explains what to click in the main GUI panel
+*	The Cold Caller has a help button that explains what to click in the main GUI panel.
 
 *	Both cogs look around over time, and will loop through some animations as well.
+
+*	The location of Cog Training is in the Cashbot Vault.
 
