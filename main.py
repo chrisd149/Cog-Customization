@@ -1078,7 +1078,7 @@ elapsed_time = (end - start)
 data = AppInfo('Christian Diaz', 'v1.0.1 Beta', elapsed_time)
 
 print('Thanks for playing!')
-print('GitHub Link: https://github.com/chrisd149/Cog-Training')
+print('GitHub Link: https://github.com/chrisd149/Cog-Customization')
 print(data.app_data)
 
 # creates a game log file if it already isn't made
