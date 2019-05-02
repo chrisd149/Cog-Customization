@@ -1,29 +1,21 @@
-import time
-# start time of main.py
-start = time.time()
-
 # Panda3D Imports
-
 from direct.showbase.ShowBase import ShowBase
-
 from pandac.PandaModules import *
+from direct.interval.IntervalGlobal import *
+from panda3d.core import TextNode
+from panda3d.core import Vec3
+from direct.actor.Actor import Actor
+from direct.gui.DirectGui import *
+import datetime
+import sys
+import webbrowser
+import time
 loadPrcFileData("", "window-title Cog Training v1.1")
 loadPrcFileData("", "win-size 1920 1080")
 loadPrcFileData("", "show-frame-rate-meter True")
 
-from direct.interval.IntervalGlobal import *
-
-from panda3d.core import PandaNode, NodePath, Camera, TextNode
-from panda3d.core import Vec3, Vec4, BitMask32
-
-from direct.actor.Actor import Actor
-
-from direct.gui.DirectGui import *
-
-import datetime
-import sys
-import webbrowser
-
+# start time of main.py
+start = time.time()
 """"""
 
 """Character customization of Big Cheese"""
@@ -251,7 +243,7 @@ class MyApp(ShowBase):
                                                  align=TextNode.A_left,
                                                  )
 
-                self.screentext_3 = OnscreenText(text='Current Version: v1.1-beta',
+                self.screentext_3 = OnscreenText(text='Current Version: v1.0.1-beta',
                                                  pos=(-1.75, .8),
                                                  font=self.font_1,
                                                  fg=(255, 255, 255, 1),
@@ -1083,7 +1075,7 @@ class AppInfo:
 end = time.time()
 elapsed_time = (end - start)
 
-data = AppInfo('Christian Diaz', 'v1.1 Beta', elapsed_time)
+data = AppInfo('Christian Diaz', 'v1.0.1 Beta', elapsed_time)
 
 print('Thanks for playing!')
 print('GitHub Link: https://github.com/chrisd149/Cog-Training')
