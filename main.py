@@ -3,31 +3,23 @@ import time
 start = time.time()
 
 # Panda3D Imports
-from panda3d.core import loadPrcFileData
-from panda3d.core import loadPrcFile
-from direct.actor.Actor import Actor
-import math
-from math import pi, sin, cos
+
 from direct.showbase.ShowBase import ShowBase
-from direct.task import Task
+
 from pandac.PandaModules import *
 loadPrcFileData("", "window-title Cog Training v1.1")
 loadPrcFileData("", "win-size 1920 1080")
 loadPrcFileData("", "show-frame-rate-meter True")
-from direct.interval.ActorInterval import ActorInterval
+
 from direct.interval.IntervalGlobal import *
-from pandac.PandaModules import WindowProperties
-from panda3d.core import CollisionTraverser, CollisionNode
-from panda3d.core import CollisionHandlerQueue, CollisionRay
-from panda3d.core import Filename, AmbientLight, DirectionalLight
+
 from panda3d.core import PandaNode, NodePath, Camera, TextNode
 from panda3d.core import Vec3, Vec4, BitMask32
-from direct.gui.OnscreenText import OnscreenText
+
 from direct.actor.Actor import Actor
-from direct.showbase.DirectObject import DirectObject
-import os
+
 from direct.gui.DirectGui import *
-from direct.gui import DirectGuiGlobals as DGG
+
 import datetime
 import sys
 import webbrowser
