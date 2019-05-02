@@ -3,9 +3,7 @@
 ![image](https://user-images.githubusercontent.com/48182689/56861706-8380fb80-6971-11e9-987f-a122c1bd2423.png)
 <h6>v1.0.1 Beta</h6>
 
-**[Demo Video 1](https://youtu.be/6QBK82pIWAo)**
-
-**[Demo Video 2](https://youtu.be/H13CPHQySiQ)**
+**[Demo Video](https://youtu.be/H13CPHQySiQ)**
 
 This is a early project for a very basic User Interactive game using Panda3D and Python.  
 
