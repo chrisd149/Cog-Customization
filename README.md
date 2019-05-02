@@ -1,4 +1,4 @@
-<h1>Cog Training v1.1 Beta</h1>
+<h1>Cog Training v1.0.1 Beta</h1>
 
 ![image](https://user-images.githubusercontent.com/48182689/56861706-8380fb80-6971-11e9-987f-a122c1bd2423.png)
 <h6>v1.1 Beta</h6>
