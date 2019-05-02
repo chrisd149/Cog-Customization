@@ -1,4 +1,4 @@
-Updates log v0.3
+Updates log 
 
 Log 4/8: Code is cleaned up significantly from intial release.  Many comments have been added to help identify code blocks.  
 Many varribles have been changed to easier names (i.e. self.Cog1 to self.cog_1, self.textob1 to self.cogtag_1, etc.)
@@ -12,3 +12,5 @@ Log 4/14: main.py has been cleaned up again.  Many lines like frameColor on the 
 Log 4/15 - 4/18: Added a button to change textures, updated the exit pop up to be more understandable and exitable in itself.  main.py will be replaced by main.cpython-37.pyc as the main file to install soon, since it directly opens the app without an IDE.
 
 Log 4/18 | 4/19: Changed all buttons' names to be more understandable, and updated exit pop-up to look better.  
+
+Log 4/26 - 4/28:  main.cpython.37.pyc is deleted, since main.py could be open with the default python IDE.  A wiki button has been added above the exit button, that opens the Cog Training wiki.  class AppInfo in main.py now creates a game log file that writes the runtime of main.py, and notes whether it is normal or slower than normal.  AppInfo also displays data of main.py, such as runtime, authors, and version # in the python terminal.  street test.dna has been removed, since it doesn't fit this project.  I will most likely upload soon for public use on r/Toontown.

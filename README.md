@@ -1,12 +1,16 @@
+
+<h1>Cog Customization v1.0.1 Beta</h1>
+
 <h1>Cog Customization</h1>
 
-![image](https://user-images.githubusercontent.com/48182689/56404892-575dd000-6237-11e9-9409-d4507fe9c5f9.png)
-<h6>v1.0 Beta Main GUI</h6>
+![image](https://user-images.githubusercontent.com/48182689/56861706-8380fb80-6971-11e9-987f-a122c1bd2423.png)
+<h6>v1.0.1 Beta</h6>
 
-**[Demo Video](https://youtu.be/6QBK82pIWAo)**
+[Demo Video](https://youtu.be/H13CPHQySiQ)
 
-This is a early project for a very basic User Interactive game using Panda3D and Python.  
+This is a early project for a very basic User Interactive game using Panda3D and Python. 
 
+This was formerly called Cog Training, but has since been changed due to another Panda3D project with the same name.
 
 **NOTE:** this is my first "real" programming project, and as such code may not be clearly readable and buggy
 
@@ -35,13 +39,12 @@ This is a early project for a very basic User Interactive game using Panda3D and
 To install
 	
 	1.	Download files from the latest release from the releases section.
-	2.	Install Panda3D-1.10-02 if not already installed, at www.panda3d.org/download
+	2.	Install Panda3D-1.10-02 if not already installed, at www.panda3d.org/download.
 	3.      Go to www.toontownrewritten.com/play, and install Toontown Rewritten.
+	4.      If not installed already, get Python 3.7 at www.python.org/downloads.
 	4.      Go to the Toontown Rewritten Folder, and copy/paste the .mf phase files into your Panda3D folder 
 		(For this project, only phase_3 through phase_5.5, and phase_9 through phase_11 files are needed). 
-	5.	Open main.cpython-37.pyc to run the application (It will open the command prompt to start). 
-		NOTE: the .pyc file may not work on your system, and if it doesn't,
-		you will have to open the program via a python IDE.
+	5.	Open main.py to run the application (It will open the command prompt to start, and start showing some code). 
 	
 <h2>Built With</h2>
 
@@ -57,20 +60,18 @@ To install
 
 *	[X] **Sequences of animations of multiple actors**
 
-*	[X] **GUI buttons with working animations/sounds**
+*	[X] **GUI buttons with working animations/sounds/functions**
 
 *  	[X] **Advanced functions that change colors, scale, load/delete models, and textures**
 
-*	[X] **Have the program run as an .exe/.pyc file**
-
-*	[ ] **Have the option to set some settings, like resolution and binds**
+*	[X] **Allow the user to access help *while* ingame or online via the wiki**
 
 
 <h2>License</h2>
 
-**This Panda3D Game and/or the author(s) are not affiliated with The Walt Disney Company and/or the Disney Interactive Media Group (collectively referred to as "Disney")**
+**This Panda3D game and/or the author(s) are not affiliated with *The Walt Disney Company* and/or the *Disney Interactive Media Group*(collectively referred to as *"Disney"*).  All textures/models used in this program are not mine, and are allowed to be publicly used and distributed, with the exceptition for profit, which isn't allowed at all.**
 
-This game can be modified to any extent, **but do not upload to anywhere if it is unmodified**.
+This game can be modified to any extent. and can be reuploaded ***if*** it is modified.
 
 Credit is not required, just have fun running/modifing the program :)
 
@@ -83,20 +84,22 @@ Main Author: Christian M Diaz
 *	GitHub UserName: **@chrisd149**
 
 * Email: **christianmigueldiaz@gmail.com**
-	* Hours M-F: 2pm - 9pm EST
-	* Hours Weekend: 11am - 1am EST
+	* Active Hours M-F: 2pm - 9pm EST
+	* Active Hours Weekend: 11am - 1am EST (Some of the time im availiable to 4am on the weekends)
 
 <h4>All questions and inquiries must be related to the project in some way, unrelated messages will be ignored</h4>
 
 <h2>Easter Eggs/Small Details</h2>
 
-*	Pressing M will stop the music
+*	Pressing M will stop the music.
 
-*	Holding M will restart the music
+*	Holding M will restart the music.
 
-*	All cog tags make the cog grunt sound effect when clicked
+*	All cog tags make the cog grunt sound effect when clicked.
 
-*	The Cold Caller has a help button that explains what to click in the main GUI panel
+*	The Cold Caller has a help button that explains what to click in the main GUI panel.
 
 *	Both cogs look around over time, and will loop through some animations as well.
+
+*	The location of Cog Training is in the Cashbot Vault.
 

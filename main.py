@@ -1,35 +1,21 @@
-import time
-# start time of main.py
-start = time.time()
-
 # Panda3D Imports
-from panda3d.core import loadPrcFileData
-from panda3d.core import loadPrcFile
-from direct.actor.Actor import Actor
-import math
-from math import pi, sin, cos
 from direct.showbase.ShowBase import ShowBase
-from direct.task import Task
 from pandac.PandaModules import *
-loadPrcFileData("", "window-title Cog Training v0.3")
-loadPrcFileData("", "win-size 1920 1080")
-from direct.interval.ActorInterval import ActorInterval
 from direct.interval.IntervalGlobal import *
-from pandac.PandaModules import WindowProperties
-from panda3d.core import CollisionTraverser, CollisionNode
-from panda3d.core import CollisionHandlerQueue, CollisionRay
-from panda3d.core import Filename, AmbientLight, DirectionalLight
-from panda3d.core import PandaNode, NodePath, Camera, TextNode
-from panda3d.core import Vec3, Vec4, BitMask32
-from direct.gui.OnscreenText import OnscreenText
+from panda3d.core import TextNode
+from panda3d.core import Vec3
 from direct.actor.Actor import Actor
-from direct.showbase.DirectObject import DirectObject
-import os
 from direct.gui.DirectGui import *
-from direct.gui import DirectGuiGlobals as DGG
 import datetime
 import sys
+import webbrowser
+import time
+loadPrcFileData("", "window-title Cog Training v1.1")
+loadPrcFileData("", "win-size 1920 1080")
+loadPrcFileData("", "show-frame-rate-meter True")
 
+# start time of main.py
+start = time.time()
 """"""
 
 """Character customization of Big Cheese"""
@@ -57,22 +43,26 @@ class MyApp(ShowBase):
                 self.hat_button_label = OnscreenText(text='Hats',
                                                      pos=(-.05, .225, 1),
                                                      scale=.05,
-                                                     font=self.font_1
+                                                     font=self.font_1,
+                                                     bg=(0, 255, 0, .1)
                                                      )
                 self.scale_button_label = OnscreenText(text='Scale',
                                                        pos=(-.475, .225, 1),
                                                        scale=.05,
-                                                       font=self.font_1
+                                                       font=self.font_1,
+                                                       bg=(255, 0, 255, .1)
                                                        )
                 self.color_button_label = OnscreenText(text='Color',
                                                        pos=(-.05, .46, 1),
                                                        scale=.05,
-                                                       font=self.font_1
+                                                       font=self.font_1,
+                                                       bg=(255, 0, 0, .1)
                                                        )
                 self.texture_button_label = OnscreenText(text='Texture',
                                                          pos=(-.475, .46, 1),
                                                          scale=.05,
-                                                         font=self.font_1
+                                                         font=self.font_1,
+                                                         bg=(0, 0, 255, .1)
                                                          )
 
         # music
@@ -94,6 +84,13 @@ class MyApp(ShowBase):
                 # self.cog_1.loop('Stand')
                 self.cog_1.reparentTo(self.render)
                 self.cog_1.setBlend(frameBlend=True)
+
+                # cog_1 shadow
+                self.cogshadow_1 = self.loader.loadModel('phase_3/models/props/drop_shadow.bam')
+                self.cogshadow_1.reparentTo(self.cog_1.find('**/joint_shadow'))
+                self.cogshadow_1.setScale(.5)
+                self.cogshadow_1.setColor(0, 0, 0, .5)
+                self.cogshadow_1.setBin('fixed', 0, 1)
 
                 # cog head
                 self.coghead_1 = self.loader.loadModel('phase_4\models\char\suitA-heads.bam').find('**/bigcheese')
@@ -246,7 +243,7 @@ class MyApp(ShowBase):
                                                  align=TextNode.A_left,
                                                  )
 
-                self.screentext_3 = OnscreenText(text='Current Version: v1.0-beta',
+                self.screentext_3 = OnscreenText(text='Current Version: v1.0.1-beta',
                                                  pos=(-1.75, .8),
                                                  font=self.font_1,
                                                  fg=(255, 255, 255, 1),
@@ -334,19 +331,26 @@ class MyApp(ShowBase):
                 # textbox
                 self.entry = DirectEntry(text='',
                                          scale=.05,
-                                         command=self.textbox_bg.setText(),
-                                         initialText='You can type here.  It will not affect anything.',
+                                         command=self.setText,
+                                         initialText='',
                                          numLines=10,
                                          focus=1,
-                                         focusInCommand=self.textbox_bg.clearText(),
                                          parent=self.aspect2d,
-                                         pos=(1.45, .1, .8),
+                                         pos=(1.45, .05, .7),
                                          entryFont=self.font_1,
                                          relief=None,
                                          clickSound=self.click,
                                          rolloverSound=self.roll_over,
                                          text_align=TextNode.ACenter
                                          )
+
+                self.entry_title = OnscreenText(text='Type here, then press Enter to delete the text.',
+                                                wordwrap=12,
+                                                pos=(1.45, .825, 1),
+                                                bg=(255, 255, 0, .25),
+                                                scale=.0475,
+                                                font=self.font_1
+                                                )
 
                 # cog_1 tag
                 self.cogtag_1 = DirectButton(text='Big Cheese    lvl 12',
@@ -408,7 +412,8 @@ class MyApp(ShowBase):
                                                 image=self.img_1,
                                                 image_scale=(.25, .09, .09),
                                                 image_pos=(-.175, 0, .19),
-                                                command=self.add_hat1
+                                                command=self.add_hat1,
+
                                                 )
 
                 self.des_text_button = DirectButton(text=('Delete Top-left text.', 'Loading...',
@@ -471,8 +476,8 @@ class MyApp(ShowBase):
                                                       rolloverSound=self.roll_over,
                                                       textMayChange=1,
                                                       image=self.img_1,
-                                                      image_scale=(.25, .09, .09),
-                                                      image_pos=(1.25, 0, -.75),
+                                                      image_scale=(.20, .09, .09),
+                                                      image_pos=(1.275, 0, -.75),
                                                       command=self.exit_popup
                                                       )
 
@@ -502,6 +507,34 @@ class MyApp(ShowBase):
                                                 image_pos=(-1.1, 0, .5),
                                                 command=self.help_box
                                                 )
+
+                self.wiki_button = DirectButton(text=('Official Wiki', 'Loading...', 'Go to Wiki', ''),
+                                                text_scale=.05,
+                                                text_font=self.font_1,
+                                                text_pos=(1.375, -.65, -.45),
+                                                pressEffect=1,
+                                                geom_scale=(1, 6, 1),
+                                                relief=None,
+                                                clickSound=self.click,
+                                                rolloverSound=self.roll_over,
+                                                textMayChange=1,
+                                                image=self.img_1,
+                                                image_scale=(.25, .09, .09),
+                                                image_pos=(1.25, 0, -.585),
+                                                command=self.github_link
+                                                )
+
+        def github_link(self):
+                webbrowser.open('http://github.com/chrisd149/Cog-Training/wiki/')
+
+        def setText(self, textEntered):
+                self.textbox_bg.setText(textEntered)
+                self.textbox_bg.destroy()
+                del self.textbox_bg
+                self.entry.destroy()
+                del self.entry
+                self.entry_title.destroy()
+                del self.entry_title
 
         # func to destroy onscreentext objects
         def screen_text_destroy(self):
@@ -1035,18 +1068,30 @@ class AppInfo:
                                 'Version: {} | ' \
                                 'Script Time: {} seconds'\
                                 .format(devs, ver, tim)
+                self.total_time = 'Runtime: {} seconds'.format(tim)
 
 
 # end time of main.py
 end = time.time()
 elapsed_time = (end - start)
 
-data = AppInfo('Christian Diaz', 'v1.0 Beta', elapsed_time)
+data = AppInfo('Christian Diaz', 'v1.0.1 Beta', elapsed_time)
 
-print('GitHub Link: https://github.com/chrisd149/Cog-Training')
-print(data.app_data)
 print('Thanks for playing!')
+print('GitHub Link: https://github.com/chrisd149/Cog-Customization')
+print(data.app_data)
 
+# creates a game log file if it already isn't made
+f = open("game_log.txt", "w+")
+
+f.write(str(data.total_time))
+
+if elapsed_time < 1:
+        f.write("   |   The program is running under a second, which is good.")
+elif elapsed_time > 1 < 1.5:
+        f.write("   |   The program is running slower than normal, but isn't significantly affecting performance.")
+elif elapsed_time > 2:
+        f.write("   |   The program is running very slow, try restarting your computer to decrease run time.")
 
 app = MyApp()
 app.run()
