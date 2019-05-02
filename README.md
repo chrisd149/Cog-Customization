@@ -5,8 +5,9 @@
 
 **[Demo Video](https://youtu.be/H13CPHQySiQ)**
 
-This is a early project for a very basic User Interactive game using Panda3D and Python.  
+This is a early project for a very basic User Interactive game using Panda3D and Python. 
 
+This was formerly called Cog Training, but has since been changed due to another Panda3D project with the same name.
 
 **NOTE:** this is my first "real" programming project, and as such code may not be clearly readable and buggy
 
