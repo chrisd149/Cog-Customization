@@ -98,5 +98,5 @@ Main Author: Christian M Diaz
 
 *	Both cogs look around over time, and will loop through some animations as well.
 
-*	The location of Cog Training is in the Cashbot Vault.
+*	The location of Cog Customization is in the Cashbot Vault from Toontown.
 
