@@ -36,9 +36,9 @@ This was formerly called Cog Training, but has since been changed due to another
 To install
 	
 	1.	Download files from the latest release from the releases section.
-	2.	Install Panda3D-1.10-02 if not already installed, at www.panda3d.org/download.
+	2.	Install and configure Panda3D-1.10-02 if not already installed, at www.panda3d.org/download.
 	3.      Go to www.toontownrewritten.com/play, and install Toontown Rewritten.
-	4.      If not installed already, get Python 3.7 at www.python.org/downloads.
+	4.      If not installed already, get Python 3.7 at www.python.org/downloads, and properly configure it.
 	4.      Go to the Toontown Rewritten Folder, and copy/paste the .mf phase files into your Panda3D folder 
 		(For this project, only phase_3 through phase_5.5, and phase_9 through phase_11 files are needed). 
 	5.	Open main.py to run the application (It will open the command prompt to start, and start showing some code). 
@@ -59,7 +59,7 @@ To install
 
 *	[X] **GUI buttons with working animations/sounds/functions**
 
-*  	[X] **Advanced functions that change colors, scale, load/delete models, and textures**
+*  	[X] **Functions that change colors, scale, load/delete models, and textures**
 
 *	[X] **Allow the user to access help *while* ingame or online via the wiki**
 
@@ -81,7 +81,7 @@ Main Author: Christian M Diaz
 *	GitHub UserName: **@chrisd149**
 
 * Email: **christianmigueldiaz@gmail.com**
-	* Active Hours M-F: 2pm - 9pm EST
+	* Active Hours M-F: 3pm - 9pm EST
 	* Active Hours Weekend: 11am - 1am EST (Some of the time im availiable to 4am on the weekends)
 
 <h4>All questions and inquiries must be related to the project in some way, unrelated messages will be ignored</h4>
