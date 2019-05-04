@@ -1,3 +1,7 @@
+# start time of main.py
+import time
+start = time.time()
+
 # Panda3D Imports
 from direct.showbase.ShowBase import ShowBase
 from pandac.PandaModules import *
@@ -10,12 +14,13 @@ import datetime
 import sys
 import webbrowser
 import time
-loadPrcFileData("", "window-title Cog Training v1.1")
+
+
+loadPrcFileData("", "window-title Cog Training v1.0.2")
 loadPrcFileData("", "win-size 1920 1080")
 loadPrcFileData("", "show-frame-rate-meter True")
 
-# start time of main.py
-start = time.time()
+
 """"""
 
 """Character customization of Big Cheese"""
@@ -243,7 +248,7 @@ class MyApp(ShowBase):
                                                  align=TextNode.A_left,
                                                  )
 
-                self.screentext_3 = OnscreenText(text='Current Version: v1.0.1-beta',
+                self.screentext_3 = OnscreenText(text='Current Version: v1.0.2-beta',
                                                  pos=(-1.75, .8),
                                                  font=self.font_1,
                                                  fg=(255, 255, 255, 1),
@@ -299,13 +304,12 @@ class MyApp(ShowBase):
                 self.click.setVolume(.75)
 
                 self.roll_over = self.loader.loadSfx('phase_3/audio\sfx\GUI_rollover.ogg')
-                self.roll_over.setVolume(1)
 
                 self.grunt = self.loader.loadSfx('phase_3.5/audio\dial\COG_VO_grunt.ogg')
 
                 self.img_1 = self.loader.loadModel('phase_3\models\gui\ChatPanel.bam')
                 self.img_2 = self.loader.loadModel('phase_3.5\models\gui\QT_buttons.bam')
-                self.img_3 = self.loader.loadModel('phase_3.5\models\gui\QT_buttons.bam')
+
 
                 self.gui_image = self.loader.loadModel('phase_3\models\gui\dialog_box_gui.bam')
 
@@ -953,7 +957,7 @@ class MyApp(ShowBase):
                                                     clickSound=self.click,
                                                     rolloverSound=self.roll_over,
                                                     textMayChange=1,
-                                                    image=self.img_3,
+                                                    image=self.img_2,
                                                     image_scale=(.075, .075, .075),
                                                     image_pos=(.8, 0, .65),
                                                     command=self.destroy_helpbox
@@ -1075,25 +1079,24 @@ class AppInfo:
 end = time.time()
 elapsed_time = (end - start)
 
-data = AppInfo('Christian Diaz', 'v1.0.1 Beta', elapsed_time)
+data = AppInfo('Christian Diaz', 'v1.0.2 Beta', elapsed_time)
 
-print('Thanks for playing!')
 print('GitHub Link: https://github.com/chrisd149/Cog-Customization')
 print(data.app_data)
+print('Thanks for playing!')
 
 # creates a game log file if it already isn't made
-f = open("game_log.txt", "w+")
+log = open("game_log.txt", "w+")
 
-f.write(str(data.total_time))
+log.write(str(data.total_time))
 
 if elapsed_time < 1:
-        f.write("   |   The program is running under a second, which is good.")
+        log.write("   |   The program is running under a second, which is good.")
 elif elapsed_time > 1 < 1.5:
-        f.write("   |   The program is running slower than normal, but isn't significantly affecting performance.")
+        log.write("   |   The program is running slower than normal, but isn't significantly affecting performance.")
 elif elapsed_time > 2:
-        f.write("   |   The program is running very slow, try restarting your computer to decrease run time.")
+        log.write("   |   The program is running very slow, try restarting your computer to decrease run time.")
+
 
 app = MyApp()
 app.run()
-
-
