@@ -1,7 +1,7 @@
-<h1>Cog Customization v1.0.1 Beta</h1>
+<h1>Cog Customization v1.0.2 Beta</h1>
 
 ![image](https://user-images.githubusercontent.com/48182689/56861706-8380fb80-6971-11e9-987f-a122c1bd2423.png)
-<h6>v1.0.1 Beta</h6>
+<h6>v1.0.2 Beta</h6>
 
 [Demo Video](https://youtu.be/H13CPHQySiQ)
 
@@ -25,7 +25,7 @@ This was formerly called Cog Training, but has since been changed due to another
 
 <h3>Software Info</h3>
 
-*	**Engine**: ***Panda3D-1.10***
+*	**Engine**: ***Panda3D-1.10.2***
 
 *	**Programming Language**: ***Python 3.7***
 
