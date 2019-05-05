@@ -1,7 +1,7 @@
-<h1>Cog Customization v1.0.1 Beta</h1>
+<h1>Cog Customization v1.0.2 Beta</h1>
 
 ![image](https://user-images.githubusercontent.com/48182689/56861706-8380fb80-6971-11e9-987f-a122c1bd2423.png)
-<h6>v1.0.1 Beta</h6>
+<h6>v1.0.2 Beta</h6>
 
 [Demo Video](https://youtu.be/H13CPHQySiQ)
 
@@ -25,7 +25,7 @@ This was formerly called Cog Training, but has since been changed due to another
 
 <h3>Software Info</h3>
 
-*	**Engine**: ***Panda3D-1.10***
+*	**Engine**: ***Panda3D-1.10.2***
 
 *	**Programming Language**: ***Python 3.7***
 
@@ -36,9 +36,9 @@ This was formerly called Cog Training, but has since been changed due to another
 To install
 	
 	1.	Download files from the latest release from the releases section.
-	2.	Install Panda3D-1.10-02 if not already installed, at www.panda3d.org/download.
+	2.	Install and configure Panda3D-1.10-02 if not already installed, at www.panda3d.org/download.
 	3.      Go to www.toontownrewritten.com/play, and install Toontown Rewritten.
-	4.      If not installed already, get Python 3.7 at www.python.org/downloads.
+	4.      If not installed already, get Python 3.7 at www.python.org/downloads, and properly configure it.
 	4.      Go to the Toontown Rewritten Folder, and copy/paste the .mf phase files into your Panda3D folder 
 		(For this project, only phase_3 through phase_5.5, and phase_9 through phase_11 files are needed). 
 	5.	Open main.py to run the application (It will open the command prompt to start, and start showing some code). 
@@ -59,7 +59,7 @@ To install
 
 *	[X] **GUI buttons with working animations/sounds/functions**
 
-*  	[X] **Advanced functions that change colors, scale, load/delete models, and textures**
+*  	[X] **Functions that change colors, scale, load/delete models, and textures**
 
 *	[X] **Allow the user to access help *while* ingame or online via the wiki**
 
@@ -81,7 +81,7 @@ Main Author: Christian M Diaz
 *	GitHub UserName: **@chrisd149**
 
 * Email: **christianmigueldiaz@gmail.com**
-	* Active Hours M-F: 2pm - 9pm EST
+	* Active Hours M-F: 3pm - 9pm EST
 	* Active Hours Weekend: 11am - 1am EST (Some of the time im availiable to 4am on the weekends)
 
 <h4>All questions and inquiries must be related to the project in some way, unrelated messages will be ignored</h4>
@@ -98,5 +98,5 @@ Main Author: Christian M Diaz
 
 *	Both cogs look around over time, and will loop through some animations as well.
 
-*	The location of Cog Training is in the Cashbot Vault.
+*	The location of Cog Customization is in the Cashbot Vault from Toontown.
 
