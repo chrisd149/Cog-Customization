@@ -13,4 +13,8 @@ Log 4/15 - 4/18: Added a button to change textures, updated the exit pop up to b
 
 Log 4/18 | 4/19: Changed all buttons' names to be more understandable, and updated exit pop-up to look better.  
 
-Log 4/26 - 4/28:  main.cpython.37.pyc is deleted, since main.py could be open with the default python IDE.  A wiki button has been added above the exit button, that opens the Cog Training wiki.  class AppInfo in main.py now creates a game log file that writes the runtime of main.py, and notes whether it is normal or slower than normal.  AppInfo also displays data of main.py, such as runtime, authors, and version # in the python terminal.  street test.dna has been removed, since it doesn't fit this project.  I will most likely upload soon for public use on r/Toontown.
+Log 4/26 - 4/28:  main.cpython.37.pyc is deleted, since main.py could be open with the default python IDE.  A wiki button has been added above the exit button, that opens the Cog Training wiki.  class AppInfo in main.py now creates a game log file that writes the runtime of main.py, and notes whether it is normal or slower than normal.  AppInfo also displays data of main.py, such as runtime, authors, and version # in the python terminal. 
+
+---------------------------------------------------------------
+
+Log 5/16/19: main.py has been updated to have better function/varriable names, and comments have been updated to be more clearer.  Code is much clearer, and a most of the code has been changed to follow conventional naming schematics for Python.
