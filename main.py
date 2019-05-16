@@ -16,7 +16,7 @@ import webbrowser
 import time
 
 
-loadPrcFileData("", "window-title Cog Training v1.0.2")
+loadPrcFileData("", "window-title Cog Training v1.0.3")
 loadPrcFileData("", "win-size 1920 1080")
 loadPrcFileData("", "show-frame-rate-meter True")
 
@@ -248,7 +248,7 @@ class MyApp(ShowBase):
                                                  align=TextNode.A_left,
                                                  )
 
-                self.screentext_3 = OnscreenText(text='Current Version: v1.0.2-beta',
+                self.screentext_3 = OnscreenText(text='Current Version: v1.0.3-beta',
                                                  pos=(-1.75, .8),
                                                  font=self.font1,
                                                  fg=(255, 255, 255, 1),
@@ -335,7 +335,7 @@ class MyApp(ShowBase):
                 # textbox
                 self.entry = DirectEntry(text='',
                                          scale=.05,
-                                         command=self.setText,
+                                         command=self.set_text,
                                          initialText='',
                                          numLines=10,
                                          focus=1,
@@ -357,7 +357,7 @@ class MyApp(ShowBase):
                                                 )
 
                 # cog_1 tag
-                self.cog_tag1 = DirectButton(text='Big Cheese    lvl 12',
+                self.cog_tag1 = DirectButton(text='Big Cheese    Level 12',
                                              text_wordwrap=7.5,
                                              parent=self.aspect2d,
                                              pos=(.565, .45, .475),
@@ -372,7 +372,7 @@ class MyApp(ShowBase):
                                              )
 
                 # cog_2 tag
-                self.cog_tag2 = DirectButton(text='Cold Caller          lvl 5',
+                self.cog_tag2 = DirectButton(text='Cold Caller          Level 5',
                                              text_wordwrap=8,
                                              parent=self.aspect2d,
                                              pos=(-1.225, .45, .425),
@@ -415,7 +415,7 @@ class MyApp(ShowBase):
                                                 image=self.img1,
                                                 image_scale=(.25, .09, .09),
                                                 image_pos=(-.175, 0, .19),
-                                                command=self.add_hat1,
+                                                command=self.destroy_hat1,
 
                                                 )
 
@@ -527,10 +527,11 @@ class MyApp(ShowBase):
                                                 command=self.github_link
                                                 )
 
-        def github_link(self):
+        @staticmethod
+        def github_link():
                 webbrowser.open('http://github.com/chrisd149/Cog-Training/wiki/help')
 
-        def setText(self, textEntered):
+        def set_text(self, textEntered):
                 self.textbox_bg.setText(textEntered)
                 self.textbox_bg.destroy()
                 del self.textbox_bg
@@ -539,7 +540,7 @@ class MyApp(ShowBase):
                 self.entry_title.destroy()
                 del self.entry_title
 
-        # func to destroy onscreentext objects
+        # Destroys Onscreentext objects
         def screen_text_destroy(self):
                 self.screentext_1.removeNode()
                 del self.screentext_1
@@ -582,8 +583,8 @@ class MyApp(ShowBase):
                 self.info_button.destroy()
                 del self.info_button
 
-        # func to add hat
-        def add_hat1(self):
+        # destroys hat1
+        def destroy_hat1(self):
                 self.hat1.removeNode()
                 del self.hat1
                 self.hat2 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_band.bam')
@@ -605,11 +606,11 @@ class MyApp(ShowBase):
                                                 image_scale=(.3, .09, .09),
                                                 image_pos=(-.2, 0, .19),
                                                 textMayChange=1,
-                                                command=self.add_hat2
+                                                command=self.destroy_hat2
                                                 )
 
-        # func to add hat
-        def add_hat2(self):
+        # destroys hat2
+        def destroy_hat2(self):
                 self.hat2.removeNode()
                 del self.hat2
                 self.hat3 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_cowboyHat.bam')
@@ -631,11 +632,11 @@ class MyApp(ShowBase):
                                                 image=self.img1,
                                                 image_scale=(.25, .09, .09),
                                                 image_pos=(-.175, 0, .19),
-                                                command=self.add_hat3
+                                                command=self.destroy_hat3
                                                 )
 
-        # func to add hat
-        def add_hat3(self):
+        # destroys hat3
+        def destroy_hat3(self):
                 self.hat3.removeNode()
                 del self.hat3
                 self.hat1 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_fez.bam')
@@ -657,10 +658,10 @@ class MyApp(ShowBase):
                                                 image=self.img1,
                                                 image_scale=(.25, .09, .09),
                                                 image_pos=(-.175, 0, .19),
-                                                command=self.add_hat1
+                                                command=self.destroy_hat1
                                                 )
 
-        # functions that change scale of cog_1
+        # shrinks cog to .5
         def decrease_scale(self):
 
                 cog1_scale1 = self.cog1.scaleInterval(.25, Point3(.5, .5, .5))
@@ -692,6 +693,7 @@ class MyApp(ShowBase):
                                                      command=self.increase_scale
                                                      )
 
+        # returns scale to normal
         def increase_scale(self):
                 cog1_scale2 = self.cog1.scaleInterval(.25, Point3(1, 1, 1))
                 cog_tag1_scale2 = self.cog_tag1.scaleInterval(.25, Point3(1, 1, 1))
@@ -721,7 +723,7 @@ class MyApp(ShowBase):
                                                       )
 
         # glove color functions
-        # purple
+        # purple color
         def change_color_purple(self):
                 self.cog1.find("**/hands").setColor(255, 0, 255)
                 self.white_button.destroy()
@@ -743,7 +745,7 @@ class MyApp(ShowBase):
                                                   command=self.change_color_yellow
                                                   )
 
-        # yellow
+        # yellow color
         def change_color_yellow(self):
                 self.cog1.find("**/hands").setColor(255, 255, 0)
                 self.purple_button.destroy()
@@ -765,7 +767,7 @@ class MyApp(ShowBase):
                                                   command=self.change_color_cyan
                                                   )
 
-        # cyan
+        # cyan color
         def change_color_cyan(self):
                 self.cog1.find("**/hands").setColor(0, 255, 255)
                 self.yellow_button.destroy()
@@ -787,7 +789,7 @@ class MyApp(ShowBase):
                                                 command=self.change_color_white
                                                 )
 
-        # white
+        # white color
         def change_color_white(self):
                 self.cog1.find("**/hands").setColor(255, 255, 255)
                 self.cyan_button.destroy()
@@ -808,8 +810,9 @@ class MyApp(ShowBase):
                                                  image_pos=(-.175, 0, .425),
                                                  command=self.change_color_purple
                                                  )
+
         # texture functions
-        # cashbot
+        # cashbot text
         def cash_texture(self):
                 self.cog_torso1 = self.loader.loadTexture('phase_3.5\maps\m_blazer.jpg')
                 self.cog1.find('**/torso').setTexture(self.cog_torso1, 1)
@@ -839,7 +842,7 @@ class MyApp(ShowBase):
                                                    command=self.law_texture
                                                    )
 
-        # lawbot
+        # lawbot text
         def law_texture(self):
                 self.cog_torso1 = self.loader.loadTexture('phase_3.5\maps\l_blazer.jpg')
                 self.cog1.find('**/torso').setTexture(self.cog_torso1, 1)
@@ -868,7 +871,8 @@ class MyApp(ShowBase):
                                                   image_pos=(-.6, 0, .425),
                                                   command=self.sell_texture
                                                   )
-        # sellbot
+
+        # sellbot text
         def sell_texture(self):
                 self.cog_torso1 = self.loader.loadTexture('phase_3.5\maps\s_blazer.jpg')
                 self.cog1.find('**/torso').setTexture(self.cog_torso1, 1)
@@ -898,7 +902,7 @@ class MyApp(ShowBase):
                                                    command=self.boss_texture
                                                    )
 
-        # bossbot
+        # bossbot text
         def boss_texture(self):
                 self.cog_torso_1 = self.loader.loadTexture('phase_3.5\maps\c_blazer.jpg')
                 self.cog1.find('**/torso').setTexture(self.cog_torso1, 1)
@@ -928,7 +932,7 @@ class MyApp(ShowBase):
                                                    command=self.cash_texture
                                                    )
 
-        # help box
+        # spawns the help box
         def help_box(self):
                 self.help_button.destroy()
                 del self.help_button
@@ -959,10 +963,11 @@ class MyApp(ShowBase):
                                                     image=self.img2,
                                                     image_scale=(.075, .075, .075),
                                                     image_pos=(.8, 0, .65),
-                                                    command=self.destroy_helpbox
+                                                    command=self.destroy_help_box
                                                     )
 
-        def destroy_helpbox(self):
+        # destroys the help box
+        def destroy_help_box(self):
                 self.help_panel.destroy()
                 del self.help_panel
                 self.des_help_button.destroy()
@@ -979,7 +984,7 @@ class MyApp(ShowBase):
                                                 command=self.help_box
                                                 )
 
-        # exit function
+        # spawns the exit popup
         def exit_popup(self):
                 self.exit_popup_button.destroy()
                 del self.exit_popup_button
@@ -1026,11 +1031,12 @@ class MyApp(ShowBase):
                                                      image_pos=(2.5, 0, -3),
                                                      clickSound=self.click_sound,
                                                      rolloverSound=self.rollover_sound,
-                                                     command=self.close_exit,
+                                                     command=self.destroy_exit_popup,
                                                      text_font=self.font1
                                                      )
 
-        def close_exit(self):
+        # destroys exit popup
+        def destroy_exit_popup(self):
                 self.warning_text.destroy()
                 del self.warning_text
                 self.exit_panel.destroy()
@@ -1056,6 +1062,7 @@ class MyApp(ShowBase):
                                                       command=self.exit_popup
                                                       )
 
+        # func that exits program
         @staticmethod
         def exit_app():
                 sys.exit()
@@ -1078,7 +1085,7 @@ class AppInfo:
 end = time.time()
 elapsed_time = (end - start)
 
-data = AppInfo('Christian Diaz', 'v1.0.2 Beta', elapsed_time)
+data = AppInfo('Christian Diaz', 'v1.0.3 Beta', elapsed_time)
 
 print('GitHub Link: https://github.com/chrisd149/Cog-Customization')
 print(data.app_data)
