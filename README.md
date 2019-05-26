@@ -1,7 +1,7 @@
-<h1>Cog Customization v1.0.4 Beta</h1>
+<h1>Cog Customization v1.1.0 Beta</h1>
 
 ![image](https://user-images.githubusercontent.com/48182689/57187555-f7b22680-6ebe-11e9-96f2-d7cc5a7ec060.png)
-<h6>v1.0 Beta</h6>
+<h6>v1.0 Beta Image</h6>
 
 [Demo Video](https://youtu.be/H13CPHQySiQ)
 
