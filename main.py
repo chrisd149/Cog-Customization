@@ -1,11 +1,11 @@
-# This is a simple interactive Panda3D project usning Python 3.7.2
+# This is a simple interactive Panda3D project using Python 3.7.2
 # This game lets you customize a Big Cheese cog via DirectButtons and functions
-# This game uses several assets made by the Disney Interactive Media Group
+# This game uses several assets made by the Disney Interactive Media Group and Toontown Rewritten
 
 # Authors: Christian Diaz
 # Engine Build: Panda3D 1.10.2
 # Python 3.7.2
-# Cog Customization v1.0.4
+# Cog Customization v1.1.0
 
 # start time of main.py
 import time
@@ -25,9 +25,9 @@ import webbrowser
 import time
 
 # PrcFileData
-loadPrcFileData("", "window-title Cog Training v1.0.4")
-loadPrcFileData("", "win-size 1280 720")
-loadPrcFileData("", "show-frame-rate-meter True")
+loadPrcFileData("", "window-title Cog Training v1.1.0")  # titles the app
+loadPrcFileData("", "win-size 1280 720")  # makes the app run in 720p
+loadPrcFileData("", "show-frame-rate-meter True")  # displays frame rate
 
 
 class MyApp(ShowBase):
@@ -35,25 +35,24 @@ class MyApp(ShowBase):
                 ShowBase.__init__(self)
                 self.load_models()
                 self.load_cog()
-                self.load_cam()
                 self.load_gui()
                 self.animations()
                 self.screen_text()
 
                 # labels for buttons
-                self.hat_button_label = OnscreenText(text='Hats',
-                                                     pos=(-.05, .225, 1),
-                                                     scale=.05,
-                                                     font=self.font1,
-                                                     bg=(0, 255, 0, .1)
-                                                     )
+                self.accessories_button_label = OnscreenText(text='Accessories',
+                                                             pos=(-.05, .225, 1),
+                                                             scale=.05,
+                                                             font=self.font1,
+                                                             bg=(0, 255, 0, .1)
+                                                             )
                 self.scale_button_label = OnscreenText(text='Scale',
                                                        pos=(-.475, .225, 1),
                                                        scale=.05,
                                                        font=self.font1,
                                                        bg=(255, 0, 255, .1)
                                                        )
-                self.color_button_label = OnscreenText(text='Color',
+                self.color_button_label = OnscreenText(text='Glove Color',
                                                        pos=(-.05, .46, 1),
                                                        scale=.05,
                                                        font=self.font1,
@@ -66,23 +65,28 @@ class MyApp(ShowBase):
                                                          bg=(0, 0, 255, .1)
                                                          )
 
-                self.music = self.loader.loadSfx('phase_3/audio/bgm\create_a_toon.ogg')
-                self.music.setVolume(.3)
-                self.music.play()
+                self.music1 = self.loader.loadSfx('phase_3/audio/bgm\create_a_toon.ogg')
+                self.music1.setVolume(.3)
+                self.music1.play()
 
-                self.accept('m', self.music.stop)
-                self.accept('m-repeat', self.music.play)
+                self.accept('m', self.music1.stop)
+                self.accept('m-repeat', self.music1.play)
+
+                # camera settings
+                self.disable_mouse()
+                self.camera.reparentTo(self.render)
+                self.camera.setPosHpr((90, 0, 75), (80, 180, -180))
 
         # cogs/goons/bosses
         def load_cog(self):
                 # cog_1 actor
                 self.cog1 = Actor('phase_3.5\models\char\suitA-mod.bam',
-                                   {'Flail': 'phase_4\models\char\suitA-flailing.bam',
-                                    'Stand': 'phase_4\models\char\suitA-neutral.bam',
-                                    'Walk': 'phase_4\models\char\suitA-walk.bam',
-                                    'Golf': 'phase_5\models\char\suitA-golf-club-swing.bam',
-                                    'Victory': 'phase_4\models\char\suitA-victory.bam'}
-                                   )
+                                  {'Flail': 'phase_4\models\char\suitA-flailing.bam',
+                                   'Stand': 'phase_4\models\char\suitA-neutral.bam',
+                                   'Walk': 'phase_4\models\char\suitA-walk.bam',
+                                   'Golf': 'phase_5\models\char\suitA-golf-club-swing.bam',
+                                   'Victory': 'phase_4\models\char\suitA-victory.bam'}
+                                  )
 
                 self.cog1.reparentTo(self.render)
                 self.cog1.setBlend(frameBlend=True)  # smooths frames
@@ -109,7 +113,7 @@ class MyApp(ShowBase):
 
                 # cog_2 actor
                 self.cog2 = Actor('phase_3.5\models\char\suitC-mod.bam',
-                                   {'Sit': 'phase_11\models\char\suitC-sit.bam'})
+                                  {'Sit': 'phase_11\models\char\suitC-sit.bam'})
                 self.cog2.loop('Sit')
                 self.cog2.reparentTo(self.chair)
                 self.cog2.setBlend(frameBlend=True)  # smooths frames
@@ -222,73 +226,68 @@ class MyApp(ShowBase):
                 )
                 pace3.loop()
 
-        # camera settings
-        def load_cam(self):
-                self.disable_mouse()
-                self.camera.reparentTo(self.render)
-                self.camera.setPosHpr((90, 0, 75), (80, 180, -180))
-
+        # loads OnscreenText
         def screen_text(self):
                 self.screentext1 = OnscreenText(text='Author: Christian Diaz',
-                                                 pos=(-1.75, .95),
-                                                 font=self.font1,
-                                                 fg=(255, 255, 255, 1),
-                                                 scale=.05,
-                                                 align=TextNode.A_left,
-                                                 )
+                                                pos=(-1.75, .95),
+                                                font=self.font1,
+                                                fg=(255, 255, 255, 1),
+                                                scale=.05,
+                                                align=TextNode.A_left,
+                                                )
 
                 self.screentext2 = OnscreenText(text='Engine Build: Panda3D 1.10.2',
-                                                 pos=(-1.75, .875),
-                                                 font=self.font1,
-                                                 fg=(255, 255, 255, 1),
-                                                 scale=.05,
-                                                 align=TextNode.A_left,
-                                                 )
+                                                pos=(-1.75, .875),
+                                                font=self.font1,
+                                                fg=(255, 255, 255, 1),
+                                                scale=.05,
+                                                align=TextNode.A_left,
+                                                )
 
                 self.screentext3 = OnscreenText(text='Current Version: v1.0.4-beta',
-                                                 pos=(-1.75, .8),
-                                                 font=self.font1,
-                                                 fg=(255, 255, 255, 1),
-                                                 scale=.05,
-                                                 align=TextNode.A_left,
-                                                 )
+                                                pos=(-1.75, .8),
+                                                font=self.font1,
+                                                fg=(255, 255, 255, 1),
+                                                scale=.05,
+                                                align=TextNode.A_left,
+                                                )
 
                 self.screentext4 = OnscreenText(text='Current Time: ',
-                                                 pos=(-1.75, .65),
-                                                 font=self.font1,
-                                                 fg=(255, 255, 255, 1),
-                                                 scale=.05,
-                                                 align=TextNode.A_left,
-                                                 )
+                                                pos=(-1.75, .65),
+                                                font=self.font1,
+                                                fg=(255, 255, 255, 1),
+                                                scale=.05,
+                                                align=TextNode.A_left,
+                                                )
 
                 self.screentext5 = OnscreenText(text=(str(self.time_now)),
-                                                 pos=(-1.45, .65),
-                                                 font=self.font1,
-                                                 fg=(255, 255, 255, 1),
-                                                 scale=.05,
-                                                 align=TextNode.A_left,
-                                                 )
+                                                pos=(-1.45, .65),
+                                                font=self.font1,
+                                                fg=(255, 255, 255, 1),
+                                                scale=.05,
+                                                align=TextNode.A_left,
+                                                )
 
                 self.screentext6 = OnscreenText(text='Contact: christianmigueldiaz@gmail.com',
-                                                 pos=(-1.75, .725),
-                                                 font=self.font1,
-                                                 fg=(255, 255, 255, 1),
-                                                 scale=.05,
-                                                 align=TextNode.A_left,
-                                                 )
+                                                pos=(-1.75, .725),
+                                                font=self.font1,
+                                                fg=(255, 255, 255, 1),
+                                                scale=.05,
+                                                align=TextNode.A_left,
+                                                )
 
                 self.screentext7 = OnscreenText(text='Contact: christianmigueldiaz@gmail.com',
-                                                 pos=(-1.75, .725),
-                                                 font=self.font1,
-                                                 fg=(255, 255, 255, 1),
-                                                 scale=.05,
-                                                 align=TextNode.A_left,
-                                                 )
+                                                pos=(-1.75, .725),
+                                                font=self.font1,
+                                                fg=(255, 255, 255, 1),
+                                                scale=.05,
+                                                align=TextNode.A_left,
+                                                )
 
                 self.info_frame = DirectFrame(frameSize=(-1.85, -.85, .6, 1),
                                               frameColor=(254, 255, 255, 0.1))
 
-        # GUI settings
+        # gui
         def load_gui(self):
                 # gui audio & images files
                 self.chat_box = self.loader.loadModel \
@@ -299,10 +298,12 @@ class MyApp(ShowBase):
                 self.font2 = self.loader.loadFont('CogFont.ttf')
 
                 # sound effects
-                self.click_sound = self.loader.loadSfx('phase_3/audio\sfx\GUI_create_toon_fwd.ogg')  # click sound effect
+                self.click_sound = self.loader.loadSfx(
+                        'phase_3/audio\sfx\GUI_create_toon_fwd.ogg')  # click sound effect
                 self.click_sound.setVolume(.75)
-                self.rollover_sound = self.loader.loadSfx('phase_3/audio\sfx\GUI_rollover.ogg') # rollover sound effect
-                self.grunt_sound = self.loader.loadSfx('phase_3.5/audio\dial\COG_VO_grunt.ogg')  # cog grunt sound effect
+                self.rollover_sound = self.loader.loadSfx('phase_3/audio\sfx\GUI_rollover.ogg')  # rollover sound effect
+                self.grunt_sound = self.loader.loadSfx(
+                        'phase_3.5/audio\dial\COG_VO_grunt.ogg')  # cog grunt sound effect
 
                 self.img1 = self.loader.loadModel('phase_3\models\gui\ChatPanel.bam')  # img used for buttons
                 self.img2 = self.loader.loadModel('phase_3.5\models\gui\QT_buttons.bam')  # img used for help box button
@@ -382,19 +383,19 @@ class MyApp(ShowBase):
                                              )
 
                 # main gui panel
-                self.guipanel = DirectLabel(parent=self.render,
-                                            text_wordwrap=10,
-                                            relief=None,
-                                            text_scale=.5,
-                                            pos=(0, 0, 0),
-                                            hpr=(0, 0, 0),
-                                            image=self.gui_image,
-                                            image_pos=(130, -4, 78),
-                                            image_scale=(10, 5, 5),
-                                            image_hpr=(85, 0, 0),
-                                            textMayChange=1,
-                                            text_font=self.font1
-                                            )
+                self.gui_panel = DirectLabel(parent=self.render,
+                                             text_wordwrap=10,
+                                             relief=None,
+                                             text_scale=.5,
+                                             pos=(0, 0, 0),
+                                             hpr=(0, 0, 0),
+                                             image=self.gui_image,
+                                             image_pos=(130, -4, 78),
+                                             image_scale=(10, 5, 5),
+                                             image_hpr=(85, 0, 0),
+                                             textMayChange=1,
+                                             text_font=self.font1
+                                             )
 
                 # gui buttons
                 self.hat1_button = DirectButton(text=('Fez', 'Loading...', 'Change Hat', ''),
@@ -416,7 +417,7 @@ class MyApp(ShowBase):
 
                 # button that destroys OnScreenText
                 self.des_text_button = DirectButton(text=('Delete Top-left text.', 'Loading...',
-                                                    'This will delete the top-left text.', ''),
+                                                          'This will delete the top-left text.', ''),
                                                     text_scale=.05,
                                                     text_font=self.font1,
                                                     text_pos=(-.625, .925),
@@ -481,7 +482,7 @@ class MyApp(ShowBase):
                                                    image_pos=(-.6, 0, .425),
                                                    command=self.cash_texture
                                                    )
-                
+
                 # opens exit popup
                 self.exit_popup_button = DirectButton(text=('Exit', 'Loading...', 'Exit App', ''),
                                                       text_scale=.05,
@@ -511,7 +512,7 @@ class MyApp(ShowBase):
                                                 command=self.help_box
                                                 )
 
-                # opens wiki sit for this project
+                # opens the wiki for this project
                 self.wiki_button = DirectButton(text=('Official Wiki', 'Loading...', 'Go to Wiki', ''),
                                                 text_scale=.05,
                                                 text_font=self.font1,
@@ -542,7 +543,7 @@ class MyApp(ShowBase):
                 self.entry_title.destroy()
                 del self.entry_title
 
-        # Destroys Onscreentext objects
+        # destroys Onscreentext objects
         def screen_text_destroy(self):
                 self.screentext1.removeNode()
                 del self.screentext1
@@ -590,11 +591,12 @@ class MyApp(ShowBase):
         def destroy_hat1(self):
                 self.hat1.removeNode()
                 del self.hat1
+                self.hat1_button.destroy()
+                del self.hat1_button
+
                 self.hat2 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_band.bam')
                 self.hat2.setPosHprScale((0, -0.1, 1.5), (180, 0, 0), (.25, .25, .25))
                 self.hat2.reparentTo(self.cog_head1)
-                self.hat1_button.destroy()
-                del self.hat1_button
 
                 self.hat2_button = DirectButton(text=('Grand Band Hat', 'Loading...', 'Change Hat', ''),
                                                 text_scale=.05,
@@ -616,11 +618,12 @@ class MyApp(ShowBase):
         def destroy_hat2(self):
                 self.hat2.removeNode()
                 del self.hat2
+                self.hat2_button.destroy()
+                del self.hat2_button
+
                 self.hat3 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_cowboyHat.bam')
                 self.hat3.reparentTo(self.cog_head1)
                 self.hat3.setPosHprScale((0, -0.1, 1.5), (10, 10, 0), (.35, .35, .35))
-                self.hat2_button.destroy()
-                del self.hat2_button
 
                 self.hat3_button = DirectButton(text=('Cowboy Hat', 'Loading...', 'Change Hat', ''),
                                                 text_scale=.05,
@@ -638,15 +641,96 @@ class MyApp(ShowBase):
                                                 command=self.destroy_hat3
                                                 )
 
-        # destroys hat3 and adds hat1
+        # destroys hat3 and adds hat4
         def destroy_hat3(self):
                 self.hat3.removeNode()
                 del self.hat3
+                self.hat3_button.destroy()
+                del self.hat3_button
+
+                self.hat4 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_msk_dorkGlasses.bam')
+                self.hat4.reparentTo(self.cog_head1)
+                self.hat4.setPosHprScale((0, -0.1, .65), (180, 10, 0), (.35, .35, .35))
+
+                self.hat4_button = DirectButton(text=('Glasses', 'Loading...', 'Change Hat', ''),
+                                                text_scale=.05,
+                                                text_font=self.font1,
+                                                text_pos=(-.05, .125, 1),
+                                                pressEffect=1,
+                                                geom_scale=(1, 6, 1),
+                                                relief=None,
+                                                clickSound=self.click_sound,
+                                                rolloverSound=self.rollover_sound,
+                                                textMayChange=1,
+                                                image=self.img1,
+                                                image_scale=(.25, .09, .09),
+                                                image_pos=(-.175, 0, .19),
+                                                command=self.destroy_hat4
+                                                )
+
+        # destroys hat4 and adds hat5
+        def destroy_hat4(self):
+                self.hat4.removeNode()
+                del self.hat4
+                self.hat4_button.destroy()
+                del self.hat4_button
+
+                self.hat5 = self.loader.loadModel('phase_4\models/accessories/ttr_m_chr_acc_msk_moostacheC.bam')
+                self.hat5.reparentTo(self.cog_head1)
+                self.hat5.setPosHprScale((0, .825, .65), (180, 0, 0), (1, 1, 1))
+
+                self.hat5_button = DirectButton(text=('Moustache', 'Loading...', 'Change Hat', ''),
+                                                text_scale=.05,
+                                                text_font=self.font1,
+                                                text_pos=(-.05, .125, 1),
+                                                pressEffect=1,
+                                                geom_scale=(1, 6, 1),
+                                                relief=None,
+                                                clickSound=self.click_sound,
+                                                rolloverSound=self.rollover_sound,
+                                                textMayChange=1,
+                                                image=self.img1,
+                                                image_scale=(.25, .09, .09),
+                                                image_pos=(-.175, 0, .19),
+                                                command=self.destroy_hat5
+                                                )
+
+        # destroys hat5 and adds hat1
+        def destroy_hat5(self):
+                self.hat5.removeNode()
+                del self.hat5
+                self.hat5_button.destroy()
+                del self.hat5_button
+
+                self.hat6 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_dinosaur.bam')
+                self.hat6.reparentTo(self.cog_head1)
+                self.hat6.setPosHprScale((0, -0.1, 1.25), (180, 0, 0), (.3, .3, .3))
+
+                self.hat6_button = DirectButton(text=('Dinosaur Hat', 'Loading...', 'Change Hat', ''),
+                                                text_scale=.05,
+                                                text_font=self.font1,
+                                                text_pos=(-.05, .125, 1),
+                                                pressEffect=1,
+                                                geom_scale=(1, 6, 1),
+                                                relief=None,
+                                                clickSound=self.click_sound,
+                                                rolloverSound=self.rollover_sound,
+                                                textMayChange=1,
+                                                image=self.img1,
+                                                image_scale=(.25, .09, .09),
+                                                image_pos=(-.175, 0, .19),
+                                                command=self.destroy_hat6
+                                                )
+
+        def destroy_hat6(self):
+                self.hat6.removeNode()
+                del self.hat6
+                self.hat6_button.destroy()
+                del self.hat6_button
+
                 self.hat1 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_fez.bam')
                 self.hat1.reparentTo(self.cog_head1)
                 self.hat1.setPosHprScale((0, -0.1, 1.5), (30, -10, 0), (.4, .4, .4))
-                self.hat3_button.destroy()
-                del self.hat3_button
 
                 self.hat1_button = DirectButton(text=('Fez Hat', 'Loading...', 'Change Hat', ''),
                                                 text_scale=.05,
@@ -788,14 +872,80 @@ class MyApp(ShowBase):
                                                 image=self.img1,
                                                 image_scale=(.25, .09, .09),
                                                 image_pos=(-.175, 0, .425),
-                                                command=self.change_color_white
+                                                command=self.change_color_red
                                                 )
+
+        # red color
+        def change_color_red(self):
+                self.cog1.find("**/hands").setColor(255, 0, 0)
+                self.cyan_button.destroy()
+                del self.cyan_button
+
+                self.red_button = DirectButton(text=('Red', 'Loading...', 'Change Color', ''),
+                                               text_scale=.05,
+                                               text_font=self.font1,
+                                               text_pos=(-.05, .365, 1),
+                                               pressEffect=1,
+                                               geom_scale=(1, 6, 1),
+                                               relief=None,
+                                               clickSound=self.click_sound,
+                                               rolloverSound=self.rollover_sound,
+                                               textMayChange=1,
+                                               image=self.img1,
+                                               image_scale=(.25, .09, .09),
+                                               image_pos=(-.175, 0, .425),
+                                               command=self.change_color_blue
+                                               )
+
+        # blue color
+        def change_color_blue(self):
+                self.cog1.find("**/hands").setColor(0, 0, 255)
+                self.red_button.destroy()
+                del self.red_button
+
+                self.blue_button = DirectButton(text=('Blue', 'Loading...', 'Change Color', ''),
+                                                text_scale=.05,
+                                                text_font=self.font1,
+                                                text_pos=(-.05, .365, 1),
+                                                pressEffect=1,
+                                                geom_scale=(1, 6, 1),
+                                                relief=None,
+                                                clickSound=self.click_sound,
+                                                rolloverSound=self.rollover_sound,
+                                                textMayChange=1,
+                                                image=self.img1,
+                                                image_scale=(.25, .09, .09),
+                                                image_pos=(-.175, 0, .425),
+                                                command=self.change_color_green
+                                                )
+
+        # green color
+        def change_color_green(self):
+                self.cog1.find("**/hands").setColor(0, 255, 0)
+                self.blue_button.destroy()
+                del self.blue_button
+
+                self.green_button = DirectButton(text=('Green', 'Loading...', 'Change Color', ''),
+                                                 text_scale=.05,
+                                                 text_font=self.font1,
+                                                 text_pos=(-.05, .365, 1),
+                                                 pressEffect=1,
+                                                 geom_scale=(1, 6, 1),
+                                                 relief=None,
+                                                 clickSound=self.click_sound,
+                                                 rolloverSound=self.rollover_sound,
+                                                 textMayChange=1,
+                                                 image=self.img1,
+                                                 image_scale=(.25, .09, .09),
+                                                 image_pos=(-.175, 0, .425),
+                                                 command=self.change_color_white
+                                                 )
 
         # white color
         def change_color_white(self):
                 self.cog1.find("**/hands").setColor(255, 255, 255)
-                self.cyan_button.destroy()
-                del self.cyan_button
+                self.green_button.destroy()
+                del self.green_button
 
                 self.white_button = DirectButton(text=('White', 'Loading...', 'Change Color', ''),
                                                  text_scale=.05,
@@ -1085,7 +1235,7 @@ class AppInfo:
                 self.runtime = tim
                 self.app_data = 'Authors: {} | ' \
                                 'Version: {} | ' \
-                                'Script Time: {} seconds'\
+                                'Script Time: {} seconds' \
                                 .format(devs, ver, tim)
                 self.total_time = 'Runtime: {} seconds'.format(tim)
 
@@ -1094,7 +1244,7 @@ class AppInfo:
 end = time.time()
 elapsed_time = (end - start)
 
-data = AppInfo('Christian Diaz', 'v1.0.4 Beta', elapsed_time)
+data = AppInfo('Christian Diaz', 'v1.1.0 Beta', elapsed_time)
 
 print('GitHub Link: https://github.com/chrisd149/Cog-Customization')
 print(data.app_data)
@@ -1111,7 +1261,6 @@ elif elapsed_time > 1 < 1.5:
         log.write("   |   The program is running slower than normal, but isn't significantly affecting performance.")
 elif elapsed_time > 2:
         log.write("   |   The program is running very slow, try restarting your computer to decrease run time.")
-
 
 app = MyApp()
 app.run()
