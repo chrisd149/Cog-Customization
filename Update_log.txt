@@ -27,3 +27,5 @@ AppInfo also displays data of main.py, such as runtime, authors, and version # i
 
 Log 5/16/19: main.py has been updated to have better function/varriable names, and comments have been updated to be more clearer. 
 Most of the code has been changed to follow conventional naming schematics for Python.
+
+Log 5/25/19: There is several new content updates for main.py.  More glove colors and accessories have been added, and new large scale option as been added.  Code has been changed in main.py, with more typo cleanup and proper indentation.
