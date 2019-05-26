@@ -194,7 +194,6 @@ class MyApp(ShowBase):
                 head_4_2 = self.cog_head2.hprInterval(2.5, Vec3(-0, 0, 0))
 
                 # sequences
-
                 # goon sequence
                 pace1 = Sequence(
                         Parallel(walk_1, move_1),
@@ -244,7 +243,7 @@ class MyApp(ShowBase):
                                                 align=TextNode.A_left,
                                                 )
 
-                self.screentext3 = OnscreenText(text='Current Version: v1.0.4-beta',
+                self.screentext3 = OnscreenText(text='Current Version: v1.1.0-beta',
                                                 pos=(-1.75, .8),
                                                 font=self.font1,
                                                 fg=(255, 255, 255, 1),
@@ -398,7 +397,7 @@ class MyApp(ShowBase):
                                              )
 
                 # gui buttons
-                self.hat1_button = DirectButton(text=('Fez', 'Loading...', 'Change Hat', ''),
+                self.hat1_button = DirectButton(text=('Fez Hat', 'Loading...', 'Change Hat', ''),
                                                 text_scale=.05,
                                                 text_font=self.font1,
                                                 text_pos=(-.05, .125, 1),
@@ -447,7 +446,7 @@ class MyApp(ShowBase):
                                                       image=self.img1,
                                                       image_scale=(.25, .09, .09),
                                                       image_pos=(-.6, 0, .19),
-                                                      command=self.decrease_scale
+                                                      command=self.small_scale
                                                       )
 
                 # changes cog1 gloves' color from white to purple
@@ -749,7 +748,7 @@ class MyApp(ShowBase):
                                                 )
 
         # shrinks cog to scale .5
-        def decrease_scale(self):
+        def small_scale(self):
                 cog1_scale1 = self.cog1.scaleInterval(.25, Point3(.5, .5, .5))
                 cog_tag1_scale1 = self.cog_tag1.scaleInterval(.25, Point3(.5, .5, .5))
                 cog_tag1_pos1 = self.cog_tag1.posInterval(.25, Point3(.565, .45, .05))
@@ -776,11 +775,11 @@ class MyApp(ShowBase):
                                                      image=self.img1,
                                                      image_scale=(.25, .09, .09),
                                                      image_pos=(-.6, 0, .19),
-                                                     command=self.increase_scale
+                                                     command=self.normal_scale
                                                      )
 
         # returns scale to normal scale
-        def increase_scale(self):
+        def normal_scale(self):
                 cog1_scale2 = self.cog1.scaleInterval(.25, Point3(1, 1, 1))
                 cog_tag1_scale2 = self.cog_tag1.scaleInterval(.25, Point3(1, 1, 1))
                 cog_tag1_pos2 = self.cog_tag1.posInterval(.25, Point3(.565, .45, .475))
@@ -805,8 +804,69 @@ class MyApp(ShowBase):
                                                       image=self.img1,
                                                       image_scale=(.25, .09, .09),
                                                       image_pos=(-.6, 0, .19),
-                                                      command=self.decrease_scale
+                                                      command=self.large_scale
                                                       )
+
+        # returns scale to normal scale
+        def large_scale(self):
+                cog1_scale3 = self.cog1.scaleInterval(.25, Point3(1.5, 1.5, 1.5))
+                cog_tag1_scale3 = self.cog_tag1.scaleInterval(.25, Point3(1.5, 1.5, 1.5))
+                cog_tag1_pos3 = self.cog_tag1.posInterval(.25, Point3(.565, .45, .9))
+                self.normal_cog_button.destroy()
+                del self.normal_cog_button
+
+                seq3 = Parallel(cog1_scale3,
+                                cog_tag1_scale3,
+                                cog_tag1_pos3,
+                                )
+                seq3.start()
+
+                self.large_cog_button = DirectButton(text=('Large Cog', 'Loading...', 'Change Size', ''),
+                                                     text_scale=.05,
+                                                     text_font=self.font1,
+                                                     text_pos=(-.475, .125, 1),
+                                                     pressEffect=1,
+                                                     geom_scale=(1, 6, 1),
+                                                     relief=None,
+                                                     clickSound=self.click_sound,
+                                                     rolloverSound=self.rollover_sound,
+                                                     textMayChange=1,
+                                                     image=self.img1,
+                                                     image_scale=(.25, .09, .09),
+                                                     image_pos=(-.6, 0, .19),
+                                                     command=self.normal_scale2
+                                                     )
+
+        # returns scale to normal scale
+        def normal_scale2(self):
+                cog1_scale4 = self.cog1.scaleInterval(.25, Point3(1, 1, 1))
+                cog_tag1_scale4 = self.cog_tag1.scaleInterval(.25, Point3(1, 1, 1))
+                cog_tag1_pos4 = self.cog_tag1.posInterval(.25, Point3(.565, .45, .475))
+                self.large_cog_button.destroy()
+                del self.large_cog_button
+
+                seq4 = Parallel(cog1_scale4,
+                                cog_tag1_scale4,
+                                cog_tag1_pos4,
+                                )
+                seq4.start()
+
+                self.normal_cog_button = DirectButton(text=('Normal Cog', 'Loading...', 'Change Size', ''),
+                                                      text_scale=.05,
+                                                      text_font=self.font1,
+                                                      text_pos=(-.475, .125, 1),
+                                                      pressEffect=1,
+                                                      geom_scale=(1, 6, 1),
+                                                      relief=None,
+                                                      clickSound=self.click_sound,
+                                                      rolloverSound=self.rollover_sound,
+                                                      textMayChange=1,
+                                                      image=self.img1,
+                                                      image_scale=(.25, .09, .09),
+                                                      image_pos=(-.6, 0, .19),
+                                                      command=self.small_scale
+                                                      )
+
 
         # glove color functions
         # purple color
