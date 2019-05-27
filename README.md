@@ -5,9 +5,9 @@
 
 This is a simple Panda3D program that allows the user to customize a Cog from Toontown.
 
-[Tutorial of the functions of the 4 main buttons](https://youtu.be/33jWVTQWn1Q)
+[**Tutorial of the functions of the 4 main buttons**](https://youtu.be/33jWVTQWn1Q)
 
-[Overview of v1.0.1](https://youtu.be/H13CPHQySiQ)
+[**Overview of v1.0.1**](https://youtu.be/H13CPHQySiQ)
 
 <h2>Prerequisites</h2>
 
