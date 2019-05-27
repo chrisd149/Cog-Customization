@@ -49,13 +49,18 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 
 <h3>How to Install</h3>
 	
-	1.	Download files from the latest release from the releases section.
-	2.	Install and configure Panda3D-1.10-02 if not already installed, at www.panda3d.org/download.
-	3.      Go to www.toontownrewritten.com/play, and install Toontown Rewritten.
-	4.      If not installed already, get Python 3.7 at www.python.org/downloads, and properly configure it.
-	4.      Go to the Toontown Rewritten Folder, and copy/paste the .mf phase files into your Panda3D folder 
-		(For this project, only phase_3 through phase_5.5, and phase_9 through phase_11 files are needed). 
-	5.	Open main.pyw(Windows OS) or main.py(Any OS) to run the application 
+1.	Download files from the latest release from the releases section.
+
+2.	Install and configure [Panda3D-1.10-02](www.panda3d.org/download) if not already installed.
+
+3.	Go to www.toontownrewritten.com/play, and install Toontown Rewritten.
+
+4.	If not installed already, get [Python 3.7](www.python.org/downloads) installed, and properly configure it.
+
+5.	Go to the Toontown Rewritten Folder, and copy/paste the .mf phase files into your Panda3D folder 
+		- (For this project, only phase_3 through phase_5.5, and phase_9 through phase_11 files are needed). 
+		
+6.	Open main.pyw(Windows OS) or main.py(Any OS) to run the application 
 	
 <h3>Installiation Issues and Fixes</h3>
 
