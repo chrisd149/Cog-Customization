@@ -9,6 +9,22 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 
 [**Overview of v1.0.1**](https://youtu.be/H13CPHQySiQ)
 
+<h2>Table of Contents</h2>
+
+- [Prerequisites](https://github.com/chrisd149/Cog-Customization#prerequisites)
+	- [System Info](https://github.com/chrisd149/Cog-Customization#system-info)
+	- [Software Info](https://github.com/chrisd149/Cog-Customization#software-info)
+- [Installiation](https://github.com/chrisd149/Cog-Customization#installing)
+	- [How to Install](https://github.com/chrisd149/Cog-Customization#how-to-install)
+	- [Installiation Issues](https://github.com/chrisd149/Cog-Customization#installiation-issues)
+- [Goals of Project](https://github.com/chrisd149/Cog-Customization#goals-of-project)
+	- [Main Goals](https://github.com/chrisd149/Cog-Customization#main-goals)
+- [FAQ](https://github.com/chrisd149/Cog-Customization#faq)
+- [Licensing](https://github.com/chrisd149/Cog-Customization#license)
+- [Built With](https://github.com/chrisd149/Cog-Customization#built-with)
+- [Authors](https://github.com/chrisd149/Cog-Customization#authors)
+	- [Christian's Contact Info](https://github.com/chrisd149/Cog-Customization#contact-info)
+
 <h2>Prerequisites</h2>
 
 <h3>System Info</h3>	
@@ -29,9 +45,9 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 
 *	**Language**: English, Spanish possibly later.
 
-<h2>Installing</h2>
+<h2>Installiation</h2>
 
-To install:
+<h3>How to Install</h3>
 	
 	1.	Download files from the latest release from the releases section.
 	2.	Install and configure Panda3D-1.10-02 if not already installed, at www.panda3d.org/download.
@@ -41,7 +57,7 @@ To install:
 		(For this project, only phase_3 through phase_5.5, and phase_9 through phase_11 files are needed). 
 	5.	Open main.pyw(Windows OS) or main.py(Any OS) to run the application 
 	
-<h3>Installiation Issues</h3>
+<h3>Installiation Issues and Fixes</h3>
 
 - You may have issues with setting the PATH varriable for Python on your Windows computer.  To fix this, watch this [video](https://www.youtube.com/watch?v=4V14G5_CNGg)
 - The program may not start due to a few reasons:
