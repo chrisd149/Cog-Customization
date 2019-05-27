@@ -14,9 +14,9 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 - [Prerequisites](https://github.com/chrisd149/Cog-Customization#prerequisites)
 	- [System Info](https://github.com/chrisd149/Cog-Customization#system-info)
 	- [Software Info](https://github.com/chrisd149/Cog-Customization#software-info)
-- [Installiation](https://github.com/chrisd149/Cog-Customization#installing)
+- [Installation](https://github.com/chrisd149/Cog-Customization#installation)
 	- [How to Install](https://github.com/chrisd149/Cog-Customization#how-to-install)
-	- [Installiation Issues](https://github.com/chrisd149/Cog-Customization#installiation-issues)
+	- [Installation Issues](https://github.com/chrisd149/Cog-Customization#installation-issues)
 - [Current Features](https://github.com/chrisd149/Cog-Customization#current-features)
 - [Goals of Project](https://github.com/chrisd149/Cog-Customization#goals-of-project)
 	- [Main Goals](https://github.com/chrisd149/Cog-Customization#main-goals)
@@ -47,7 +47,7 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 
 *	**Language**: English, Spanish possibly later.
 
-<h2>Installiation</h2>
+<h2>Installation</h2>
 
 <h3>How to Install</h3>
 	
@@ -64,7 +64,7 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 		
 6.	Open main.pyw(Windows OS) or main.py(Any OS) to run the application 
 	
-<h3>Installiation Issues and Fixes</h3>
+<h3>Installaton Issues and Fixes</h3>
 
 - You may have issues with setting the PATH varriable for Python on your Windows computer.  To fix this, watch this [video](https://www.youtube.com/watch?v=4V14G5_CNGg)
 - The program may not start due to a few reasons:
