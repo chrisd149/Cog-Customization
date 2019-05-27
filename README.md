@@ -17,8 +17,10 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 - [Installiation](https://github.com/chrisd149/Cog-Customization#installing)
 	- [How to Install](https://github.com/chrisd149/Cog-Customization#how-to-install)
 	- [Installiation Issues](https://github.com/chrisd149/Cog-Customization#installiation-issues)
+- [Current Features](https://github.com/chrisd149/Cog-Customization#current-features)
 - [Goals of Project](https://github.com/chrisd149/Cog-Customization#goals-of-project)
 	- [Main Goals](https://github.com/chrisd149/Cog-Customization#main-goals)
+	- [Side Goals](https://github.com/chrisd149/Cog-Customization#side-goals)
 - [FAQ](https://github.com/chrisd149/Cog-Customization#faq)
 - [Licensing](https://github.com/chrisd149/Cog-Customization#license)
 - [Built With](https://github.com/chrisd149/Cog-Customization#built-with)
@@ -71,6 +73,22 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 	- You may not have the phase files in the Panda3D folder
 	- The font files may not be in the same folder as the program main.py/main.pyw
 	
+<h2>Current Features</h2>
+
+- 4 DirectButtons with functions that control the appearance of the Big Cheese cog
+- A help button that opens a help box
+- 3 Actors that have a loop of sequences of animations
+- Music that can be stopped by clicking the key M and restarted by holding down M
+- An exit button that leads to an exit popup window
+	- Exit popup with 2 DirectButtons that close the program or exit popup
+- A DirectEntry object that can be closed by clicking the Enter key
+- A DirectButton that opens the Cog Customization Wiki
+- Title of program window with program name and version
+- Default resoulution of 720p to fit most monitors
+- Frame rate meter that displays current frame rate
+- Game log that includes the run time of the program
+	- This is changed after each runtime
+
 <h2>Goals of Project</h2>
 
 <h3>Main Goals</h3>
@@ -81,9 +99,13 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 
 *  	[X] **Functions that change colors, scale, load/delete models, and textures**
 
-*	[X] **Allow the user to access help *while* ingame or online via the wiki**
+<h3>Side Goals</h3>
 
 *	[X] **Update the game regularly with bug fixes and updates**
+
+*	[X] **Resolve Bugs/Issues when present**
+
+*	[X] **Allow the user to access help *while* ingame or online via the wiki**
 
 <h2>FAQ</h2>
 
