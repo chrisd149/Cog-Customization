@@ -107,6 +107,8 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 
 *	[X] **Allow the user to access help *while* ingame or online via the wiki**
 
+*	[ ] **Make a for loop that returns different valules in game_log.txt (i.e. total time ingame, avg frame rate, customizations chosen, etc.**
+
 <h2>FAQ</h2>
 
 Q: *Why isn't there an .exe file to make installation easier?*
