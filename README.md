@@ -86,8 +86,7 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 - Title of program window with program name and version
 - Default resoulution of 720p to fit most monitors
 - Frame rate meter that displays current frame rate
-- Game log that includes the run time of the program
-	- This is changed after each runtime
+- Game log that includes the run time and specs of the program
 
 <h2>Goals of Project</h2>
 
