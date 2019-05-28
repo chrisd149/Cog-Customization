@@ -1,4 +1,4 @@
-<h1>Cog Customization v1.1.1 Beta</h1>
+<h1>Cog Customization v1.1.2 Beta</h1>
 
 ![image](https://user-images.githubusercontent.com/48182689/58392291-4c9d1480-8007-11e9-8c5a-0edb3a838928.png)
 <h6>v1.1 Beta</h6>
@@ -86,8 +86,7 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 - Title of program window with program name and version
 - Default resoulution of 720p to fit most monitors
 - Frame rate meter that displays current frame rate
-- Game log that includes the run time of the program
-	- This is changed after each runtime
+- Game log that includes the run time and specs of the program
 
 <h2>Goals of Project</h2>
 

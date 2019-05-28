@@ -5,7 +5,7 @@
 # Authors: Christian Diaz
 # Engine Build: Panda3D 1.10.2
 # Python 3.7.2
-# Cog Customization v1.1.1
+# Cog Customization v1.1.2
 
 # start time of main.py
 import time
@@ -25,7 +25,7 @@ import webbrowser
 import time
 
 # PrcFileData
-loadPrcFileData("", "window-title Cog Training v1.1.1")  # titles the app
+loadPrcFileData("", "window-title Cog Training v1.1.2")  # titles the app
 loadPrcFileData("", "win-size 1280 720")  # makes the app run in 720p
 loadPrcFileData("", "show-frame-rate-meter True")  # displays frame rate
 
@@ -243,7 +243,7 @@ class MyApp(ShowBase):
                                                 align=TextNode.A_left,
                                                 )
 
-                self.screentext3 = OnscreenText(text='Current Version: v1.1.1-beta',
+                self.screentext3 = OnscreenText(text='Current Version: v1.1.2-beta',
                                                 pos=(-1.75, .8),
                                                 font=self.font1,
                                                 fg=(255, 255, 255, 1),
@@ -1287,8 +1287,7 @@ class MyApp(ShowBase):
                 sys.exit()
 
 
-class AppInfo:
-        # current app information
+class AppInfo:  # formats information about main.py
         def __init__(self, devs, ver, tim):
                 self.authors = devs
                 self.version = ver
@@ -1302,9 +1301,9 @@ class AppInfo:
 
 # end time of main.py
 end = time.time()
-elapsed_time = (end - start)
+elapsed_time = (end - start)  # total script time
 
-data = AppInfo('Christian Diaz', 'v1.1.1 Beta', elapsed_time)
+data = AppInfo('Christian Diaz', 'v1.1.2 Beta', elapsed_time)
 
 print('GitHub Link: https://github.com/chrisd149/Cog-Customization')
 print(data.app_data)
@@ -1313,14 +1312,36 @@ print('Thanks for playing!')
 # creates a game log file if it already isn't made
 log = open("game_log.txt", "w+")
 
-log.write(str(data.total_time))
+log.write(str(data.total_time))  # writes the runtime formatted
 
+# checks elapsed time
 if elapsed_time < 1:
-        log.write("   |   The program is running under a second, which is good.")
+        log.write("  |  The program is running under a second.\n")
 elif elapsed_time > 1 < 1.5:
-        log.write("   |   The program is running slower than normal, but isn't significantly affecting performance.")
+        log.write("   |   The program is running slower than normal.\n")
 elif elapsed_time > 2:
-        log.write("   |   The program is running very slow, try restarting your computer to decrease run time.")
+        log.write("   |   The program is running very slow.\n")
+
+# program specs
+# version
+log.write("Cog Customization ")
+log.write(data.version + "\n")
+
+# authors
+log.write("Authors: ")
+log.write(data.authors + "\n")
+
+# misc
+log.write("Game Engine: Panda3D 1.10.2\n\
+Programming Language: Python 3.7.2\n\
+Language: English\n \n")
+
+# short summery of project
+log.write("This is a simple interactive Panda3D project using Python 3.7.2.\n\
+This game lets you customize a Big Cheese cog via DirectButtons and functions.\n\
+This game uses several assets made by the Disney Interactive Media Group and Toontown Rewritten\n\
+and all credit goes to both entities for all models, images, sounds used in this project.\n\
+The project's main page is at https://github.com/chrisd149/Cog-Customization")
 
 app = MyApp()
 app.run()
