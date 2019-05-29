@@ -126,10 +126,18 @@ Q: *What is the end goal for this project?*
 
 A: This project is my first GitHub project I made public, as I wanted to test how to develop a game to give to the public.  I also learned many new things with Python and Panda3D that I wouldn't have learned elsewhere.  My goal is to constantly update the game when I get new ideas, and to learn more about game devlopment and programming.
 
+Q: *What experience is required to make a game like this one?*
+
+A: This project took me almost 3 months to make at this point.  I can say I was very slow for the first month, mainly due to health issues, but I quickly got back in to coding and learned more about Panda3D.  All in all, I would say a few months experience with Python and some experience with Panda3D can give you the mindset and tools to make a game like this one.  Much of the code is still very basic, since many functions could be shortened by using loops/dictionaries.
+
+Q: *How would one go about learning Panda3D with Python?*
+
+A: The easiest way is too learn Python on *atleast* a beginner level.  Then, follow some tutorials on Youtube, that go over setup and basic coding practices specific to Panda3D.  I recommend you go to the offical [Panda3D Manual](https://www.panda3d.org/manual/) to get more detailed lessons on the game engine.
+
 
 <h2>License</h2>
 
-**This Panda3D game and/or the author(s) are not affiliated with *The Walt Disney Company* and/or the *Disney Interactive Media Group*(collectively referred to as *"Disney"*).  All textures/models used in this program are not mine, and are allowed to be publicly used and distributed, with the exceptition for profit, which isn't allowed at all.**
+**This Panda3D game and/or the author(s) are not affiliated with *The Walt Disney Company* and/or the *Disney Interactive Media Group*(collectively referred to as *"Disney"*).  All textures/models/sounds used in this program are not mine, and are allowed to be publicly used and distributed, with the exceptition for profit, which isn't allowed at all.**
 
 This game can be modified to any extent. and can be reuploaded ***if*** it is modified.
 
@@ -154,9 +162,13 @@ Main Author: Christian M Diaz
 
 *	GitHub UserName: **@chrisd149**
 
+*	Discord Username: **Miguel149#7640**
+
+*	Twitter: **@miguel_TTR**
+
 * Email: **christianmigueldiaz@gmail.com**
-	* Active Hours M-F: 3pm - 9pm EST
-	* Active Hours Weekend: 11am - 1am EST (Some of the time im availiable to 4am on the weekends)
+	* Active Hours M-F: 3pm - 12am EST
+	* Active Hours Weekend: 12pm - 1am EST (Some of the time im availiable to 4am on the weekends)
 
 <h4>All questions and inquiries must be related to the project in some way, unrelated messages will be ignored</h4>
 
