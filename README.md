@@ -72,6 +72,7 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 		![image](https://user-images.githubusercontent.com/48182689/58389652-5e2bef80-7ffa-11e9-8f5b-7b4cfa74cf24.png)
 	- You may not have the phase files in the Panda3D folder
 	- The font files may not be in the same folder as the program main.py/main.pyw
+- Download the latest release from the Releases section, since older releases may have more bugs/less features.
 	
 <h2>Current Features</h2>
 
