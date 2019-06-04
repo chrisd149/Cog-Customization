@@ -138,7 +138,7 @@ A: The easiest way is too learn Python on *atleast* a beginner level.  Then, fol
 
 <h2>License</h2>
 
-This project is licensed under The Unlicense, which allows private use, commercial use, modification, and distribution of this program.
+This project is licensed under the MIT License, which allows private use, commercial use, modification, and distribution of this program, and gives me (Christian Diaz) copyright holder status.
 
 **This Panda3D game and/or the author(s) are not affiliated with *The Walt Disney Company* and/or the *Disney Interactive Media Group*(collectively referred to as *"Disney"*).  All textures/models/sounds used in this program are not mine, and are allowed to be publicly used and distributed, with the exceptition for profit, which isn't allowed at all.**
 
