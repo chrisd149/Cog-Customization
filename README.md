@@ -99,6 +99,8 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 
 *  	[X] **Functions that change colors, scale, load/delete models, and textures**
 
+*	[ ] **Separate versions of main.py/pyw in Spanish, French and German**
+
 <h3>Side Goals</h3>
 
 *	[X] **Update the game regularly with bug fixes and updates**
