@@ -1,4 +1,4 @@
-<h1>Cog Customization v1.1.2 Beta</h1>
+<h1>Cog Customization v1.1.3 Beta</h1>
 
 ![image](https://user-images.githubusercontent.com/48182689/58392291-4c9d1480-8007-11e9-8c5a-0edb3a838928.png)
 <h6>v1.1 Beta</h6>
