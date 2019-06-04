@@ -109,6 +109,8 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 
 *	[ ] **Make a for loop that returns different valules in game_log.txt (i.e. total time ingame, avg frame rate, customizations chosen, etc.**
 
+*	[ ] **Change all code to Python 3.8 and Panda3D 1.10.3**
+
 <h2>FAQ</h2>
 
 Q: *Why isn't there an .exe file to make installation easier?*
