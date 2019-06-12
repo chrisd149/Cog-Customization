@@ -53,7 +53,7 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 	
 1.	Download files from the latest release from the releases section.
 
-2.	Install and configure [Panda3D-1.10-02](www.panda3d.org/download) if not already installed.
+2.	Install and configure Panda3D-1.10-02 at www.panda3d.org/download/sdk-1-10-2 if not already installed.
 
 3.	Go to www.toontownrewritten.com/play, and install Toontown Rewritten.
 
