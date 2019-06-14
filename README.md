@@ -68,7 +68,7 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 
 - You may have issues with setting the PATH varriable for Python on your Windows computer.  To fix this, watch this [video](https://www.youtube.com/watch?v=4V14G5_CNGg)
 - The program may not start due to a few reasons:
-	- Panda3D isn't set as the Python interpreter.  To fix this, make the default interpreter for main.py Panda3D-1.10.2-x64/python/python.exe.  This [video](https://user-images.githubusercontent.com/48182689/58389652-5e2bef80-7ffa-11e9-8f5b-7b4cfa74cf24.png) helps explain it better
+	- Panda3D isn't set as the Python interpreter.  To fix this, make the default interpreter for main.py Panda3D-1.10.2-x64/python/python.exe.  This [video](https://www.youtube.com/watch?v=mkKDI6y2kyE) helps explain it better
 		![image](https://user-images.githubusercontent.com/48182689/58389652-5e2bef80-7ffa-11e9-8f5b-7b4cfa74cf24.png)
 	- You may not have the phase files in the Panda3D folder
 	- The font files may not be in the same folder as the program main.py/main.pyw
