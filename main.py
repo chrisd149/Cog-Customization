@@ -7,8 +7,8 @@
 # Python 3.7.2
 # Cog Customization v1.1.3
 
-# start time of main.py
 import time
+# start time of main.py
 start = time.time()
 
 # Panda3D Imports
@@ -22,7 +22,7 @@ from direct.gui.DirectGui import *
 import datetime
 import sys
 import webbrowser
-import time
+
 
 # PrcFileData
 loadPrcFileData("", "window-title Cog Training v1.1.3")  # titles the app
@@ -39,7 +39,7 @@ class MyApp(ShowBase):
                 self.animations()
                 self.screen_text()
 
-                # labels for buttons
+                # labels for main buttons
                 self.accessories_button_label = OnscreenText(text='Accessories',
                                                              pos=(-.05, .225, 1),
                                                              scale=.05,
@@ -65,15 +65,19 @@ class MyApp(ShowBase):
                                                          bg=(0, 0, 255, .1)
                                                          )
 
+                # music
                 self.music1 = self.loader.loadSfx('phase_3/audio/bgm\create_a_toon.ogg')
                 self.music1.setVolume(.3)
                 self.music1.play()
 
-                self.accept('m', self.music1.stop)
-                self.accept('m-repeat', self.music1.play)
+                # key binds
+                self.accept('m', self.music1.stop)  # stops the music
+                self.accept('m-repeat', self.music1.play)  # replays the music
 
                 # camera settings
                 self.disable_mouse()
+                # disables the user from using the mouse to move the camera,
+                # which allows the camera to be moved
                 self.camera.reparentTo(self.render)
                 self.camera.setPosHpr((90, 0, 75), (80, 180, -180))
 
@@ -88,7 +92,7 @@ class MyApp(ShowBase):
                                    'Victory': 'phase_4\models\char\suitA-victory.bam'}
                                   )
 
-                self.cog1.reparentTo(self.render)
+                self.cog1.reparentTo(self.render)  # parents the actor as to the 3D environment
                 self.cog1.setBlend(frameBlend=True)  # smooths frames
 
                 # cog_1 shadow
@@ -96,11 +100,12 @@ class MyApp(ShowBase):
                 self.cog_shadow1.reparentTo(self.cog1.find('**/joint_shadow'))
                 self.cog_shadow1.setScale(.5)
                 self.cog_shadow1.setColor(0, 0, 0, .5)
-                self.cog_shadow1.setBin('fixed', 0, 1)
+                self.cog_shadow1.setBin('fixed', 0, 1)  # sets the bin of the shadow fixed to the ground
 
                 # cog head
                 self.cog_head1 = self.loader.loadModel('phase_4\models\char\suitA-heads.bam').find('**/bigcheese')
                 self.cog_head1.reparentTo(self.cog1.find('**/joint_head'))
+                # finds the cold caller head model and joints it to the head pos
                 self.cog_head1.setPos(0, 0, -.05)
 
                 # cog_1 hat
@@ -111,19 +116,22 @@ class MyApp(ShowBase):
                 # cog position/hpr/scale
                 self.cog1.setPosHprScale((130, -13.5, 70.75), (65, 0, 0), (1, 1, 1))
 
-                # cog_2 actor
+                # cog2 actor
                 self.cog2 = Actor('phase_3.5\models\char\suitC-mod.bam',
-                                  {'Sit': 'phase_11\models\char\suitC-sit.bam'})
-                self.cog2.loop('Sit')
-                self.cog2.reparentTo(self.chair)
+                                  {'Sit': 'phase_11\models\char\suitC-sit.bam'}
+                                  )
+
+                self.cog2.loop('Sit')  # loops through the 'Sit' animation
+                self.cog2.reparentTo(self.chair)  # parents the actor to the chair model
                 self.cog2.setBlend(frameBlend=True)  # smooths frames
 
-                # cog_2 head
+                # cog2 head
                 self.cog_head2 = self.loader.loadModel('phase_3.5\models\char\suitC-heads.bam').find('**/coldcaller')
                 self.cog_head2.reparentTo(self.cog2.find('**/joint_head'))
+                # finds the cold caller head model and joints it to the head pos
                 self.cog_head2.setPos(0, 0, -.05)
 
-                # cog_2 textures
+                # cog2 textures
                 self.cog_torso2 = self.loader.loadTexture('phase_3.5\maps\s_blazer.jpg')
                 self.cog2.find('**/torso').setTexture(self.cog_torso2, 1)
 
@@ -132,13 +140,14 @@ class MyApp(ShowBase):
 
                 self.cog_legs2 = self.loader.loadTexture('phase_3.5\maps\s_leg.jpg')
                 self.cog2.find('**/legs').setTexture(self.cog_legs2, 1)
+                # sets the textures to the sellbot textures
 
-                # cog_2 hat
+                # cog2 hat
                 self.hat = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_fedora.bam')
                 self.hat.reparentTo(self.cog_head2)
                 self.hat.setPosHprScale((0, 0, .9), (0, 0, 0), (.5, .5, .5))
 
-                # cog_2 position/hpr/scale
+                # cog2 position/hpr/scale
                 self.cog2.setPosHprScale((0, -2, 0), (180, 0, 0), (.8, .8, .8))
 
                 # goon actor
@@ -152,6 +161,9 @@ class MyApp(ShowBase):
 
         # models
         def load_models(self):
+                # loads all models, which don't have animations.
+
+                # this is the main environment area for the game
                 self.training = self.loader.loadModel('phase_10\models\cogHQ\MidVault.bam')
                 self.training.reparentTo(self.render)
 
@@ -166,67 +178,72 @@ class MyApp(ShowBase):
         # animations
         def animations(self):
                 # actor intervals
+                # cog1 actor intervals
                 stand = self.cog1.actorInterval('Stand', duration=7.5, loop=1)
                 victory = self.cog1.actorInterval('Victory', duration=7.5, loop=0)
                 scared = self.cog1.actorInterval('Flail', duration=1.5, loop=0)
 
-                walk_1 = self.goon.actorInterval('Walk', duration=6, loop=1)
-                walk_2 = self.goon.actorInterval('Walk', duration=1.5, loop=1)
-
+                # cog2 actor intervals
                 sit = self.cog2.actorInterval('Sit', duration=10, loop=1)
 
+                # goon actor intervals
+                walk1 = self.goon.actorInterval('Walk', duration=6, loop=1)
+                walk2 = self.goon.actorInterval('Walk', duration=1.5, loop=1)
+
                 # goon hpr/pos intervals
-                move_1 = self.goon.posInterval(6, Point3(150, 12.5, 70.65))
-                turn_1 = self.goon.hprInterval(1.5, Vec3(0, 0, 0))
-                move_2 = self.goon.posInterval(6, Point3(150, -30, 70.65))
-                turn_2 = self.goon.hprInterval(1.5, Vec3(180, 0, 0))
+                move1 = self.goon.posInterval(6, Point3(150, 12.5, 70.65))
+                turn1 = self.goon.hprInterval(1.5, Vec3(0, 0, 0))
+                move2 = self.goon.posInterval(6, Point3(150, -30, 70.65))
+                turn2 = self.goon.hprInterval(1.5, Vec3(180, 0, 0))
 
-                # head hpr intervals
-                head_1_1 = self.cog_head1.hprInterval(2.5, Vec3(30, 10, 0))
-                head_2_1 = self.cog_head1.hprInterval(2.5, Vec3(0, 0, 0))
-                head_3_1 = self.cog_head1.hprInterval(2.5, Vec3(-30, 20, 0))
-                head_4_1 = self.cog_head1.hprInterval(2.5, Vec3(-0, 0, 0))
+                # cog1 head hpr intervals
+                head1_1 = self.cog_head1.hprInterval(2.5, Vec3(30, 10, 0))
+                head1_2 = self.cog_head1.hprInterval(2.5, Vec3(0, 0, 0))
+                head1_3 = self.cog_head1.hprInterval(2.5, Vec3(-30, 20, 0))
+                head1_4 = self.cog_head1.hprInterval(2.5, Vec3(-0, 0, 0))
 
-                # head hpr intervals
-                head_1_2 = self.cog_head2.hprInterval(2.5, Vec3(15, 10, 0))
-                head_2_2 = self.cog_head2.hprInterval(2.5, Vec3(0, 0, 0))
-                head_3_2 = self.cog_head2.hprInterval(2.5, Vec3(-15, 10, 5))
-                head_4_2 = self.cog_head2.hprInterval(2.5, Vec3(-0, 0, 0))
+                # cog2 head hpr intervals
+                head2_1 = self.cog_head2.hprInterval(2.5, Vec3(15, 10, 0))
+                head2_2 = self.cog_head2.hprInterval(2.5, Vec3(0, 0, 0))
+                head2_3 = self.cog_head2.hprInterval(2.5, Vec3(-15, 10, 5))
+                head2_4 = self.cog_head2.hprInterval(2.5, Vec3(-0, 0, 0))
 
                 # sequences
                 # goon sequence
                 pace1 = Sequence(
-                        Parallel(walk_1, move_1),
-                        Parallel(turn_1, walk_2),
-                        Parallel(move_2, walk_1),
-                        Parallel(walk_2, turn_2)
+                        Parallel(walk1, move1),
+                        Parallel(turn1, walk2),
+                        Parallel(move2, walk1),
+                        Parallel(walk2, turn2)
                 )
                 pace1.loop()
 
-                # cog1 sequence
+                # cog1 head sequence
                 pace2 = Sequence(
                         stand,
-                        Parallel(stand, head_1_1),
-                        Parallel(stand, head_2_1),
+                        Parallel(stand, head1_1),
+                        Parallel(stand, head1_2),
                         scared,
-                        Parallel(stand, head_3_1),
-                        Parallel(stand, head_4_1),
+                        Parallel(stand, head1_3),
+                        Parallel(stand, head1_4),
                         victory, stand,
                 )
                 pace2.loop()
 
-                # cog2 sequence
+                # cog2 head sequence
                 pace3 = Sequence(
                         sit,
-                        Parallel(sit, head_1_2),
-                        Parallel(sit, head_2_2),
-                        Parallel(sit, head_3_2),
-                        Parallel(sit, head_4_2)
+                        Parallel(sit, head2_1),
+                        Parallel(sit, head2_2),
+                        Parallel(sit, head2_3),
+                        Parallel(sit, head2_4)
                 )
                 pace3.loop()
 
         # loads OnscreenText
         def screen_text(self):
+                # displays all the OnscreenText on the top left of the program screen
+
                 self.screentext1 = OnscreenText(text='Author: Christian Diaz',
                                                 pos=(-1.75, .95),
                                                 font=self.font1,
@@ -286,15 +303,18 @@ class MyApp(ShowBase):
                 self.info_frame = DirectFrame(frameSize=(-1.85, -.85, .6, 1),
                                               frameColor=(254, 255, 255, 0.1))
 
-        # gui
+        # loads buttons, sound effects, and images
         def load_gui(self):
                 # gui audio & images files
                 self.chat_box = self.loader.loadModel \
                         ('phase_3\models\props\chatbox.bam')
+                self.img1 = self.loader.loadModel('phase_3\models\gui\ChatPanel.bam')  # img used for buttons
+                self.img2 = self.loader.loadModel('phase_3.5\models\gui\QT_buttons.bam')  # img used for help box button
+                self.gui_image = self.loader.loadModel('phase_3\models\gui\dialog_box_gui.bam')  # img used for gui bg
 
                 # fonts
-                self.font1 = self.loader.loadFont('Impress.ttf')
-                self.font2 = self.loader.loadFont('CogFont.ttf')
+                self.font1 = self.loader.loadFont('Impress.ttf')  # Impress BT
+                self.font2 = self.loader.loadFont('CogFont.ttf')  # VT Portable Remington
 
                 # sound effects
                 self.click_sound = self.loader.loadSfx(
@@ -304,15 +324,11 @@ class MyApp(ShowBase):
                 self.grunt_sound = self.loader.loadSfx(
                         'phase_3.5/audio\dial\COG_VO_grunt.ogg')  # cog grunt sound effect
 
-                self.img1 = self.loader.loadModel('phase_3\models\gui\ChatPanel.bam')  # img used for buttons
-                self.img2 = self.loader.loadModel('phase_3.5\models\gui\QT_buttons.bam')  # img used for help box button
-                self.gui_image = self.loader.loadModel('phase_3\models\gui\dialog_box_gui.bam')  # img used for gui bg
-
                 # function for time in hours & seconds
                 self.date = datetime.datetime.now()
                 self.time_now = self.date.strftime('%H:%M')
 
-                # background of textbox
+                # background of textbox DirectEntry
                 self.textbox_bg = DirectLabel(parent=self.aspect2d,
                                               text='',
                                               text_wordwrap=10,
@@ -327,7 +343,7 @@ class MyApp(ShowBase):
                                               text_font=self.font1
                                               )
 
-                # textbox
+                # textbox DirectEntry
                 self.entry = DirectEntry(text='',
                                          scale=.05,
                                          command=self.set_text,
@@ -343,6 +359,7 @@ class MyApp(ShowBase):
                                          text_align=TextNode.ACenter
                                          )
 
+                # title of self.entry
                 self.entry_title = OnscreenText(text='Type here, then press Enter to delete the text.',
                                                 wordwrap=12,
                                                 pos=(1.45, .825, 1),
@@ -397,6 +414,7 @@ class MyApp(ShowBase):
                                              )
 
                 # gui buttons
+                # destroys hat1 and adds hat2
                 self.hat1_button = DirectButton(text=('Fez Hat', 'Loading...', 'Change Hat', ''),
                                                 text_scale=.05,
                                                 text_font=self.font1,
@@ -561,8 +579,10 @@ class MyApp(ShowBase):
                 self.info_frame.destroy()
                 self.des_text_button.destroy()
                 del self.des_text_button
+                # calling del self.screen_text causes the program to crash, so this problem is fixed so far by calling
+                # removedNode() for each OnscreenText object
 
-                # adds back OnScreenText
+                # adds back OnScreenText objects
                 self.info_button = DirectButton(
                         text=('Add top-left text.', 'Loading...', 'This will add the top-left text.', ''),
                         text_scale=.05,
@@ -580,7 +600,7 @@ class MyApp(ShowBase):
                         command=self.screen_text_load
                 )
 
-        # func to add back Screentext objects
+        # function that adds back OnscreenText objects
         def screen_text_load(self):
                 self.screen_text()
                 self.info_button.destroy()
@@ -721,6 +741,7 @@ class MyApp(ShowBase):
                                                 command=self.destroy_hat6
                                                 )
 
+        # destroys hat6 and adds hat1
         def destroy_hat6(self):
                 self.hat6.removeNode()
                 del self.hat6
@@ -778,7 +799,7 @@ class MyApp(ShowBase):
                                                      command=self.normal_scale
                                                      )
 
-        # returns scale to normal scale
+        # returns small scale to normal scale
         def normal_scale(self):
                 cog1_scale2 = self.cog1.scaleInterval(.25, Point3(1, 1, 1))
                 cog_tag1_scale2 = self.cog_tag1.scaleInterval(.25, Point3(1, 1, 1))
@@ -807,7 +828,7 @@ class MyApp(ShowBase):
                                                       command=self.large_scale
                                                       )
 
-        # returns scale to normal scale
+        # scales cog to 1.5
         def large_scale(self):
                 cog1_scale3 = self.cog1.scaleInterval(.25, Point3(1.5, 1.5, 1.5))
                 cog_tag1_scale3 = self.cog_tag1.scaleInterval(.25, Point3(1.5, 1.5, 1.5))
@@ -837,7 +858,7 @@ class MyApp(ShowBase):
                                                      command=self.normal_scale2
                                                      )
 
-        # returns scale to normal scale
+        # returns large scale to normal scale
         def normal_scale2(self):
                 cog1_scale4 = self.cog1.scaleInterval(.25, Point3(1, 1, 1))
                 cog_tag1_scale4 = self.cog_tag1.scaleInterval(.25, Point3(1, 1, 1))
@@ -866,7 +887,6 @@ class MyApp(ShowBase):
                                                       image_pos=(-.6, 0, .19),
                                                       command=self.small_scale
                                                       )
-
 
         # glove color functions
         # purple color
@@ -1148,7 +1168,7 @@ class MyApp(ShowBase):
                                                    command=self.cash_texture
                                                    )
 
-        # spawns the help box
+        # loads the help box
         def help_box(self):
                 self.help_button.destroy()
                 del self.help_button
@@ -1200,7 +1220,7 @@ class MyApp(ShowBase):
                                                 command=self.help_box
                                                 )
 
-        # spawns the exit popup
+        # loads the exit popup
         def exit_popup(self):
                 self.exit_popup_button.destroy()
                 del self.exit_popup_button
@@ -1240,7 +1260,7 @@ class MyApp(ShowBase):
                                                 text_font=self.font1
                                                 )
 
-                # closes exit pop up
+                # destroys exit pop up
                 self.exit_back_button = DirectButton(text=('No', 'Loading...', 'Close Pop-up', ''),
                                                      scale=.1,
                                                      relief=None,
@@ -1281,7 +1301,7 @@ class MyApp(ShowBase):
                                                       command=self.exit_popup
                                                       )
 
-        # func that exits program
+        # function that exits the program
         @staticmethod
         def exit_app():
                 sys.exit()
