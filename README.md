@@ -139,6 +139,10 @@ Q: *How would one go about learning Panda3D with Python?*
 
 A: The easiest way is too learn Python on *atleast* a beginner level.  Then, follow some tutorials on Youtube, that go over setup and basic coding practices specific to Panda3D.  I recommend you go to the offical [Panda3D Manual](https://www.panda3d.org/manual/) to get more detailed lessons on the game engine.
 
+Q: *Why is there inconsistent updates?*
+
+A: I am the sole contributor to this project, and as updates are only pushed when I have the time to do so.  I've had many medical issues recently that I have caused me to get distracted from updates, and I don't know when I will be able to program more consistently.
+
 
 <h2>License</h2>
 
