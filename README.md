@@ -142,9 +142,9 @@ A: The easiest way is too learn Python on *atleast* a beginner level.  Then, fol
 
 <h2>License</h2>
 
-This project is licensed under the MIT License, which allows private use, commercial use, modification, and distribution of this program, and gives me (Christian Diaz) copyright holder status.
+This project is licensed under the a modified MIT License, which allows private use, commercial use, modification, and distribution of this program, but not sales, and gives me (Christian Diaz) copyright holder status.
 
-**This Panda3D game and/or the author(s) are not affiliated with *The Walt Disney Company* and/or the *Disney Interactive Media Group*(collectively referred to as *"Disney"*).  All textures/models/sounds used in this program are not mine, and are allowed to be publicly used and distributed, with the exceptition for profit, which isn't allowed at all.**
+**This Panda3D game and/or the author(s) are not affiliated with *The Walt Disney Company* and/or the *Disney Interactive Media Group*(collectively referred to as *"Disney"*), and/or Toontown Rewritten.  All textures/models/sounds used in this program are not mine, and are allowed to be publicly used and distributed, with the exceptition for profit, which isn't allowed at all.  By downloading this game, you agree to release any employees of Disney and/or Toontown Rewritten from any liablity caused to you from the use of Cog Customization.**
 
 
 <h2>Built With</h2>
