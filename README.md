@@ -1,4 +1,4 @@
-<h1>Cog Customization v1.1.3 Beta</h1>
+<h1>Cog Customization v1.1.4 Beta</h1>
 
 ![image](https://user-images.githubusercontent.com/48182689/58392291-4c9d1480-8007-11e9-8c5a-0edb3a838928.png)
 <h6>v1.1 Beta</h6>
@@ -68,7 +68,7 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 
 - You may have issues with setting the PATH varriable for Python on your Windows computer.  To fix this, watch this [video](https://www.youtube.com/watch?v=4V14G5_CNGg)
 - The program may not start due to a few reasons:
-	- Panda3D isn't set as the Python interpreter.  To fix this, make the default interpreter for main.py Panda3D-1.10.2-x64/python/python.exe.  This [video](https://user-images.githubusercontent.com/48182689/58389652-5e2bef80-7ffa-11e9-8f5b-7b4cfa74cf24.png) helps explain it better
+	- Panda3D isn't set as the Python interpreter.  To fix this, make the default interpreter for main.py Panda3D-1.10.2-x64/python/python.exe.  This [video](https://www.youtube.com/watch?v=mkKDI6y2kyE) helps explain it better
 		![image](https://user-images.githubusercontent.com/48182689/58389652-5e2bef80-7ffa-11e9-8f5b-7b4cfa74cf24.png)
 	- You may not have the phase files in the Panda3D folder
 	- The font files may not be in the same folder as the program main.py/main.pyw
@@ -138,6 +138,10 @@ A: This project took me almost 3 months to make at this point.  I can say I was 
 Q: *How would one go about learning Panda3D with Python?*
 
 A: The easiest way is too learn Python on *atleast* a beginner level.  Then, follow some tutorials on Youtube, that go over setup and basic coding practices specific to Panda3D.  I recommend you go to the offical [Panda3D Manual](https://www.panda3d.org/manual/) to get more detailed lessons on the game engine.
+
+Q: *Why is there inconsistent updates?*
+
+A: I am the sole contributor to this project, and as updates are only pushed when I have the time to do so.  I've had many medical issues recently that I have caused me to get distracted from updates, and I don't know when I will be able to program more consistently.
 
 
 <h2>License</h2>
