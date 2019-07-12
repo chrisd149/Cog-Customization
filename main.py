@@ -546,6 +546,34 @@ class MyApp(ShowBase):
                                                 command=self.github_link
                                                 )
 
+                # opens the wiki for this project
+                self.turn_button = DirectButton(text=('360 Turn', 'Loading...', '360 Turn', ''),
+                                                text_scale=.05,
+                                                text_font=self.font1,
+                                                text_pos=(.575, -.56125, 0),
+                                                pressEffect=1,
+                                                geom_scale=(1, 6, 1),
+                                                relief=None,
+                                                clickSound=self.click_sound,
+                                                rolloverSound=self.rollover_sound,
+                                                textMayChange=1,
+                                                image=self.img1,
+                                                image_scale=(.25, .09, .09),
+                                                image_pos=(.45, 0, -.5),
+                                                command=self.cog_turn,
+                                                )
+
+        def cog_turn(self):
+                turn1 = self.cog1.hprInterval(5, Vec3(430, 0, 0))
+
+                turn_seq = Sequence(
+
+                        turn1
+                )
+
+                turn_seq.start()
+
+
         @staticmethod
         def github_link():
                 webbrowser.open('http://github.com/chrisd149/Cog-Customization/wiki/help')  # opens the GitHub wiki
