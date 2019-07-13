@@ -33,10 +33,8 @@ loadPrcFileData("", "show-frame-rate-meter True")  # displays frame rate
 class MyApp(ShowBase):
         def __init__(self):
                 ShowBase.__init__(self)
-                self.load_models()
-                self.load_cog()
+                self.models()
                 self.load_gui()
-                self.animations()
                 self.screen_text()
 
                 # labels for main buttons
@@ -82,7 +80,6 @@ class MyApp(ShowBase):
                 self.camera.setPosHpr((90, 0, 75), (80, 180, -180))
 
         # cogs/goons/bosses
-        def load_cog(self):
                 # cog_1 actor
                 self.cog1 = Actor('phase_3.5\models\char\suitA-mod.bam',
                                   {'Flail': 'phase_4\models\char\suitA-flailing.bam',
@@ -159,24 +156,7 @@ class MyApp(ShowBase):
                 # goon position/hpr/scale
                 self.goon.setPosHprScale((150, -30, 70.65), (180, 0, 0), (2, 2, 2))
 
-        # models
-        def load_models(self):
-                # loads all models, which don't have animations.
-
-                # this is the main environment area for the game
-                self.training = self.loader.loadModel('phase_10\models\cogHQ\MidVault.bam')
-                self.training.reparentTo(self.render)
-
-                self.desk = self.loader.loadModel('phase_3.5\models\modules\desk_only_wo_phone.bam')
-                self.desk.reparentTo(self.render)
-                self.desk.setPosHprScale((130, 7.5, 70.75), (120, 0, 0), (1.5, 1.5, 1.5))
-
-                self.chair = self.loader.loadModel('phase_5.5\models\estate\deskChair.bam')
-                self.chair.reparentTo(self.render)
-                self.chair.setPosHprScale((135, 7, 70.75), (-60, 0, 0), (1.5, 1.5, 1.5))
-
-        # animations
-        def animations(self):
+                # animations
                 # actor intervals
                 # cog1 actor intervals
                 stand = self.cog1.actorInterval('Stand', duration=7.5, loop=1)
@@ -240,65 +220,78 @@ class MyApp(ShowBase):
                 )
                 pace3.loop()
 
+                # loads all models, which don't have animations.
+        def models(self):
+                # this is the main environment area for the game
+                self.training = self.loader.loadModel('phase_10\models\cogHQ\MidVault.bam')
+                self.training.reparentTo(self.render)
+
+                self.desk = self.loader.loadModel('phase_3.5\models\modules\desk_only_wo_phone.bam')
+                self.desk.reparentTo(self.render)
+                self.desk.setPosHprScale((130, 7.5, 70.75), (120, 0, 0), (1.5, 1.5, 1.5))
+
+                self.chair = self.loader.loadModel('phase_5.5\models\estate\deskChair.bam')
+                self.chair.reparentTo(self.render)
+                self.chair.setPosHprScale((135, 7, 70.75), (-60, 0, 0), (1.5, 1.5, 1.5))
+
         # loads OnscreenText
         def screen_text(self):
                 # displays all the OnscreenText on the top left of the program screen
+                self.screen_text1 = OnscreenText(text='Author: Christian Diaz',
+                                                 pos=(-1.75, .95),
+                                                 font=self.font1,
+                                                 fg=(255, 255, 255, 1),
+                                                 scale=.05,
+                                                 align=TextNode.A_left,
+                                                 )
 
-                self.screentext1 = OnscreenText(text='Author: Christian Diaz',
-                                                pos=(-1.75, .95),
-                                                font=self.font1,
-                                                fg=(255, 255, 255, 1),
-                                                scale=.05,
-                                                align=TextNode.A_left,
-                                                )
+                self.screen_text2 = OnscreenText(text='Engine Build: Panda3D 1.10.2',
+                                                 pos=(-1.75, .875),
+                                                 font=self.font1,
+                                                 fg=(255, 255, 255, 1),
+                                                 scale=.05,
+                                                 align=TextNode.A_left,
+                                                 )
 
-                self.screentext2 = OnscreenText(text='Engine Build: Panda3D 1.10.2',
-                                                pos=(-1.75, .875),
-                                                font=self.font1,
-                                                fg=(255, 255, 255, 1),
-                                                scale=.05,
-                                                align=TextNode.A_left,
-                                                )
+                self.screen_text3 = OnscreenText(text='Current Version: v1.1.4-beta',
+                                                 pos=(-1.75, .8),
+                                                 font=self.font1,
+                                                 fg=(255, 255, 255, 1),
+                                                 scale=.05,
+                                                 align=TextNode.A_left,
+                                                 )
 
-                self.screentext3 = OnscreenText(text='Current Version: v1.1.4-beta',
-                                                pos=(-1.75, .8),
-                                                font=self.font1,
-                                                fg=(255, 255, 255, 1),
-                                                scale=.05,
-                                                align=TextNode.A_left,
-                                                )
+                self.screen_text4 = OnscreenText(text='Current Time: ',
+                                                 pos=(-1.75, .65),
+                                                 font=self.font1,
+                                                 fg=(255, 255, 255, 1),
+                                                 scale=.05,
+                                                 align=TextNode.A_left,
+                                                 )
 
-                self.screentext4 = OnscreenText(text='Current Time: ',
-                                                pos=(-1.75, .65),
-                                                font=self.font1,
-                                                fg=(255, 255, 255, 1),
-                                                scale=.05,
-                                                align=TextNode.A_left,
-                                                )
+                self.screen_text5 = OnscreenText(text=(str(self.time_now)),
+                                                 pos=(-1.45, .65),
+                                                 font=self.font1,
+                                                 fg=(255, 255, 255, 1),
+                                                 scale=.05,
+                                                 align=TextNode.A_left,
+                                                 )
 
-                self.screentext5 = OnscreenText(text=(str(self.time_now)),
-                                                pos=(-1.45, .65),
-                                                font=self.font1,
-                                                fg=(255, 255, 255, 1),
-                                                scale=.05,
-                                                align=TextNode.A_left,
-                                                )
+                self.screen_text6 = OnscreenText(text='Contact: christianmigueldiaz@gmail.com',
+                                                 pos=(-1.75, .725),
+                                                 font=self.font1,
+                                                 fg=(255, 255, 255, 1),
+                                                 scale=.05,
+                                                 align=TextNode.A_left,
+                                                 )
 
-                self.screentext6 = OnscreenText(text='Contact: christianmigueldiaz@gmail.com',
-                                                pos=(-1.75, .725),
-                                                font=self.font1,
-                                                fg=(255, 255, 255, 1),
-                                                scale=.05,
-                                                align=TextNode.A_left,
-                                                )
-
-                self.screentext7 = OnscreenText(text='Contact: christianmigueldiaz@gmail.com',
-                                                pos=(-1.75, .725),
-                                                font=self.font1,
-                                                fg=(255, 255, 255, 1),
-                                                scale=.05,
-                                                align=TextNode.A_left,
-                                                )
+                self.screen_text7 = OnscreenText(text='Contact: christianmigueldiaz@gmail.com',
+                                                 pos=(-1.75, .725),
+                                                 font=self.font1,
+                                                 fg=(255, 255, 255, 1),
+                                                 scale=.05,
+                                                 align=TextNode.A_left,
+                                                 )
 
                 self.info_frame = DirectFrame(frameSize=(-1.85, -.85, .6, 1),
                                               frameColor=(254, 255, 255, 0.1))
@@ -546,6 +539,34 @@ class MyApp(ShowBase):
                                                 command=self.github_link
                                                 )
 
+                # opens the wiki for this project
+                self.turn_button = DirectButton(text=('360 Turn', 'Loading...', '360 Turn', ''),
+                                                text_scale=.05,
+                                                text_font=self.font1,
+                                                text_pos=(.575, -.56125, 0),
+                                                pressEffect=1,
+                                                geom_scale=(1, 6, 1),
+                                                relief=None,
+                                                clickSound=self.click_sound,
+                                                rolloverSound=self.rollover_sound,
+                                                textMayChange=1,
+                                                image=self.img1,
+                                                image_scale=(.25, .09, .09),
+                                                image_pos=(.45, 0, -.5),
+                                                command=self.cog_turn,
+                                                )
+
+        def cog_turn(self):
+                turn1 = self.cog1.hprInterval(5, Vec3(430, 0, 0))
+
+                turn_seq = Sequence(
+
+                        turn1
+                )
+
+                turn_seq.start()
+
+
         @staticmethod
         def github_link():
                 webbrowser.open('http://github.com/chrisd149/Cog-Customization/wiki/help')  # opens the GitHub wiki
@@ -562,20 +583,20 @@ class MyApp(ShowBase):
 
         # destroys Onscreentext objects
         def screen_text_destroy(self):
-                self.screentext1.removeNode()
-                del self.screentext1
-                self.screentext2.removeNode()
-                del self.screentext2
-                self.screentext3.removeNode()
-                del self.screentext3
-                self.screentext4.removeNode()
-                del self.screentext4
-                self.screentext5.removeNode()
-                del self.screentext5
-                self.screentext6.removeNode()
-                del self.screentext6
-                self.screentext7.removeNode()
-                del self.screentext7
+                self.screen_text1.removeNode()
+                del self.screen_text1
+                self.screen_text2.removeNode()
+                del self.screen_text2
+                self.screen_text3.removeNode()
+                del self.screen_text3
+                self.screen_text4.removeNode()
+                del self.screen_text4
+                self.screen_text5.removeNode()
+                del self.screen_text5
+                self.screen_text6.removeNode()
+                del self.screen_text6
+                self.screen_text7.removeNode()
+                del self.screen_text7
                 self.info_frame.destroy()
                 self.des_text_button.destroy()
                 del self.des_text_button
