@@ -1,4 +1,4 @@
-<h1>Cog Customization v1.1.4 Beta</h1>
+<h1>Cog Customization v1.2.0 Beta</h1>
 
 ![image](https://user-images.githubusercontent.com/48182689/58392291-4c9d1480-8007-11e9-8c5a-0edb3a838928.png)
 <h6>v1.1 Beta</h6>
@@ -99,8 +99,6 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 
 *  	[X] **Functions that change colors, scale, load/delete models, and textures**
 
-*	[ ] **Separate versions of main.py/pyw in Spanish, French and German**
-
 <h3>Side Goals</h3>
 
 *	[X] **Update the game regularly with bug fixes and updates**
@@ -108,10 +106,6 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 *	[X] **Resolve Bugs/Issues when present**
 
 *	[X] **Allow the user to access help *while* ingame or online via the wiki**
-
-*	[ ] **Make a for loop that returns different valules in game_log.txt (i.e. total time ingame, avg frame rate, customizations chosen, etc.**
-
-*	[ ] **Change all code to Python 3.8 and Panda3D 1.10.3**
 
 <h2>FAQ</h2>
 
