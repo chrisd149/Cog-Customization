@@ -5,7 +5,7 @@
 # Authors: Christian Diaz
 # Engine Build: Panda3D 1.10.2
 # Python 3.7.2
-# Cog Customization v1.1.4
+# Cog Customization v1.2.0 Pre-Release
 
 import time
 # start time of main.py
@@ -25,7 +25,7 @@ import webbrowser
 
 
 # PrcFileData
-loadPrcFileData("", "window-title Cog Training v1.1.4")  # titles the app
+loadPrcFileData("", "window-title Cog Training v1.2 Pre-Release")  # titles the app
 loadPrcFileData("", "win-size 1280 720")  # makes the app run in 720p
 loadPrcFileData("", "show-frame-rate-meter True")  # displays frame rate
 
@@ -253,7 +253,7 @@ class MyApp(ShowBase):
                                                  align=TextNode.A_left,
                                                  )
 
-                self.screen_text3 = OnscreenText(text='Current Version: v1.1.4-beta',
+                self.screen_text3 = OnscreenText(text='Current Version: v1.2-Pre-Release',
                                                  pos=(-1.75, .8),
                                                  font=self.font1,
                                                  fg=(255, 255, 255, 1),
@@ -1344,7 +1344,7 @@ class AppInfo:  # formats information about main.py
 end = time.time()
 elapsed_time = (end - start)  # total script time
 
-data = AppInfo('Christian Diaz', 'v1.1.4 Beta', elapsed_time)
+data = AppInfo('Christian Diaz', 'v1.2.0 Pre-Release', elapsed_time)
 
 print('GitHub Link: https://github.com/chrisd149/Cog-Customization')
 print(data.app_data)
