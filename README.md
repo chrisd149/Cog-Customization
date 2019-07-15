@@ -21,6 +21,7 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 - [Goals of Project](https://github.com/chrisd149/Cog-Customization#goals-of-project)
 	- [Main Goals](https://github.com/chrisd149/Cog-Customization#main-goals)
 	- [Side Goals](https://github.com/chrisd149/Cog-Customization#side-goals)
+- [Pre-Release 1.2](https://github.com/chrisd149/Cog-Customization/blob/1.2.0/README.md#pre-release-12)
 - [FAQ](https://github.com/chrisd149/Cog-Customization#faq)
 - [Licensing](https://github.com/chrisd149/Cog-Customization#license)
 - [Built With](https://github.com/chrisd149/Cog-Customization#built-with)
@@ -107,7 +108,7 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 
 *	[X] **Allow the user to access help *while* ingame or online via the wiki**
 
-<h3>Pre-Release 1.2</h3>
+<h2>Pre-Release 1.2</h2>
 
 This Pre-Release of 1.2 will be updated constantly with new code changes, such as making functions that can make buttons faster, adding a way of controlling the spin of the cog, etc.
 
