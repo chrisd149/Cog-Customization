@@ -1,4 +1,4 @@
-<h1>Cog Customization v1.2.0 Beta</h1>
+<h1>Cog Customization v1.2.0 Pre-Release</h1>
 
 ![image](https://user-images.githubusercontent.com/48182689/58392291-4c9d1480-8007-11e9-8c5a-0edb3a838928.png)
 <h6>v1.1 Beta</h6>
@@ -106,6 +106,12 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 *	[X] **Resolve Bugs/Issues when present**
 
 *	[X] **Allow the user to access help *while* ingame or online via the wiki**
+
+<h3>Pre-Release 1.2</h3>
+
+This Pre-Release of 1.2 will be updated constantly with new code changes, such as making functions that can make buttons faster, adding a way of controlling the spin of the cog, etc.
+
+The Pre-Release will go through many reworks before the real release, so please be patient while the update is finalized.
 
 <h2>FAQ</h2>
 
