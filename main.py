@@ -5,24 +5,20 @@
 # Authors: Christian Diaz
 # Engine Build: Panda3D 1.10.2
 # Python 3.7.2
-# Cog Customization v2.0
+# Cog Customization v2.0 Pre Release
 
-import time
 import sys
 import webbrowser
 import datetime
 
 # Panda3D Imports
-from output import AppInfo
 from direct.showbase.ShowBase import ShowBase
-from pandac.PandaModules import *
 from direct.interval.IntervalGlobal import *
 from panda3d.core import *
 from direct.actor.Actor import Actor
 from direct.gui.DirectGui import *
 
-
-# PrcFileData
+# PrcFileDataaaaaaaaa
 loadPrcFileData("", "window-title Cog Customization v2.0")  # titles the app
 loadPrcFileData("", "win-size 1280 720")  # makes the app run in 720p
 
@@ -39,16 +35,19 @@ class Cog(ShowBase):
                 self.animations()
                 self.screen_text()
 
+                self.win.setClearColor((0, 0, 0, 1))  # sets background as black
+
                 self.isMoving = False
-                self.forward_speed = 20
+
+                self.size = 0
 
                 self.keyMap = {
-                    "left": 0, "right": 0, "forward": 0, "backward": 0, "change-cam": 0}
+                    "left": 0, "right": 0, "forward": 0, "backward": 0, "change-cam": 0, "sprint": 0}
 
+                # this sets a node in cog1's chest for the camera to look at
                 self.floater = NodePath(PandaNode("floater"))
                 self.floater.reparentTo(self.cog1)
                 self.floater.setZ(5.0)
-
 
                 # labels for main buttons
                 self.accessories_button_label = OnscreenText(text='Accessories',
@@ -77,9 +76,11 @@ class Cog(ShowBase):
                                                          )
 
                 # music
-                # comment out these lines to if you don't like music for some reason
-                self.music1 = self.loader.loadSfx('phase_3/audio/bgm\create_a_toon.ogg')
-                self.music1.setVolume(.25)
+                self.music1 = self.loader.loadSfx('source files\phase_3/audio/bgm\create_a_toon.ogg')
+                self.music2 = self.loader.loadSfx('source files\phase_4/audio/bgm\MG_TwoDGame.ogg')
+                self.music1.setVolume(.2)
+                self.music2.setVolume(.2)
+                self.music1.setLoop(True)  # loops music if it ends
                 self.music1.play()
 
                 # key binds
@@ -88,40 +89,38 @@ class Cog(ShowBase):
 
                 # camera settings
                 self.disable_mouse()
-                # disables the user from using the mouse to move the camera,
-                # which allows the camera to be moved
+                # disables the user from using the mouse to move the camera, which allows the camera to be moved
                 self.camera.reparentTo(self.render)
                 self.camera.setPosHpr((90, 0, 75), (80, 180, -180))
 
         # cogs/goons/bosses
         def load_cog(self):
                 # cog_1 actor
-                self.cog1 = Actor('phase_3.5\models\char\suitA-mod.bam',
-                                  {'Flail': 'phase_4\models\char\suitA-flailing.bam',
-                                   'Stand': 'phase_4\models\char\suitA-neutral.bam',
-                                   'Walk': 'phase_4\models\char\suitA-walk.bam',
-                                   'Golf': 'phase_5\models\char\suitA-golf-club-swing.bam',
-                                   'Victory': 'phase_4\models\char\suitA-victory.bam'}
+                self.cog1 = Actor('source files\phase_3.5\models\char\suitA-mod.bam',
+                                  {'Flail': 'source files\phase_4\models\char\suitA-flailing.bam',
+                                   'Stand': 'source files\phase_4\models\char\suitA-neutral.bam',
+                                   'Walk': 'source files\phase_4\models\char\suitA-walk.bam',
+                                   'Victory': 'source files\phase_4\models\char\suitA-victory.bam'}
                                   )
 
                 self.cog1.reparentTo(self.render)  # parents the actor as to the 3D environment
                 self.cog1.setBlend(frameBlend=True)  # smooths frames
 
                 # cog_1 shadow
-                self.cog_shadow1 = self.loader.loadModel('phase_3/models/props/drop_shadow.bam')
+                self.cog_shadow1 = self.loader.loadModel('source files\phase_3/models/props/drop_shadow.bam')
                 self.cog_shadow1.reparentTo(self.cog1.find('**/joint_shadow'))
                 self.cog_shadow1.setScale(.5)
                 self.cog_shadow1.setColor(0, 0, 0, .5)
                 self.cog_shadow1.setBin('fixed', 0, 1)  # sets the bin of the shadow fixed to the ground
 
                 # cog head
-                self.cog_head1 = self.loader.loadModel('phase_4\models\char\suitA-heads.bam').find('**/bigcheese')
+                self.cog_head1 = self.loader.loadModel('source files\phase_4\models\char\suitA-heads.bam').find('**/bigcheese')
                 self.cog_head1.reparentTo(self.cog1.find('**/joint_head'))
                 # finds the cold caller head model and joints it to the head pos
                 self.cog_head1.setPos(0, 0, -.05)
 
                 # cog_1 hat
-                self.hat1 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_fez.bam')
+                self.hat1 = self.loader.loadModel('source files\phase_4\models/accessories/tt_m_chr_avt_acc_hat_fez.bam')
                 self.hat1.reparentTo(self.cog_head1)
                 self.hat1.setPosHprScale((0, -0.1, 1.5), (30, -10, 0), (.4, .4, .4))
 
@@ -129,8 +128,8 @@ class Cog(ShowBase):
                 self.cog1.setPosHprScale((130, -13.5, 70.75), (65, 0, 0), (1, 1, 1))
 
                 # cog2 actor
-                self.cog2 = Actor('phase_3.5\models\char\suitC-mod.bam',
-                                  {'Sit': 'phase_11\models\char\suitC-sit.bam'}
+                self.cog2 = Actor('source files\phase_3.5\models\char\suitC-mod.bam',
+                                  {'Sit': 'source files\phase_11\models\char\suitC-sit.bam'}
                                   )
 
                 self.cog2.loop('Sit')  # loops through the 'Sit' animation
@@ -138,24 +137,24 @@ class Cog(ShowBase):
                 self.cog2.setBlend(frameBlend=True)  # smooths frames
 
                 # cog2 head
-                self.cog_head2 = self.loader.loadModel('phase_3.5\models\char\suitC-heads.bam').find('**/coldcaller')
+                self.cog_head2 = self.loader.loadModel('source files\phase_3.5\models\char\suitC-heads.bam').find('**/coldcaller')
                 self.cog_head2.reparentTo(self.cog2.find('**/joint_head'))
                 # finds the cold caller head model and joints it to the head pos
                 self.cog_head2.setPos(0, 0, -.05)
 
                 # cog2 textures
-                self.cog_torso2 = self.loader.loadTexture('phase_3.5\maps\s_blazer.jpg')
+                self.cog_torso2 = self.loader.loadTexture('source files\phase_3.5\maps\s_blazer.jpg')
                 self.cog2.find('**/torso').setTexture(self.cog_torso2, 1)
 
-                self.cog_arms2 = self.loader.loadTexture('phase_3.5\maps\s_sleeve.jpg')
+                self.cog_arms2 = self.loader.loadTexture('source files\phase_3.5\maps\s_sleeve.jpg')
                 self.cog2.find('**/arms').setTexture(self.cog_arms2, 1)
 
-                self.cog_legs2 = self.loader.loadTexture('phase_3.5\maps\s_leg.jpg')
+                self.cog_legs2 = self.loader.loadTexture('source files\phase_3.5\maps\s_leg.jpg')
                 self.cog2.find('**/legs').setTexture(self.cog_legs2, 1)
                 # sets the textures to the sellbot textures
 
                 # cog2 hat
-                self.hat = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_fedora.bam')
+                self.hat = self.loader.loadModel('source files\phase_4\models/accessories/tt_m_chr_avt_acc_hat_fedora.bam')
                 self.hat.reparentTo(self.cog_head2)
                 self.hat.setPosHprScale((0, 0, .9), (0, 0, 0), (.5, .5, .5))
 
@@ -163,8 +162,8 @@ class Cog(ShowBase):
                 self.cog2.setPosHprScale((0, -2, 0), (180, 0, 0), (.8, .8, .8))
 
                 # goon actor
-                self.goon = Actor('phase_9\models\char\Cog_Goonie-zero.bam',
-                                  {'Walk': 'phase_9\models\char\Cog_Goonie-walk.bam'})
+                self.goon = Actor('source files\phase_9\models\char\Cog_Goonie-zero.bam',
+                                  {'Walk': 'source files\phase_9\models\char\Cog_Goonie-walk.bam'})
                 self.goon.reparentTo(self.render)
                 self.goon.setBlend(frameBlend=True)  # smooths frames
 
@@ -176,14 +175,14 @@ class Cog(ShowBase):
                 # loads all models, which don't have animations.
 
                 # this is the main environment area for the game
-                self.training = self.loader.loadModel('phase_10\models\cogHQ\MidVault.bam')
+                self.training = self.loader.loadModel('source files\phase_10\models\cogHQ\MidVault.bam')
                 self.training.reparentTo(self.render)
 
-                self.desk = self.loader.loadModel('phase_3.5\models\modules\desk_only_wo_phone.bam')
+                self.desk = self.loader.loadModel('source files\phase_3.5\models\modules\desk_only_wo_phone.bam')
                 self.desk.reparentTo(self.render)
                 self.desk.setPosHprScale((130, 7.5, 70.75), (120, 0, 0), (1.5, 1.5, 1.5))
 
-                self.chair = self.loader.loadModel('phase_5.5\models\estate\deskChair.bam')
+                self.chair = self.loader.loadModel('source files\phase_5.5\models\estate\deskChair.bam')
                 self.chair.reparentTo(self.render)
                 self.chair.setPosHprScale((135, 7, 70.75), (-60, 0, 0), (1.5, 1.5, 1.5))
 
@@ -272,7 +271,7 @@ class Cog(ShowBase):
                                                 align=TextNode.A_left,
                                                 )
 
-                self.screentext3 = OnscreenText(text='Current Version: v1.2.0-beta',
+                self.screentext3 = OnscreenText(text='Current Version: v2.0',
                                                 pos=(-1.75, .8),
                                                 font=self.font1,
                                                 fg=(255, 255, 255, 1),
@@ -312,15 +311,8 @@ class Cog(ShowBase):
                                                 align=TextNode.A_left,
                                                 )
 
-                self.screentext8 = OnscreenText(text='WASD Controls for movement, Tab for camera',
-                                                pos=(-1.75, .575),
-                                                font=self.font1,
-                                                fg=(255, 255, 255, 1),
-                                                scale=.05,
-                                                align=TextNode.A_left,
-                                                )
 
-                self.info_frame = DirectFrame(frameSize=(-1.8, -.7, .55, 1),
+                self.info_frame = DirectFrame(frameSize=(-2, -.7, .40, 1),
                                               frameColor=(0, 0, 0, 0.1),
                                              )
 
@@ -328,10 +320,10 @@ class Cog(ShowBase):
         def load_gui(self):
                 # gui audio & images files
                 self.chat_box = self.loader.loadModel \
-                        ('phase_3\models\props\chatbox.bam')
-                self.img1 = self.loader.loadModel('phase_3\models\gui\ChatPanel.bam')  # img used for buttons
-                self.img2 = self.loader.loadModel('phase_3.5\models\gui\QT_buttons.bam')  # img used for help box button
-                self.gui_image = self.loader.loadModel('phase_3\models\gui\dialog_box_gui.bam')  # img used for gui bg
+                        ('source files\phase_3\models\props\chatbox.bam')
+                self.img1 = self.loader.loadModel('source files\phase_3\models\gui\ChatPanel.bam')  # img used for buttons
+                self.img2 = self.loader.loadModel('source files\phase_3.5\models\gui\QT_buttons.bam')  # img used for help box button
+                self.gui_image = self.loader.loadModel('source files\phase_3\models\gui\dialog_box_gui.bam')  # img used for gui bg
 
                 # fonts
                 self.font1 = self.loader.loadFont('Impress.ttf')  # Impress BT
@@ -339,11 +331,11 @@ class Cog(ShowBase):
 
                 # sound effects
                 self.click_sound = self.loader.loadSfx(
-                        'phase_3/audio\sfx\GUI_create_toon_fwd.ogg')  # click sound effect
+                        'source files\phase_3/audio\sfx\GUI_create_toon_fwd.ogg')  # click sound effect
                 self.click_sound.setVolume(.75)
-                self.rollover_sound = self.loader.loadSfx('phase_3/audio\sfx\GUI_rollover.ogg')  # rollover sound effect
+                self.rollover_sound = self.loader.loadSfx('source files\phase_3/audio\sfx\GUI_rollover.ogg')  # rollover sound effect
                 self.grunt_sound = self.loader.loadSfx(
-                        'phase_3.5/audio\dial\COG_VO_grunt.ogg')  # cog grunt sound effect
+                        'source files\phase_3.5/audio\dial\COG_VO_grunt.ogg')  # cog grunt sound effect
 
                 # function for time in hours & seconds
                 self.date = datetime.datetime.now()
@@ -531,17 +523,46 @@ class Cog(ShowBase):
                 webbrowser.open('http://github.com/chrisd149/Cog-Customization/wiki/help')  # opens the GitHub wiki
 
         def start(self):
+            self.forward_speed = 30
             # stops all other processes and changes camera PosHpr
             self.start_button.removeNode()
-            self.camera.setPos(self.cog1.getX(), self.cog1.getY() - 10, 2)
+            self.camera.setPos(self.cog1.getX(), self.cog1.getY() - 10, 10)
             self.camera.reparentTo(self.cog1)
             self.camera.lookAt(self.floater)
-            self.pace2.finish()
-            world = loader.loadModel('models/world')
+            pl = base.cam.node().getLens()
+            pl.setFov(80)
+
+
+            self.screentext8 = OnscreenText(text='WASD Controls for movement, Tab for camera',
+                                            pos=(-1.75, .575),
+                                            font=self.font1,
+                                            fg=(255, 255, 255, 1),
+                                            scale=.05,
+                                            align=TextNode.A_left,
+                                            )
+            self.screentext9 = OnscreenText(text='Press Shift to sprint forward',
+                                            pos=(-1.75, .5),
+                                            font=self.font1,
+                                            fg=(255, 255, 255, 1),
+                                            scale=.05,
+                                            align=TextNode.A_left,
+                                            )
+
+            world = loader.loadModel('source files\models\world')
             world.reparentTo(self.render)
-            self.cog1.setPos(0, 0, 0)
+            world.setScale(2.5)
+            self.cog1.setPosHpr((0, 0, 10), (-30, 0, 0))
+
+            self.music2.setLoop(True)
+            self.music2.play()
 
             # removes all 2D and 3D unwanted models
+            self.goon.delete()
+            self.chair.removeNode()
+            self.desk.removeNode()
+            self.gui_panel.removeNode()
+            self.music1.stop()
+            self.pace2.finish()
             self.training.removeNode()
             self.cog2.delete()
             self.cog_tag1.removeNode()
@@ -569,7 +590,7 @@ class Cog(ShowBase):
             self.cTrav = CollisionTraverser()
 
             self.cogGroundRay = CollisionRay()
-            self.cogGroundRay.setOrigin(0, 0, 15)
+            self.cogGroundRay.setOrigin(0, 0, 4)
             self.cogGroundRay.setDirection(0, 0, -1)
             self.cogGroundCol = CollisionNode('cog1Ray')
             self.cogGroundCol.addSolid(self.cogGroundRay)
@@ -580,7 +601,7 @@ class Cog(ShowBase):
             self.cTrav.addCollider(self.cog1Node, self.cogGroundHandler)
 
             self.camGroundRay = CollisionRay()
-            self.camGroundRay.setOrigin(0, 0, 9)
+            self.camGroundRay.setOrigin(0, 0, 1)
             self.camGroundRay.setDirection(0, 0, -1)
             self.camGroundCol = CollisionNode('camRay')
             self.camGroundCol.addSolid(self.camGroundRay)
@@ -590,8 +611,6 @@ class Cog(ShowBase):
             self.camGroundHandler = CollisionHandlerQueue()
             self.cTrav.addCollider(self.camGroundColNp, self.camGroundHandler)
 
-            self.cTrav.showCollisions(render)
-
             # binds keys to movement, WASD format
             self.accept("escape", sys.exit)
             self.accept("a", self.setKey, ["left", True])
@@ -599,13 +618,32 @@ class Cog(ShowBase):
             self.accept("w", self.setKey, ["forward", True])
             self.accept("s", self.setKey, ["backward", True])
             self.accept("tab", self.setKey, ["change-cam", True])
+            self.accept("shift", self.setKey, ["sprint", True])
             self.accept("a-up", self.setKey, ["left", False])
             self.accept("d-up", self.setKey, ["right", False])
             self.accept("w-up", self.setKey, ["forward", False])
             self.accept("s-up", self.setKey, ["backward", False])
             self.accept("tab-up", self.setKey, ["change-cam", False])
+            self.accept("shift-up", self.setKey, ["sprint", False])
 
             taskMgr.add(self.move, "moveTask")  # adds movement task to taskMgr
+            taskMgr.add(self.extra_move, "addmoveTask")  # adds movement task to taskMgr
+
+            self.dev_button = DirectButton(text=('Show Collisions', 'Loading...', 'Show Collisions', ''),
+                                             text_scale=.05,
+                                             text_font=self.font1,
+                                             text_pos=(1.375, -.25, -.45),
+                                             pressEffect=1,
+                                             geom_scale=(1, 6, 1),
+                                             relief=None,
+                                             clickSound=self.click_sound,
+                                             rolloverSound=self.rollover_sound,
+                                             textMayChange=1,
+                                             image=self.img1,
+                                             image_scale=(.25, .09, .09),
+                                             image_pos=(1.25, 0, -.185),
+                                             command=self.show_collisons
+                                             )
 
         # destroys hat1 and adds hat2
         def destroy_hat1(self):
@@ -614,7 +652,7 @@ class Cog(ShowBase):
                 self.hat_button.destroy()
                 del self.hat_button
 
-                self.hat2 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_band.bam')
+                self.hat2 = self.loader.loadModel('source files\phase_4\models/accessories/tt_m_chr_avt_acc_hat_band.bam')
                 self.hat2.setPosHprScale((0, -0.1, 1.5), (180, 0, 0), (.25, .25, .25))
                 self.hat2.reparentTo(self.cog_head1)
 
@@ -641,7 +679,7 @@ class Cog(ShowBase):
                 self.hat_button.destroy()
                 del self.hat_button
 
-                self.hat3 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_cowboyHat.bam')
+                self.hat3 = self.loader.loadModel('source files\phase_4\models/accessories/tt_m_chr_avt_acc_hat_cowboyHat.bam')
                 self.hat3.reparentTo(self.cog_head1)
                 self.hat3.setPosHprScale((0, -0.1, 1.5), (10, 10, 0), (.35, .35, .35))
 
@@ -668,7 +706,7 @@ class Cog(ShowBase):
                 self.hat_button.destroy()
                 del self.hat_button
 
-                self.hat4 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_msk_dorkGlasses.bam')
+                self.hat4 = self.loader.loadModel('source files\phase_4\models/accessories/tt_m_chr_avt_acc_msk_dorkGlasses.bam')
                 self.hat4.reparentTo(self.cog_head1)
                 self.hat4.setPosHprScale((0, -0.1, .65), (180, 10, 0), (.35, .35, .35))
 
@@ -695,7 +733,7 @@ class Cog(ShowBase):
                 self.hat_button.destroy()
                 del self.hat_button
 
-                self.hat5 = self.loader.loadModel('phase_4\models/accessories/ttr_m_chr_acc_msk_moostacheC.bam')
+                self.hat5 = self.loader.loadModel('source files\phase_4\models/accessories/ttr_m_chr_acc_msk_moostacheC.bam')
                 self.hat5.reparentTo(self.cog_head1)
                 self.hat5.setPosHprScale((0, .825, .65), (180, 0, 0), (1, 1, 1))
 
@@ -722,7 +760,7 @@ class Cog(ShowBase):
                 self.hat_button.destroy()
                 del self.hat_button
 
-                self.hat6 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_dinosaur.bam')
+                self.hat6 = self.loader.loadModel('source files\phase_4\models/accessories/tt_m_chr_avt_acc_hat_dinosaur.bam')
                 self.hat6.reparentTo(self.cog_head1)
                 self.hat6.setPosHprScale((0, -0.1, 1.25), (180, 0, 0), (.3, .3, .3))
 
@@ -749,7 +787,7 @@ class Cog(ShowBase):
                 self.hat_button.destroy()
                 del self.hat_button
 
-                self.hat1 = self.loader.loadModel('phase_4\models/accessories/tt_m_chr_avt_acc_hat_fez.bam')
+                self.hat1 = self.loader.loadModel('source files\phase_4\models/accessories/tt_m_chr_avt_acc_hat_fez.bam')
                 self.hat1.reparentTo(self.cog_head1)
                 self.hat1.setPosHprScale((0, -0.1, 1.5), (30, -10, 0), (.4, .4, .4))
 
@@ -773,6 +811,8 @@ class Cog(ShowBase):
         def small_scale(self):
                 # cog speed is set to 30 to compensate for the reduction in speed caused by descaling
                 self.forward_speed = 30
+
+                self.size = -1
                 cog1_scale1 = self.cog1.scaleInterval(.25, Point3(.5, .5, .5))
                 cog_tag1_scale1 = self.cog_tag1.scaleInterval(.25, Point3(.5, .5, .5))
                 cog_tag1_pos1 = self.cog_tag1.posInterval(.25, Point3(.565, .45, .05))
@@ -804,6 +844,7 @@ class Cog(ShowBase):
 
         # returns small scale to normal scale
         def normal_scale(self):
+                self.size = 0
                 # cog speed is set to 20
                 self.forward_speed = 20
                 cog1_scale2 = self.cog1.scaleInterval(.25, Point3(1, 1, 1))
@@ -835,6 +876,7 @@ class Cog(ShowBase):
 
         # scales cog to 1.5
         def large_scale(self):
+                self.size = 1
                 # cog speed is set to 10 to compensate for the increase in speed caused by upscaling
                 self.forward_speed = 10
                 cog1_scale3 = self.cog1.scaleInterval(.25, Point3(1.5, 1.5, 1.5))
@@ -867,6 +909,7 @@ class Cog(ShowBase):
 
         # returns large scale to normal scale
         def normal_scale2(self):
+                self.size = 0
                 # cog speed is set to 20
                 self.forward_speed = 20
                 cog1_scale4 = self.cog1.scaleInterval(.25, Point3(1, 1, 1))
@@ -1056,13 +1099,13 @@ class Cog(ShowBase):
         # cashbot text
         def cash_texture(self):
                 # sets cog1 textures to Cashbot
-                self.cog_torso1 = self.loader.loadTexture('phase_3.5\maps\m_blazer.jpg')
+                self.cog_torso1 = self.loader.loadTexture('source files\phase_3.5\maps\m_blazer.jpg')
                 self.cog1.find('**/torso').setTexture(self.cog_torso1, 1)
 
-                self.cog_arms1 = self.loader.loadTexture('phase_3.5\maps\m_sleeve.jpg')
+                self.cog_arms1 = self.loader.loadTexture('source files\phase_3.5\maps\m_sleeve.jpg')
                 self.cog1.find('**/arms').setTexture(self.cog_arms1, 1)
 
-                self.cog_legs1 = self.loader.loadTexture('phase_3.5\maps\m_leg.jpg')
+                self.cog_legs1 = self.loader.loadTexture('source files\phase_3.5\maps\m_leg.jpg')
                 self.cog1.find('**/legs').setTexture(self.cog_legs1, 1)
 
                 self.texture_button.destroy()
@@ -1087,13 +1130,13 @@ class Cog(ShowBase):
         # lawbot text
         def law_texture(self):
                 # sets cog1 textures to Lawbot
-                self.cog_torso1 = self.loader.loadTexture('phase_3.5\maps\l_blazer.jpg')
+                self.cog_torso1 = self.loader.loadTexture('source files\phase_3.5\maps\l_blazer.jpg')
                 self.cog1.find('**/torso').setTexture(self.cog_torso1, 1)
 
-                self.cog_arms1 = self.loader.loadTexture('phase_3.5\maps\l_sleeve.jpg')
+                self.cog_arms1 = self.loader.loadTexture('source files\phase_3.5\maps\l_sleeve.jpg')
                 self.cog1.find('**/arms').setTexture(self.cog_arms1, 1)
 
-                self.cog_legs1 = self.loader.loadTexture('phase_3.5\maps\l_leg.jpg')
+                self.cog_legs1 = self.loader.loadTexture('source files\phase_3.5\maps\l_leg.jpg')
                 self.cog1.find('**/legs').setTexture(self.cog_legs1, 1)
 
                 self.texture_button.destroy()
@@ -1118,13 +1161,13 @@ class Cog(ShowBase):
         # sellbot text
         def sell_texture(self):
                 # sets cog1 textures to Sellbot
-                self.cog_torso1 = self.loader.loadTexture('phase_3.5\maps\s_blazer.jpg')
+                self.cog_torso1 = self.loader.loadTexture('source files\phase_3.5\maps\s_blazer.jpg')
                 self.cog1.find('**/torso').setTexture(self.cog_torso1, 1)
 
-                self.cog_arms1 = self.loader.loadTexture('phase_3.5\maps\s_sleeve.jpg')
+                self.cog_arms1 = self.loader.loadTexture('source files\phase_3.5\maps\s_sleeve.jpg')
                 self.cog1.find('**/arms').setTexture(self.cog_arms1, 1)
 
-                self.cog_legs1 = self.loader.loadTexture('phase_3.5\maps\s_leg.jpg')
+                self.cog_legs1 = self.loader.loadTexture('source files\phase_3.5\maps\s_leg.jpg')
                 self.cog1.find('**/legs').setTexture(self.cog_legs1, 1)
 
                 self.texture_button.destroy()
@@ -1149,13 +1192,13 @@ class Cog(ShowBase):
         # bossbot text
         def boss_texture(self):
                 # sets cog1 textures to Bossbot
-                self.cog_torso1 = self.loader.loadTexture('phase_3.5\maps\c_blazer.jpg')
+                self.cog_torso1 = self.loader.loadTexture('source files\phase_3.5\maps\c_blazer.jpg')
                 self.cog1.find('**/torso').setTexture(self.cog_torso1, 1)
 
-                self.cog_arms1 = self.loader.loadTexture('phase_3.5\maps\c_sleeve.jpg')
+                self.cog_arms1 = self.loader.loadTexture('source files\phase_3.5\maps\c_sleeve.jpg')
                 self.cog1.find('**/arms').setTexture(self.cog_arms1, 1)
 
-                self.cog_legs1 = self.loader.loadTexture('phase_3.5\maps\c_leg.jpg')
+                self.cog_legs1 = self.loader.loadTexture('source files\phase_3.5\maps\c_leg.jpg')
                 self.cog1.find('**/legs').setTexture(self.cog_legs1, 1)
 
                 self.texture_button.destroy()
@@ -1345,9 +1388,6 @@ class Cog(ShowBase):
             if self.keyMap['change-cam']:
                 self.camera.setY(20)
 
-            # If ralph is moving, loop the run animation.
-            # If he is standing still, stop the animation.
-
             if self.keyMap["forward"] or self.keyMap["left"] or self.keyMap["right"] or self.keyMap["backward"]:
                 if self.isMoving is False:
                     self.cog1.loop("Walk")
@@ -1358,15 +1398,10 @@ class Cog(ShowBase):
                     self.cog1.loop("Stand")
                     self.isMoving = False
 
-
             # Normally, we would have to call traverse() to check for collisions.
             # However, the class ShowBase that we inherit from has a task to do
             # this for us, if we assign a CollisionTraverser to self.cTrav.
             # self.cTrav.traverse(render)
-
-            # Adjust ralph's Z coordinate.  If ralph's ray hit terrain,
-            # update his Z. If it hit anything else, or didn't hit anything, put
-            # him back where he was last frame.
 
             entries = list(self.cogGroundHandler.getEntries())
             entries.sort(key=lambda x: x.getSurfacePoint(render).getZ())
@@ -1376,23 +1411,41 @@ class Cog(ShowBase):
             else:
                 self.cog1.setPos(startpos)
 
-            # Keep the camera at one foot above the terrain,
-            # or two feet above ralph, whichever is greater.
-
             entries = list(self.camGroundHandler.getEntries())
             entries.sort(key=lambda x: x.getSurfacePoint(render).getZ())
 
             if len(entries) > 0 and entries[0].getIntoNode().getName() == "terrain":
                 self.camera.setZ(entries[0].getSurfacePoint(render).getZ() + 10)
             if self.camera.getZ() < self.cog1.getZ():
-                self.camera.setZ(self.cog1.getZ() + 15.0)
+                self.camera.setZ(self.cog1.getZ() + 5.0)
 
-            # The camera should look in ralph's direction,
+            # The camera should look in cog's direction,
             # but it should also try to stay horizontal, so look at
-            # a floater which hovers above ralph's head.
+            # a floater which hovers above cog's head.
             self.camera.lookAt(self.floater)
 
             return task.cont
+
+        def extra_move(self, task):
+            pl = base.cam.node().getLens()
+            # This makes the forward speed double while shift key is held down, and changes camera FOV as well
+            if self.keyMap['sprint'] is True:
+                pl.setFov(120)
+                self.forward_speed = 60
+                self.music2.setPlayRate(1.5)
+                self.cog1.setPlayRate(2.0, 'Walk')
+
+            if self.keyMap['sprint'] is False:
+                self.forward_speed = 30
+                pl.setFov(80)
+                self.music2.setPlayRate(1.0)
+                self.cog1.setPlayRate(1.0, 'Walk')
+
+            return task.cont
+
+        def show_collisons(self):
+            self.cTrav.showCollisions(render)
+            self.dev_button.removeNode()
 
         # function that exits the program
         @staticmethod
