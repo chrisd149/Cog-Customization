@@ -1,9 +1,6 @@
-<h1>Cog Customization v1.1.4 Beta</h1>
+<h1>Cog Customization v2.0 PRE RELEASE</h1>
 
-![image](https://user-images.githubusercontent.com/48182689/58392291-4c9d1480-8007-11e9-8c5a-0edb3a838928.png)
-<h6>v1.1 Beta</h6>
-
-This is a simple Panda3D program that allows the user to customize a Cog from Toontown.
+This is a simple Panda3D program that allows the user to customize a Cog from Toontown and walk around in a demo area.
 
 [**Tutorial of the functions of the 4 main buttons**](https://youtu.be/33jWVTQWn1Q)
 
@@ -99,7 +96,7 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 
 *  	[X] **Functions that change colors, scale, load/delete models, and textures**
 
-*	[ ] **Separate versions of main.py/pyw in Spanish, French and German**
+*	[X] **Add a demo area to walk around in after customizing the Big Cheese**
 
 <h3>Side Goals</h3>
 
@@ -109,15 +106,11 @@ This is a simple Panda3D program that allows the user to customize a Cog from To
 
 *	[X] **Allow the user to access help *while* ingame or online via the wiki**
 
-*	[ ] **Make a for loop that returns different valules in game_log.txt (i.e. total time ingame, avg frame rate, customizations chosen, etc.**
-
-*	[ ] **Change all code to Python 3.8 and Panda3D 1.10.3**
-
 <h2>FAQ</h2>
 
 Q: *Why isn't there an .exe file to make installation easier?*
 
-A: I planned on making this project with the intent on making runnable on a majority of systems.  .exe is not supported on Mac and Linux systems, so they wouldn't have access to the program.  Making seperate versions for each operating system would take addtional time and effort on top of the normal updates.
+A: I planned on making this project with the intent on making runnable on a majority of systems.  .exe is not supported on Mac and Linux systems, so they wouldn't have access to the program.  However, .exe update is soon to come in the final release.
 
 Q: *Why use Panda3D, an almost 2 decade old game engine, alongside Python, to build a game?*
 
@@ -137,18 +130,20 @@ A: This project took me almost 3 months to make at this point.  I can say I was 
 
 Q: *How would one go about learning Panda3D with Python?*
 
-A: The easiest way is too learn Python on *atleast* a beginner level.  Then, follow some tutorials on Youtube, that go over setup and basic coding practices specific to Panda3D.  I recommend you go to the offical [Panda3D Manual](https://www.panda3d.org/manual/) to get more detailed lessons on the game engine.
+A: The easiest way is too learn Python on *atleast* a beginner level.  Then, follow some tutorials on Youtube, that go over setup and basic coding practices specific to Panda3D.  I recommend you go to the offical [Panda3D Manual](https://www.panda3d.org/manual/) to get more detailed lessons on the game engine.  The offical Panda3D manual is the most useful tool you will need when using Panda3D.
 
 Q: *Why is there inconsistent updates?*
 
-A: I am the sole contributor to this project, and as updates are only pushed when I have the time to do so.  I've had many medical issues recently that I have caused me to get distracted from updates, and I don't know when I will be able to program more consistently.
+A: I am the sole contributor to this project, and as updates are only pushed when I have the time to do so.  I've had many medical issues recently that I have caused me to get distracted from updates, and I don't know when I will be able to program more consistently. Updates are expected to speed up until the New Year, as of now.
 
 
 <h2>License</h2>
 
-This project is licensed under the a modified MIT License, which allows private use, commercial use, modification, and distribution of this program, but not sales, and gives me (Christian Diaz) copyright holder status.
+This project is licensed under the a GNU General Public License v3.0 License, which allows private use, commercial use, modification, and distribution of this program, but not sales, and gives me (Christian Diaz) copyright holder status.
 
 **This Panda3D game and/or the author(s) are not affiliated with *The Walt Disney Company* and/or the *Disney Interactive Media Group*(collectively referred to as *"Disney"*), and/or Toontown Rewritten.  All textures/models/sounds used in this program are not mine, and are allowed to be publicly used and distributed, with the exceptition for profit, which isn't allowed at all.  By downloading this game, you agree to release any employees of Disney and/or Toontown Rewritten from any liablity caused to you from the use of Cog Customization.**
+
+Please be thankful to Disney and the Toontown Rewritten Team for their efforts in making and maintaing Toontown.
 
 
 <h2>Built With</h2>
@@ -174,8 +169,8 @@ Main Author: Christian M Diaz
 *	Twitter: **@miguel_TTR**
 
 * Email: **christianmigueldiaz@gmail.com**
-	* Active Hours M-F: 3pm - 12am EST
-	* Active Hours Weekend: 12pm - 1am EST (Some of the time im availiable to 4am on the weekends)
+	* Active Hours M-F: 3pm - 11pm EST
+	* Active Hours Weekend: 12pm - 2am EST (Some of the time im availiable to 4am on the weekends)
 
 <h4>All questions and inquiries must be related to the project in some way, unrelated messages will be ignored</h4>
 
